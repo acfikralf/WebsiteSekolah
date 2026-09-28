@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 export default function MainLayout({ children }) {
+
+    const { auth } = usePage().props;
     const [darkMode, setDarkMode] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -21,7 +23,9 @@ export default function MainLayout({ children }) {
             return newMode;
         });
     };
+    console.log(usePage());;
 
+    const { site } = usePage().props || {};
     return (
         <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
             {/* NAVBAR */}
@@ -35,10 +39,10 @@ export default function MainLayout({ children }) {
                             </div>
                             <div className="leading-tight">
                                 <span className="block font-display font-bold text-slate-900 dark:text-white text-lg group-hover:text-primary-600 dark:group-hover:text-accent-400 transition-colors">
-                                    SMP Islam Watestanjung
+                                    {site.title}
                                 </span>
                                 <span className="block text-xs text-slate-500 dark:text-slate-400">
-                                    Unggul dalam Prestasi, Berakhlak Mulia
+                                    {site.tagline}
                                 </span>
                             </div>
                         </a>
@@ -134,15 +138,15 @@ export default function MainLayout({ children }) {
                         <div>
                             <h3 className="text-white font-semibold mb-4">Tautan</h3>
                             <ul className="space-y-2 text-sm">
-                                <li><a href="#beranda" className="hover:text-accent-400 transition-colors">Beranda</a></li>
-                                <li><a href="#profil" className="hover:text-accent-400 transition-colors">Profil</a></li>
-                                <li><a href="#berita" className="hover:text-accent-400 transition-colors">Berita</a></li>
-                                <li><a href="#agenda" className="hover:text-accent-400 transition-colors">Agenda</a></li>
-                                <li><a href="#prestasi" className="hover:text-accent-400 transition-colors">Prestasi</a></li>
-                                <li><a href="#galeri" className="hover:text-accent-400 transition-colors">Galeri</a></li>
-                                <li><a href="#ppdb" className="hover:text-accent-400 transition-colors">PPDB</a></li>
-                                <li><a href="#kontak" className="hover:text-accent-400 transition-colors">Kontak</a></li>
-                                <li><a href="#" className="hover:text-accent-400 transition-colors">Administrator</a></li>
+                                <li><Link href="#beranda" className="hover:text-accent-400 transition-colors">Beranda</Link></li>
+                                <li><Link href="#profil" className="hover:text-accent-400 transition-colors">Profil</Link></li>
+                                <li><Link href="#berita" className="hover:text-accent-400 transition-colors">Berita</Link></li>
+                                <li><Link href="#agenda" className="hover:text-accent-400 transition-colors">Agenda</Link></li>
+                                <li><Link href="#prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
+                                <li><Link href="#galeri" className="hover:text-accent-400 transition-colors">Galeri</Link></li>
+                                <li><Link href="#ppdb" className="hover:text-accent-400 transition-colors">PPDB</Link></li>
+                                <li><Link href="#kontak" className="hover:text-accent-400 transition-colors">Kontak</Link></li>
+                                <li><Link href={auth.user ? '/dashboard' : '/login'} className="hover:text-accent-400 transition-colors">Administrator</Link></li>
                             </ul>
                         </div>
                         <div>

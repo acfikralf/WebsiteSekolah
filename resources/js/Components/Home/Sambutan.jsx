@@ -23,7 +23,7 @@ export default function Sambutan() {
                             <p>Assalamu'alaikum warahmatullahi wabarakatuh. Selamat datang di website resmi SMP Islam Watestanjung. Kami berkomitmen untuk mendidik generasi yang tidak hanya unggul dalam akademik, tetapi juga berakhlak mulia sesuai tuntunan Islam. Dengan tenaga pendidik yang profesional dan lingkungan belajar yang islami, kami berharap dapat mencetak pemimpin masa depan yang berintegritas.</p>
                         </div>
                         <div className="mt-6">
-                            <p className="font-display font-semibold text-lg text-slate-900 dark:text-white">Ust. Ahmad Fauzi, S.Pd.I.</p>
+                            <p className="font-display font-semibold text-lg text-slate-900 dark:text-white">H. Fahru Rozi, M.Pd.</p>
                             <p className="text-sm text-slate-500 dark:text-slate-400">Kepala SMP Islam Watestanjung</p>
                         </div>
                         <a href="#" className="mt-6 inline-flex items-center text-primary-600 dark:text-accent-400 font-medium hover:text-primary-700 group">
