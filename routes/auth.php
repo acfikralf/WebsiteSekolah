@@ -15,6 +15,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\EkstrakurikulerController;
+use App\Http\Controllers\Admin\GaleriController;
+use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\Admin\PrestasiController;
 use Illuminate\Support\Facades\Route;
 
@@ -108,6 +110,20 @@ Route::middleware('auth')->group(function () {
         Route::post('prestasi', [PrestasiController::class, 'store'])->name('prestasi.store');
         Route::post('prestasi/{prestasi}', [PrestasiController::class, 'update'])->name('prestasi.update'); // pakai POST + _method=PUT untuk file upload
         Route::delete('prestasi/{prestasi}', [PrestasiController::class, 'destroy'])->name('prestasi.destroy');
+    });
+
+    //Guru
+    Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+        Route::post('guru', [GuruController::class, 'store'])->name('guru.store');
+        Route::post('guru/{guru}', [GuruController::class, 'update'])->name('guru.update'); // pakai POST + _method=PUT untuk file upload
+        Route::delete('guru/{guru}', [GuruController::class, 'destroy'])->name('guru.destroy');
+    });
+    
+    //Galeri
+    Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+        Route::post('galeri', [GaleriController::class, 'store'])->name('galeri.store');
+        Route::post('galeri/{galeri}', [GaleriController::class, 'update'])->name('galeri.update'); // pakai POST + _method=PUT untuk file upload
+        Route::delete('galeri/{galeri}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
     });
 
     //Password Confirm

@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
             BeritaSeeder::class,
             AgendaSeeder::class,
             PrestasiSeeder::class,
+            GuruSeeder::class,
+            GaleriSeeder::class,
+
         ]);
 
         User::factory()->create([

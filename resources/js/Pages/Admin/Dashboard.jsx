@@ -8,6 +8,8 @@ import SectionEkstrakurikuler from "@/Components/Admin/SectionEkstrakurikuler";
 import SectionBerita from "@/Components/Admin/SectionBerita";
 import SectionAgenda from "@/Components/Admin/SectionAgenda";
 import SectionPrestasi from "@/Components/Admin/SectionPrestasi";
+import SectionGuru from "@/Components/Admin/SectionGuru";
+import SectionGaleri from "@/Components/Admin/SectionGaleri";
 
 const sectionTitles = {
     dashboard: "Dashboard",
@@ -24,10 +26,9 @@ const sectionTitles = {
     akun: "Akun Admin",
 };
 
-export default function Dashboard({ settings, ekstrakurikulers, beritas, agendas, prestasis }) {
+export default function Dashboard({ settings, ekstrakurikulers, beritas, agendas, prestasis, gurus, galeris}) {
     const [activeSection, setActiveSection] = useState("dashboard");
     console.log(usePage());
-    console.log(agendas)
     return (
         <AdminLayout
             activeSection={activeSection}
@@ -54,6 +55,8 @@ export default function Dashboard({ settings, ekstrakurikulers, beritas, agendas
             {activeSection === "berita" && <SectionBerita beritas={beritas} />}
             {activeSection === "agenda" && <SectionAgenda agendas={agendas}/>}
             {activeSection === "prestasi" && <SectionPrestasi prestasis={prestasis}/>}
+            {activeSection === "guru" && <SectionGuru gurus={gurus}/>}
+            {activeSection === 'galeri' && <SectionGaleri galeris={galeris} />}
         </AdminLayout>
     );
 }

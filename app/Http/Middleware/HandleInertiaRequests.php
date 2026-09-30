@@ -75,6 +75,28 @@ class HandleInertiaRequests extends Middleware
                     'foto' => $prestasi->foto,
                     'deskripsi' => $prestasi->deskripsi,
                 ]),
+            'gurus' => fn() => \App\Models\Guru::orderBy('urutan')
+                ->latest('id')
+                ->get()
+                ->map(fn($guru) => [
+                    'id' => $guru->id,
+                    'nama' => $guru->nama,
+                    'jabatan' => $guru->jabatan,
+                    'mapel' => $guru->mapel,
+                    'urutan' => $guru->urutan,
+                    'foto' => $guru->foto,
+                    'foto_url' => $guru->foto_url,
+                ]),
+            'galeris' => fn() => \App\Models\Galeri::ordered()
+                ->get()
+                ->map(fn($galeri) => [
+                    'id' => $galeri->id,
+                    'judul' => $galeri->judul,
+                    'kategori' => $galeri->kategori,
+                    'gambar' => $galeri->gambar,
+                    'gambar_url' => $galeri->gambar_url,
+                    'urutan' => $galeri->urutan,
+                ]),
         ]);
     }
 }

@@ -42,6 +42,22 @@ class SettingController extends Controller
                 'foto' => $prestasi->foto,
                 'deskripsi' => $prestasi->deskripsi,
             ]),
+            'gurus'     => \App\Models\Guru::ordered()->get()->map(fn($g) => [
+                'id'       => $g->id,
+                'nama'     => $g->nama,
+                'jabatan'  => $g->jabatan,
+                'mapel'    => $g->mapel,
+                'foto_url' => $g->foto_url,
+                'urutan'   => $g->urutan,
+            ]),
+            'galeris' => \App\Models\Galeri::ordered()->get()->map(fn($g) => [
+                'id'         => $g->id,
+                'judul'      => $g->judul,
+                'kategori'   => $g->kategori,
+                'gambar'     => $g->gambar,
+                'gambar_url' => $g->gambar_url,
+                'urutan'     => $g->urutan,
+            ]),
         ]);
     }
 
