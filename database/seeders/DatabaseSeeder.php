@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             PrestasiSeeder::class,
             GuruSeeder::class,
             GaleriSeeder::class,
+            UserSeeder::class,
+            PollingSeeder::class,
 
         ]);
 

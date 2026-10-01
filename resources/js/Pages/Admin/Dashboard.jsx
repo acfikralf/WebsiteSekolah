@@ -10,6 +10,8 @@ import SectionAgenda from "@/Components/Admin/SectionAgenda";
 import SectionPrestasi from "@/Components/Admin/SectionPrestasi";
 import SectionGuru from "@/Components/Admin/SectionGuru";
 import SectionGaleri from "@/Components/Admin/SectionGaleri";
+import SectionPolling from "@/Components/Admin/SectionPolling";
+import SectionDashboard from "@/Components/Admin/SectionDashboard";
 
 const sectionTitles = {
     dashboard: "Dashboard",
@@ -26,9 +28,22 @@ const sectionTitles = {
     akun: "Akun Admin",
 };
 
-export default function Dashboard({ settings, ekstrakurikulers, beritas, agendas, prestasis, gurus, galeris}) {
+export default function Dashboard({
+    settings,
+    ekstrakurikulers,
+    beritas,
+    agendas,
+    prestasis,
+    gurus,
+    galeris,
+    polling,
+    stats,
+    recentAgenda,
+    recentBerita,
+    recentPrestasi,
+}) {
     const [activeSection, setActiveSection] = useState("dashboard");
-    console.log(usePage());
+    console.log(polling);
     return (
         <AdminLayout
             activeSection={activeSection}
@@ -37,11 +52,14 @@ export default function Dashboard({ settings, ekstrakurikulers, beritas, agendas
         >
             {/* Section akan ditambahkan di step berikutnya */}
             {activeSection === "dashboard" && (
-                <div className="text-sm text-slate-500 dark:text-slate-400">
-                    Section Dashboard akan ditambahkan di step berikutnya.
-                </div>
+                <SectionDashboard
+                    stats={stats}
+                    recentBerita={recentBerita}
+                    recentAgenda={recentAgenda}
+                    recentPrestasi={recentPrestasi}
+                    polling={polling}
+                />
             )}
-
             {activeSection === "pengaturan" && (
                 <SectionPengaturan settings={settings} />
             )}
@@ -53,10 +71,15 @@ export default function Dashboard({ settings, ekstrakurikulers, beritas, agendas
                 <SectionEkstrakurikuler ekstrakurikulers={ekstrakurikulers} />
             )}
             {activeSection === "berita" && <SectionBerita beritas={beritas} />}
-            {activeSection === "agenda" && <SectionAgenda agendas={agendas}/>}
-            {activeSection === "prestasi" && <SectionPrestasi prestasis={prestasis}/>}
-            {activeSection === "guru" && <SectionGuru gurus={gurus}/>}
-            {activeSection === 'galeri' && <SectionGaleri galeris={galeris} />}
+            {activeSection === "agenda" && <SectionAgenda agendas={agendas} />}
+            {activeSection === "prestasi" && (
+                <SectionPrestasi prestasis={prestasis} />
+            )}
+            {activeSection === "guru" && <SectionGuru gurus={gurus} />}
+            {activeSection === "galeri" && <SectionGaleri galeris={galeris} />}
+            {activeSection === "polling" && (
+                <SectionPolling polling={polling} />
+            )}
         </AdminLayout>
     );
 }

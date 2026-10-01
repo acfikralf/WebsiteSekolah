@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\EkstrakurikulerController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\Admin\PrestasiController;
+use App\Http\Controllers\Admin\PollingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -126,6 +127,13 @@ Route::middleware('auth')->group(function () {
         Route::delete('galeri/{galeri}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
     });
 
+    //Polling 
+   Route::middleware('auth')->group(function () {
+    Route::get('/admin/polling', [PollingController::class, 'index'])->name('admin.polling.index');
+    Route::post('/admin/polling', [PollingController::class, 'store'])->name('admin.polling.store');
+    Route::post('/admin/polling/{polling}/reset', [PollingController::class, 'reset'])->name('admin.polling.reset');
+    Route::delete('/admin/polling/{polling}', [PollingController::class, 'destroy'])->name('admin.polling.destroy');
+});
     //Password Confirm
 
     Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])

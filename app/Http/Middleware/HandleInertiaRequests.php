@@ -97,6 +97,20 @@ class HandleInertiaRequests extends Middleware
                     'gambar_url' => $galeri->gambar_url,
                     'urutan' => $galeri->urutan,
                 ]),
+            'polling' => fn() => (
+                $polling = \App\Models\Polling::with('options')
+                ->latest()
+                ->first()
+            ) ? [
+                'id' => $polling->id,
+                'pertanyaan' => $polling->pertanyaan,
+                'aktif' => $polling->aktif,
+                'options' => $polling->options->map(fn($option) => [
+                    'id' => $option->id,
+                    'opsi' => $option->opsi,
+                    'votes' => $option->votes,
+                ])->values(),
+            ] : null,
         ]);
     }
 }

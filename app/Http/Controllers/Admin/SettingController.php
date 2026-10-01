@@ -58,6 +58,56 @@ class SettingController extends Controller
                 'gambar_url' => $g->gambar_url,
                 'urutan'     => $g->urutan,
             ]),
+            'polling' => (function () {
+                $p = \App\Models\Polling::with('options')->latest()->first();
+                return $p ? [
+                    'id'         => $p->id,
+                    'pertanyaan' => $p->pertanyaan,
+                    'aktif'      => $p->aktif,
+                    'options'    => $p->options->map(fn($o) => [
+                        'id'    => $o->id,
+                        'opsi'  => $o->opsi,
+                        'votes' => $o->votes,
+                    ]),
+                ] : null;
+            })(),
+            'stats' => [
+            'berita'   => \App\Models\Berita::count(),
+            'guru'     => \App\Models\Guru::count(),
+            'prestasi' => \App\Models\Prestasi::count(),
+            'agenda'   => \App\Models\Agenda::count(),
+            'galeri'   => \App\Models\Galeri::count(),
+            'polling'  => \App\Models\Polling::count(),
+        ],
+
+        'recentBerita' => \App\Models\Berita::latest('tanggal')->take(5)->get()->map(fn ($b) => [
+            'id'      => $b->id,
+            'judul'   => $b->judul,
+            'status'  => $b->status,
+            'tanggal' => $b->tanggal?->format('Y-m-d'),
+        ]),
+
+        'recentAgenda' => \App\Models\Agenda::where('tanggal', '>=', now()->startOfDay())
+            ->orderBy('tanggal')
+            ->take(3)
+            ->get()
+            ->map(fn ($a) => [
+                'id'      => $a->id,
+                'judul'   => $a->judul,
+                'tanggal' => $a->tanggal?->format('Y-m-d'),
+                'waktu'   => $a->waktu,
+                'lokasi'  => $a->lokasi,
+            ]),
+
+        'recentPrestasi' => \App\Models\Prestasi::orderBy('tanggal', 'desc')->take(4)->get()->map(fn ($p) => [
+            'id'       => $p->id,
+            'judul'    => $p->judul,
+            'siswa'    => $p->siswa,
+            'kategori' => $p->kategori,
+            'tingkat'  => $p->tingkat,
+            'tanggal'  => $p->tanggal?->format('Y-m-d'),
+            'foto_url' => $p->foto ? asset('storage/' . $p->foto) : null,
+        ]),
         ]);
     }
 
