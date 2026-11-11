@@ -1,24 +1,49 @@
+import { useState, useEffect } from "react";
 import { StarFour, ArrowRight } from "@phosphor-icons/react";
 import { usePage } from "@inertiajs/react";
 
 export default function Hero() {
     const { site } = usePage().props;
 
+    // TAMBAHKAN /Image/ DI SINI
+    const gambarHero = [
+        "/image/upacara.jpeg",
+        "/image/upacara-bendera.jpeg",
+        "/image/upacara-guru-baru.jpeg" 
+    ];
+
+    const [currentImage, setCurrentImage] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImage((prevIndex) => 
+                prevIndex === gambarHero.length - 1 ? 0 : prevIndex + 1
+            );
+        }, 8000); 
+
+        return () => clearInterval(interval);
+    }, [gambarHero.length]);
+
     return (
         <section
             id="beranda"
-            className="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 text-white overflow-hidden "
+            className="relative bg-primary-900 text-white overflow-hidden"
         >
-            <div className="absolute inset-0 opacity-10 islamic-pattern">
-                <img
-                    src="https://picsum.photos/seed/school/1920/1080"
-                    alt="SMP Islam Watestanjung"
-                    className="w-full h-full object-cover"
+            {gambarHero.map((src, index) => (
+                <img 
+                    key={index}
+                    src={src} 
+                    alt={`Background Hero ${index + 1}`} 
+                    className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-[3000ms] ease-in-out ${
+                        index === currentImage ? "opacity-100 z-0" : "opacity-0 -z-10"
+                    }`}
                 />
-            </div>
-            <div className="absolute -top-20 -right-20 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-white/5 rounded-full blur-3xl"></div>
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
+            ))}
+
+            <div className="absolute inset-0 bg-primary-900/70 mix-blend-multiply z-10"></div>
+
+            {/* ... sisa kode teks dan tombol tetap sama ... */}
+            <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
                 <div className="max-w-3xl">
                     <p className="inline-flex items-center gap-2 text-accent-400 font-medium uppercase tracking-wider mb-4 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-xs sm:text-sm backdrop-blur-sm">
                         {site.title}

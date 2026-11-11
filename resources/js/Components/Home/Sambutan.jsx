@@ -11,7 +11,11 @@ export default function Sambutan() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="relative" ref={leftRef}>
                         <div className="absolute -inset-4 bg-gradient-to-br from-primary-200 to-accent-200 dark:from-primary-800 dark:to-accent-800 rounded-3xl blur-2xl opacity-30"></div>
-                        <img src="https://picsum.photos/seed/headmaster/600/700" alt="Kepala Sekolah" className="relative w-full max-w-md mx-auto rounded-3xl shadow-xl transform transition-transform duration-500 hover:scale-[1.02]" />
+                        <img 
+                         src="/image/kepala-sekolah.jpeg" 
+                         alt="Kepala Sekolah" 
+                         className="relative w-full max-w-md mx-auto rounded-3xl shadow-xl transform transition-transform duration-500 hover:scale-[1.02]" 
+                        />
                     </div>
                     <div ref={rightRef}>
                         <div className="mb-6 text-left">
