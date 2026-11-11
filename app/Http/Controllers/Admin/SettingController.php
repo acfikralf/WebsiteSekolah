@@ -72,42 +72,78 @@ class SettingController extends Controller
                 ] : null;
             })(),
             'stats' => [
-            'berita'   => \App\Models\Berita::count(),
-            'guru'     => \App\Models\Guru::count(),
-            'prestasi' => \App\Models\Prestasi::count(),
-            'agenda'   => \App\Models\Agenda::count(),
-            'galeri'   => \App\Models\Galeri::count(),
-            'polling'  => \App\Models\Polling::count(),
-        ],
+                'berita'   => \App\Models\Berita::count(),
+                'guru'     => \App\Models\Guru::count(),
+                'prestasi' => \App\Models\Prestasi::count(),
+                'agenda'   => \App\Models\Agenda::count(),
+                'galeri'   => \App\Models\Galeri::count(),
+                'polling'  => \App\Models\Polling::count(),
+            ],
 
-        'recentBerita' => \App\Models\Berita::latest('tanggal')->take(5)->get()->map(fn ($b) => [
-            'id'      => $b->id,
-            'judul'   => $b->judul,
-            'status'  => $b->status,
-            'tanggal' => $b->tanggal?->format('Y-m-d'),
-        ]),
-
-        'recentAgenda' => \App\Models\Agenda::where('tanggal', '>=', now()->startOfDay())
-            ->orderBy('tanggal')
-            ->take(3)
-            ->get()
-            ->map(fn ($a) => [
-                'id'      => $a->id,
-                'judul'   => $a->judul,
-                'tanggal' => $a->tanggal?->format('Y-m-d'),
-                'waktu'   => $a->waktu,
-                'lokasi'  => $a->lokasi,
+            'recentBerita' => \App\Models\Berita::latest('tanggal')->take(5)->get()->map(fn($b) => [
+                'id'      => $b->id,
+                'judul'   => $b->judul,
+                'status'  => $b->status,
+                'tanggal' => $b->tanggal?->format('Y-m-d'),
             ]),
 
-        'recentPrestasi' => \App\Models\Prestasi::orderBy('tanggal', 'desc')->take(4)->get()->map(fn ($p) => [
-            'id'       => $p->id,
-            'judul'    => $p->judul,
-            'siswa'    => $p->siswa,
-            'kategori' => $p->kategori,
-            'tingkat'  => $p->tingkat,
-            'tanggal'  => $p->tanggal?->format('Y-m-d'),
-            'foto_url' => $p->foto ? asset('storage/' . $p->foto) : null,
-        ]),
+            'recentAgenda' => \App\Models\Agenda::where('tanggal', '>=', now()->startOfDay())
+                ->orderBy('tanggal')
+                ->take(3)
+                ->get()
+                ->map(fn($a) => [
+                    'id'      => $a->id,
+                    'judul'   => $a->judul,
+                    'tanggal' => $a->tanggal?->format('Y-m-d'),
+                    'waktu'   => $a->waktu,
+                    'lokasi'  => $a->lokasi,
+                ]),
+
+            'recentPrestasi' => \App\Models\Prestasi::orderBy('tanggal', 'desc')->take(4)->get()->map(fn($p) => [
+                'id'       => $p->id,
+                'judul'    => $p->judul,
+                'siswa'    => $p->siswa,
+                'kategori' => $p->kategori,
+                'tingkat'  => $p->tingkat,
+                'tanggal'  => $p->tanggal?->format('Y-m-d'),
+                'foto_url' => $p->foto ? asset('storage/' . $p->foto) : null,
+            ]),
+            'invitations' => \App\Models\Invitation::with('inviter')
+                ->whereNull('accepted_at')
+                ->latest()
+                ->get()
+                ->map(fn($i) => [
+                    'id'         => $i->id,
+                    'email'      => $i->email,
+                    'expires_at' => $i->expires_at->format('Y-m-d H:i'),
+                    'inviter'    => $i->inviter?->name,
+                    'created_at' => $i->created_at->format('Y-m-d'),
+                ]),
+
+            'users' => \App\Models\User::orderBy('id')->get()->map(fn($u) => [
+                'id'         => $u->id,
+                'name'       => $u->name,
+                'email'      => $u->email,
+                'created_at' => $u->created_at->format('Y-m-d'),
+            ]),
+
+            'profil' => [
+                'sejarah'       => Setting::get('profil_sejarah', ''),
+                'sambutan'      => Setting::get('profil_sambutan', ''),
+                'kepala_nama'   => Setting::get('profil_kepala_nama', ''),
+                'kepala_foto'   => Setting::get('profil_kepala_foto', null),
+                'timeline'      => Setting::get('profil_timeline', ''), // BARU
+                'visi'          => Setting::get('profil_visi', ''),
+                'misi'          => Setting::get('profil_misi', ''),
+                'tujuan'        => Setting::get('profil_tujuan', ''),   // BARU
+                'program'       => Setting::get('profil_program', ''),  // BARU
+                'npsn'          => Setting::get('profil_npsn', ''),
+                'status'        => Setting::get('profil_status', ''),
+                'alamat'        => Setting::get('profil_alamat', ''),
+                'telepon'       => Setting::get('profil_telepon', ''),
+                'email'         => Setting::get('profil_email', ''),
+                'tahun_berdiri' => Setting::get('profil_tahun_berdiri', ''),
+            ],
         ]);
     }
 

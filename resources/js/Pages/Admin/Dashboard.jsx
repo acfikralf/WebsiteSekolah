@@ -12,6 +12,7 @@ import SectionGuru from "@/Components/Admin/SectionGuru";
 import SectionGaleri from "@/Components/Admin/SectionGaleri";
 import SectionPolling from "@/Components/Admin/SectionPolling";
 import SectionDashboard from "@/Components/Admin/SectionDashboard";
+import SectionProfil from "@/Components/Admin/SectionProfil";
 
 const sectionTitles = {
     dashboard: "Dashboard",
@@ -41,6 +42,8 @@ export default function Dashboard({
     recentAgenda,
     recentBerita,
     recentPrestasi,
+    invitations,
+    users,
 }) {
     const [activeSection, setActiveSection] = useState("dashboard");
     console.log(polling);
@@ -63,7 +66,7 @@ export default function Dashboard({
             {activeSection === "pengaturan" && (
                 <SectionPengaturan settings={settings} />
             )}
-            {activeSection === "akun" && <SectionAkun />}
+           
             {activeSection === "statistik" && (
                 <SectionStatistik settings={settings} />
             )}
@@ -80,6 +83,8 @@ export default function Dashboard({
             {activeSection === "polling" && (
                 <SectionPolling polling={polling} />
             )}
+            {activeSection === 'akun' && <SectionAkun invitations={invitations} users={users} />}
+            {activeSection === 'profil' && <SectionProfil settings={settings} />}
         </AdminLayout>
     );
 }

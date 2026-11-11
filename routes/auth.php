@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\Admin\PrestasiController;
 use App\Http\Controllers\Admin\PollingController;
+use App\Http\Controllers\Admin\InvitationController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -100,14 +101,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Agenda 
-     Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::post('agenda', [AgendaController::class, 'store'])->name('agenda.store');
         Route::put('agenda/{agenda}', [AgendaController::class, 'update'])->name('agenda.update'); // pakai POST + _method=PUT untuk file upload
         Route::delete('agenda/{agenda}', [AgendaController::class, 'destroy'])->name('agenda.destroy');
     });
 
     // Prestasi
-     Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::post('prestasi', [PrestasiController::class, 'store'])->name('prestasi.store');
         Route::post('prestasi/{prestasi}', [PrestasiController::class, 'update'])->name('prestasi.update'); // pakai POST + _method=PUT untuk file upload
         Route::delete('prestasi/{prestasi}', [PrestasiController::class, 'destroy'])->name('prestasi.destroy');
@@ -119,7 +120,7 @@ Route::middleware('auth')->group(function () {
         Route::post('guru/{guru}', [GuruController::class, 'update'])->name('guru.update'); // pakai POST + _method=PUT untuk file upload
         Route::delete('guru/{guru}', [GuruController::class, 'destroy'])->name('guru.destroy');
     });
-    
+
     //Galeri
     Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::post('galeri', [GaleriController::class, 'store'])->name('galeri.store');
@@ -128,12 +129,51 @@ Route::middleware('auth')->group(function () {
     });
 
     //Polling 
-   Route::middleware('auth')->group(function () {
-    Route::get('/admin/polling', [PollingController::class, 'index'])->name('admin.polling.index');
-    Route::post('/admin/polling', [PollingController::class, 'store'])->name('admin.polling.store');
-    Route::post('/admin/polling/{polling}/reset', [PollingController::class, 'reset'])->name('admin.polling.reset');
-    Route::delete('/admin/polling/{polling}', [PollingController::class, 'destroy'])->name('admin.polling.destroy');
-});
+    Route::middleware('auth')->group(function () {
+        Route::get('/admin/polling', [PollingController::class, 'index'])->name('admin.polling.index');
+        Route::post('/admin/polling', [PollingController::class, 'store'])->name('admin.polling.store');
+        Route::post('/admin/polling/{polling}/reset', [PollingController::class, 'reset'])->name('admin.polling.reset');
+        Route::delete('/admin/polling/{polling}', [PollingController::class, 'destroy'])->name('admin.polling.destroy');
+    });
+
+
+    // Invitation
+    Route::prefix('admin')
+        ->name('admin.')
+        ->middleware('auth')
+        ->group(function () {
+
+            // Kirim invitation
+            Route::post(
+                '/invitations/send',
+                [InvitationController::class, 'send']
+            )->name('invitations.send');
+
+            // Kirim ulang invitation
+            Route::post(
+                '/invitations/{invitation}/resend',
+                [InvitationController::class, 'resend']
+            )->name('invitations.resend');
+
+            // Hapus invitation
+            Route::delete(
+                '/invitations/{invitation}',
+                [InvitationController::class, 'destroy']
+            )->name('invitations.destroy');
+        });
+
+    //Public Invitation
+    // Klik link dari email
+    Route::get(
+        '/invitation/{token}',
+        [InvitationController::class, 'show']
+    )->name('invitation.accept');
+
+    // Submit form aktivasi
+    Route::post(
+        '/invitation/{token}',
+        [InvitationController::class, 'accept']
+    )->name('invitation.accept.submit');
     //Password Confirm
 
     Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])

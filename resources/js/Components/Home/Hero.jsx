@@ -31,7 +31,7 @@ export default function Hero() {
                     </p>
                     <div className="flex flex-wrap gap-4">
                         <a
-                            href="#profil"
+                            href="profil"
                             className="inline-flex items-center px-6 py-3 bg-accent-500 hover:bg-accent-600 text-white font-medium rounded-xl shadow-lg shadow-accent-500/30 hover:shadow-accent-600/40 transition-all hover:-translate-y-0.5"
                         >
                             Lihat Profil

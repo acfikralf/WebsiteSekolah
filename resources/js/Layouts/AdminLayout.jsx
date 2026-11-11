@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Head, Link, useForm, usePage} from '@inertiajs/react';
+import Toast from '@/Components/Toast';
 
 
 
@@ -203,6 +204,7 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
                     </div>
                 </div>
             </div>
+            <Toast />
         </>
     );
 }

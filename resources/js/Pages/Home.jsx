@@ -14,13 +14,13 @@ import PpdbCta from '@/Components/Home/PpdbCta';
 import Kontak from '@/Components/Home/Kontak';
 import { Head } from '@inertiajs/react';
 
-export default function Home() {
+export default function Home({kepalaSekolah}) {
     return (
         <MainLayout>
             <Head title="Home" />
             <Hero />
             <Stats />
-            <Sambutan />
+            <Sambutan kepalaSekolah={kepalaSekolah} />
             <VisiMisi />
             <Program />
             <Berita />

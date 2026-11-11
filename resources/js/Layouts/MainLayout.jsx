@@ -33,7 +33,7 @@ export default function MainLayout({ children }) {
                 <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16 md:h-20">
                         {/* Logo */}
-                        <a href="#" className="flex items-center gap-2 shrink-0 group">
+                        <a href="/" className="flex items-center gap-2 shrink-0 group">
                             <div className="w-10 h-10 bg-primary-600 text-white rounded-xl flex items-center justify-center transition-all group-hover:rounded-lg group-hover:bg-primary-500">
                                 <i className="ph ph-graduation-cap text-2xl"></i>
                             </div>
@@ -49,8 +49,8 @@ export default function MainLayout({ children }) {
 
                         {/* Desktop nav */}
                         <div className="hidden lg:flex items-center gap-6">
-                            <a href="#beranda" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Beranda</a>
-                            <a href="#profil" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Profil</a>
+                            <a href="/" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Beranda</a>
+                            <a href="profil" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Profil</a>
                             <div className="relative group">
                                 <button className="flex items-center gap-1 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400">
                                     Akademik
@@ -96,8 +96,8 @@ export default function MainLayout({ children }) {
                 {mobileMenuOpen && (
                     <div className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-lg">
                         <div className="px-4 pt-2 pb-4 space-y-1">
-                            <a href="#beranda" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Beranda</a>
-                            <a href="#profil" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Profil</a>
+                            <a href="/" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Beranda</a>
+                            <a href="profil" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Profil</a>
                             <p className="px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white">Akademik</p>
                             <a href="#guru" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Guru</a>
                             <a href="#ekstrakurikuler" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Ekstrakurikuler</a>
@@ -138,8 +138,8 @@ export default function MainLayout({ children }) {
                         <div>
                             <h3 className="text-white font-semibold mb-4">Tautan</h3>
                             <ul className="space-y-2 text-sm">
-                                <li><Link href="#beranda" className="hover:text-accent-400 transition-colors">Beranda</Link></li>
-                                <li><Link href="#profil" className="hover:text-accent-400 transition-colors">Profil</Link></li>
+                                <li><Link href="/" className="hover:text-accent-400 transition-colors">Beranda</Link></li>
+                                <li><Link href="profil" className="hover:text-accent-400 transition-colors">Profil</Link></li>
                                 <li><Link href="#berita" className="hover:text-accent-400 transition-colors">Berita</Link></li>
                                 <li><Link href="#agenda" className="hover:text-accent-400 transition-colors">Agenda</Link></li>
                                 <li><Link href="#prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
