@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { useForm } from '@inertiajs/react';
+import { useForm, router } from '@inertiajs/react'; // Tambahkan router
 import { Plus, PencilSimple, Trash } from '@phosphor-icons/react';
+import ConfirmModal from '@/Components/ConfirmModal'; // Import ConfirmModal
 
 export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
     const [showModal, setShowModal] = useState(false);
     const [editing, setEditing] = useState(null);
+    
+    // State Konfirmasi Hapus
+    const [confirmDelete, setConfirmDelete] = useState({ show: false, id: null, nama: '' });
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const openCreate = () => {
         setEditing(null);
@@ -21,14 +26,21 @@ export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
         setEditing(null);
     };
 
-    const handleDelete = (item) => {
-        if (!confirm(`Hapus ekstrakurikuler "${item.nama}"?`)) return;
-        // pakai router dari inertia
-        window.location; // placeholder
-        import('@inertiajs/react').then(({ router }) => {
-            router.delete(route('admin.ekstrakurikuler.destroy', item.id), {
-                preserveScroll: true,
-            });
+    // Fungsi trigger modal hapus
+    const handleDeleteClick = (item) => {
+        setConfirmDelete({ show: true, id: item.id, nama: item.nama });
+    };
+
+    // Fungsi eksekusi hapus
+    const executeDelete = () => {
+        setIsDeleting(true);
+        router.delete(route('admin.ekstrakurikuler.destroy', confirmDelete.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                setConfirmDelete({ show: false, id: null, nama: '' });
+                setIsDeleting(false);
+            },
+            onError: () => setIsDeleting(false)
         });
     };
 
@@ -76,7 +88,7 @@ export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
                                 <PencilSimple size={14} /> Edit
                             </button>
                             <button
-                                onClick={() => handleDelete(item)}
+                                onClick={() => handleDeleteClick(item)}
                                 className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 text-xs bg-red-50 dark:bg-red-900/30 text-red-600 rounded-md hover:bg-red-100"
                             >
                                 <Trash size={14} /> Hapus
@@ -92,11 +104,21 @@ export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
                     onClose={closeModal}
                 />
             )}
+
+            {/* CONFIRM MODAL */}
+            <ConfirmModal
+                show={confirmDelete.show}
+                onClose={() => setConfirmDelete({ show: false, id: null, nama: '' })}
+                onConfirm={executeDelete}
+                processing={isDeleting}
+                message={`Apakah Anda yakin ingin menghapus ekstrakurikuler "${confirmDelete.nama}"? Data yang dihapus tidak dapat dikembalikan.`}
+            />
         </section>
     );
 }
 
 function EkstrakurikulerModal({ editing, onClose }) {
+    // ... (Isi EkstrakurikulerModal SAMA PERSIS dengan yang Anda kirim, tidak ada perubahan logic di sini)
     const isEdit = !!editing;
 
     const { data, setData, post, put, processing, errors, reset } = useForm({
@@ -128,61 +150,27 @@ function EkstrakurikulerModal({ editing, onClose }) {
                     {isEdit ? 'Edit Ekstrakurikuler' : 'Tambah Ekstrakurikuler'}
                 </h3>
                 <form onSubmit={submit} className="space-y-4">
+                    {/* Form fields ... */}
                     <div>
                         <label className="block text-sm font-medium mb-1">Nama</label>
-                        <input
-                            type="text"
-                            value={data.nama}
-                            onChange={(e) => setData('nama', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        />
+                        <input type="text" value={data.nama} onChange={(e) => setData('nama', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
                         {errors.nama && <p className="mt-1 text-xs text-red-600">{errors.nama}</p>}
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-1">Pembina</label>
-                        <input
-                            type="text"
-                            value={data.pembina}
-                            onChange={(e) => setData('pembina', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        />
+                        <input type="text" value={data.pembina} onChange={(e) => setData('pembina', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium mb-1">
-                            Icon <span className="text-xs text-slate-400">(kelas Phosphor, mis. ph-tent)</span>
-                        </label>
-                        <input
-                            type="text"
-                            value={data.icon}
-                            onChange={(e) => setData('icon', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        />
+                        <label className="block text-sm font-medium mb-1">Icon <span className="text-xs text-slate-400">(kelas Phosphor, mis. ph-tent)</span></label>
+                        <input type="text" value={data.icon} onChange={(e) => setData('icon', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-1">Deskripsi</label>
-                        <textarea
-                            rows="3"
-                            value={data.deskripsi}
-                            onChange={(e) => setData('deskripsi', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        ></textarea>
+                        <textarea rows="3" value={data.deskripsi} onChange={(e) => setData('deskripsi', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
                     </div>
-
                     <div className="flex justify-end gap-2 pt-2">
-                        <button
-                            type="button"
-                            onClick={onClose}
-                            className="px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
-                        >
-                            Batal
-                        </button>
-                        <button
-                            type="submit"
-                            disabled={processing}
-                            className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg disabled:opacity-60"
-                        >
-                            {processing ? 'Menyimpan...' : 'Simpan'}
-                        </button>
+                        <button type="button" onClick={onClose} className="px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">Batal</button>
+                        <button type="submit" disabled={processing} className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg disabled:opacity-60">{processing ? 'Menyimpan...' : 'Simpan'}</button>
                     </div>
                 </form>
             </div>

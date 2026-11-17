@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Head, Link, useForm, usePage} from '@inertiajs/react';
+import { Head, Link, useForm, usePage, router } from '@inertiajs/react'; // Tambahkan router
 import Toast from '@/Components/Toast';
-
-
 
 export default function AdminLayout({ children, activeSection, onSectionChange, title }) {
     const [darkMode, setDarkMode] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const  { user }  = usePage().props.auth
-    console.log(user)
+    const { user } = usePage().props.auth;
 
     // ==== Dark mode init ====
     useEffect(() => {
@@ -32,17 +29,13 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
     };
 
     const { post } = useForm()
-
     const HandleLogout = () => {
         post(route('logout'))
     }
-    
 
     // ==== Daftar menu sidebar ====
     const sections = {
-        main: [
-            { key: 'dashboard', label: 'Dashboard', icon: 'ph-squares-four' },
-        ],
+        main: [{ key: 'dashboard', label: 'Dashboard', icon: 'ph-squares-four' }],
         konten: [
             { key: 'berita', label: 'Berita', icon: 'ph-newspaper' },
             { key: 'agenda', label: 'Agenda', icon: 'ph-calendar' },
@@ -63,7 +56,15 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
     };
 
     const handleNavClick = (key) => {
-        onSectionChange(key);
+        // Cek jika kita sedang tidak berada di halaman dashboard/admin (misal di /profile)
+        if (window.location.pathname === '/profile') {
+            // Gunakan route('admin.dashboard') untuk mendapatkan URL yang benar dari Laravel
+            router.get(route('admin.dashboard'), { section: key });
+        } else if (onSectionChange) {
+            // Jika sudah di halaman admin, ganti tab tanpa reload
+            onSectionChange(key);
+        }
+
         if (window.innerWidth < 1024) {
             setSidebarOpen(false);
         }
@@ -99,7 +100,6 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
                             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                         } lg:translate-x-0 transition-transform duration-300 flex flex-col`}
                     >
-                        {/* Logo */}
                         <Link href='/' className="h-16 flex items-center gap-2 px-6 border-b border-slate-200 dark:border-slate-800">
                             <div className="w-9 h-9 bg-primary-600 text-white rounded-lg flex items-center justify-center shrink-0">
                                 <i className="ph ph-graduation-cap text-xl"></i>
@@ -109,64 +109,42 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
                             </span>
                         </Link>
 
-                        {/* Navigation */}
                         <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
                             <NavLink item={sections.main[0]} />
 
-                            <p className="px-3 pt-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                                Konten
-                            </p>
-                            {sections.konten.map((item) => (
-                                <NavLink key={item.key} item={item} />
-                            ))}
+                            <p className="px-3 pt-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">Konten</p>
+                            {sections.konten.map((item) => <NavLink key={item.key} item={item} />)}
 
-                            <p className="px-3 pt-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                                Sekolah
-                            </p>
-                            {sections.sekolah.map((item) => (
-                                <NavLink key={item.key} item={item} />
-                            ))}
+                            <p className="px-3 pt-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">Sekolah</p>
+                            {sections.sekolah.map((item) => <NavLink key={item.key} item={item} />)}
 
-                            <p className="px-3 pt-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                                Pengaturan
-                            </p>
-                            {sections.pengaturan.map((item) => (
-                                <NavLink key={item.key} item={item} />
-                            ))}
+                            <p className="px-3 pt-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">Pengaturan</p>
+                            {sections.pengaturan.map((item) => {
+                                // Khusus Akun Admin, kita gunakan Link menuju /profile
+                                return <NavLink key={item.key} item={item} />;
+                            })}
                         </nav>
 
-                        {/* Sidebar footer */}
                         <div className="p-4 border-t border-slate-200 dark:border-slate-800">
-                            <a
+                            <button
                                 onClick={HandleLogout}
-                                as="button"
-                                className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 w-full"
+                                className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 w-full text-left"
                             >
-                                <i className="ph ph-sign-out text-xl"></i>
-                                Logout
-                            </a>
+                                <i className="ph ph-sign-out text-xl"></i> Logout
+                            </button>
                         </div>
                     </aside>
 
-                    {/* Overlay mobile */}
                     {sidebarOpen && (
-                        <div
-                            onClick={() => setSidebarOpen(false)}
-                            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-                        ></div>
+                        <div onClick={() => setSidebarOpen(false)} className="fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
                     )}
 
                     {/* ===== MAIN CONTENT ===== */}
                     <div className="flex-1 lg:ml-64 flex flex-col min-h-screen min-w-0">
-                        {/* Topbar */}
                         <header className="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
                             <div className="flex items-center justify-between h-16 px-4 sm:px-6">
                                 <div className="flex items-center gap-3">
-                                    <button
-                                        onClick={() => setSidebarOpen(true)}
-                                        className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-                                        aria-label="Toggle sidebar"
-                                    >
+                                    <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
                                         <i className="ph ph-list text-2xl"></i>
                                     </button>
                                     <h1 className="text-lg md:text-xl font-display font-semibold text-slate-900 dark:text-white">
@@ -175,29 +153,23 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
                                 </div>
 
                                 <div className="flex items-center gap-2">
-                                    <button
-                                        onClick={toggleDark}
-                                        className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-                                        aria-label="Toggle dark mode"
-                                    >
+                                    <button onClick={toggleDark} className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
                                         <i className={`ph ${darkMode ? 'ph-sun' : 'ph-moon'} text-xl`}></i>
                                     </button>
-                                    <div className="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-700">
+                                    <Link href="/profile" className="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-700">
                                         <div className="w-8 h-8 bg-primary-100 dark:bg-slate-800 text-primary-700 dark:text-accent-400 rounded-full flex items-center justify-center">
                                             <i className="ph ph-user text-lg"></i>
                                         </div>
-                                        <span className="hidden sm:block text-sm font-medium">{user.name}</span>
-                                    </div>
+                                        <span className="hidden sm:block text-sm font-medium">{user?.name}</span>
+                                    </Link>
                                 </div>
                             </div>
                         </header>
 
-                        {/* Main content */}
                         <main className="flex-1 p-4 sm:p-6 overflow-x-hidden">
                             {children}
                         </main>
 
-                        {/* Footer */}
                         <footer className="py-4 px-6 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
                             © {new Date().getFullYear()} Admin SMP Islam Watestanjung
                         </footer>

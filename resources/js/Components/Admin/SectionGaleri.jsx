@@ -1,17 +1,22 @@
 import { useState } from 'react';
 import { useForm, router } from '@inertiajs/react';
 import Modal from '@/Components/Modal';
+import ConfirmModal from '@/Components/ConfirmModal'; // Import ConfirmModal
 
 export default function SectionGaleri({ galeris = [] }) {
     const [showForm, setShowForm] = useState(false);
     const [editing, setEditing] = useState(null);
     const [previews, setPreviews] = useState([]);
+    
+    // State Konfirmasi Hapus
+    const [confirmDelete, setConfirmDelete] = useState({ show: false, id: null });
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const { data, setData, post, processing, reset, errors } = useForm({
         judul: '',
         kategori: '',
         urutan: 0,
-        gambar: [],       // array File untuk multi-upload
+        gambar: [],
         _method: 'post',
     });
 
@@ -67,10 +72,22 @@ export default function SectionGaleri({ galeris = [] }) {
         });
     };
 
-    const hapus = (id) => {
-        if (confirm('Yakin ingin menghapus gambar ini?')) {
-            router.delete(route('admin.galeri.destroy', id), { preserveScroll: true });
-        }
+    // Fungsi trigger modal hapus
+    const handleDeleteClick = (id) => {
+        setConfirmDelete({ show: true, id });
+    };
+
+    // Fungsi eksekusi hapus
+    const executeDelete = () => {
+        setIsDeleting(true);
+        router.delete(route('admin.galeri.destroy', confirmDelete.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                setConfirmDelete({ show: false, id: null });
+                setIsDeleting(false);
+            },
+            onError: () => setIsDeleting(false)
+        });
     };
 
     return (
@@ -110,7 +127,7 @@ export default function SectionGaleri({ galeris = [] }) {
                                     <button onClick={() => openEdit(item)} className="p-1.5 bg-white rounded-full text-slate-700 hover:bg-slate-100" title="Edit">
                                         <i className="ph ph-pencil-simple"></i>
                                     </button>
-                                    <button onClick={() => hapus(item.id)} className="p-1.5 bg-white rounded-full text-red-600 hover:bg-red-50" title="Hapus">
+                                    <button onClick={() => handleDeleteClick(item.id)} className="p-1.5 bg-white rounded-full text-red-600 hover:bg-red-50" title="Hapus">
                                         <i className="ph ph-trash"></i>
                                     </button>
                                 </div>
@@ -126,24 +143,15 @@ export default function SectionGaleri({ galeris = [] }) {
                 onClose={closeModal}
                 title={editing ? 'Edit Gambar Galeri' : 'Tambah Gambar Galeri'}
             >
+                {/* ... Isi form Galeri SAMA PERSIS ... */}
                 <form onSubmit={submit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium mb-1">Judul / Caption</label>
-                        <input
-                            type="text"
-                            value={data.judul}
-                            onChange={(e) => setData('judul', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500"
-                        />
+                        <input type="text" value={data.judul} onChange={(e) => setData('judul', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500" />
                     </div>
-
                     <div>
                         <label className="block text-sm font-medium mb-1">Kategori</label>
-                        <select
-                            value={data.kategori}
-                            onChange={(e) => setData('kategori', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500"
-                        >
+                        <select value={data.kategori} onChange={(e) => setData('kategori', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500">
                             <option value="">-- Pilih --</option>
                             <option value="Kegiatan">Kegiatan</option>
                             <option value="Keagamaan">Keagamaan</option>
@@ -153,32 +161,15 @@ export default function SectionGaleri({ galeris = [] }) {
                             <option value="Akademik">Akademik</option>
                         </select>
                     </div>
-
                     <div>
                         <label className="block text-sm font-medium mb-1">Urutan</label>
-                        <input
-                            type="number"
-                            value={data.urutan}
-                            onChange={(e) => setData('urutan', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500"
-                        />
+                        <input type="number" value={data.urutan} onChange={(e) => setData('urutan', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500" />
                     </div>
-
                     <div className="md:col-span-2">
-                        <label className="block text-sm font-medium mb-1">
-                            {editing ? 'Ganti Gambar (opsional)' : 'Upload Gambar (Bisa banyak sekaligus)'}
-                        </label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            multiple={!editing}
-                            onChange={editing ? handleSingleUpload : handleMultiUpload}
-                            className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-slate-800 dark:file:text-slate-300"
-                        />
+                        <label className="block text-sm font-medium mb-1">{editing ? 'Ganti Gambar (opsional)' : 'Upload Gambar (Bisa banyak sekaligus)'}</label>
+                        <input type="file" accept="image/*" multiple={!editing} onChange={editing ? handleSingleUpload : handleMultiUpload} className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-slate-800 dark:file:text-slate-300" />
                         {errors.gambar && <p className="text-xs text-red-600 mt-1">{errors.gambar}</p>}
                     </div>
-
-                    {/* Preview Image di dalam Modal */}
                     {(previews.length > 0 || (editing?.gambar_url && previews.length === 0)) && (
                         <div className="md:col-span-2 mt-2">
                             <p className="text-xs font-medium text-slate-500 mb-2">Preview:</p>
@@ -194,17 +185,21 @@ export default function SectionGaleri({ galeris = [] }) {
                             </div>
                         </div>
                     )}
-
                     <div className="md:col-span-2 flex justify-end gap-2 mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-                        <button type="button" onClick={closeModal} className="px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700">
-                            Batal
-                        </button>
-                        <button type="submit" disabled={processing} className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg disabled:opacity-60">
-                            {processing ? 'Mengunggah...' : 'Simpan'}
-                        </button>
+                        <button type="button" onClick={closeModal} className="px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700">Batal</button>
+                        <button type="submit" disabled={processing} className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg disabled:opacity-60">{processing ? 'Mengunggah...' : 'Simpan'}</button>
                     </div>
                 </form>
             </Modal>
+
+            {/* CONFIRM MODAL */}
+            <ConfirmModal
+                show={confirmDelete.show}
+                onClose={() => setConfirmDelete({ show: false, id: null })}
+                onConfirm={executeDelete}
+                processing={isDeleting}
+                message="Apakah Anda yakin ingin menghapus gambar ini? Data yang dihapus tidak dapat dikembalikan."
+            />
         </section>
     );
 }

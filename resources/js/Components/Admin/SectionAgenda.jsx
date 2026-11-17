@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { useForm, router } from '@inertiajs/react';
 import Modal from '@/Components/Modal';
+import ConfirmModal from '@/Components/ConfirmModal'; // <-- Tambahkan ini
 
 export default function SectionAgenda({ agendas = [] }) {
     const [showForm, setShowForm] = useState(false);
     const [editing, setEditing] = useState(null);
+    
+    // State untuk Konfirmasi Hapus
+    const [confirmDelete, setConfirmDelete] = useState({ show: false, id: null });
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const { data, setData, post, put, processing, reset, errors } = useForm({
         judul: '',
@@ -53,10 +58,22 @@ export default function SectionAgenda({ agendas = [] }) {
         }
     };
 
-    const hapus = (id) => {
-        if (confirm('Yakin ingin menghapus agenda ini?')) {
-            router.delete(route('admin.agenda.destroy', id), { preserveScroll: true });
-        }
+    // 1. Ganti fungsi hapus menjadi trigger modal
+    const handleDeleteClick = (id) => {
+        setConfirmDelete({ show: true, id });
+    };
+
+    // 2. Fungsi eksekusi hapus
+    const executeDelete = () => {
+        setIsDeleting(true);
+        router.delete(route('admin.agenda.destroy', confirmDelete.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                setConfirmDelete({ show: false, id: null });
+                setIsDeleting(false);
+            },
+            onError: () => setIsDeleting(false)
+        });
     };
 
     return (
@@ -105,7 +122,7 @@ export default function SectionAgenda({ agendas = [] }) {
                                             <button onClick={() => openEdit(item)} className="p-1.5 text-slate-500 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-slate-800 rounded-md transition-colors" title="Edit">
                                                 <i className="ph ph-pencil-simple text-lg"></i>
                                             </button>
-                                            <button onClick={() => hapus(item.id)} className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-slate-800 rounded-md transition-colors" title="Hapus">
+                                            <button onClick={() => handleDeleteClick(item.id)} className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-slate-800 rounded-md transition-colors" title="Hapus">
                                                 <i className="ph ph-trash text-lg"></i>
                                             </button>
                                         </div>
@@ -124,69 +141,43 @@ export default function SectionAgenda({ agendas = [] }) {
                 title={editing ? 'Edit Agenda' : 'Tambah Agenda Baru'}
             >
                 <form onSubmit={submit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* ... (Isi form sama persis seperti sebelumnya) ... */}
                     <div className="md:col-span-2">
                         <label className="block text-sm font-medium mb-1">Judul Agenda</label>
-                        <input
-                            type="text"
-                            value={data.judul}
-                            onChange={(e) => setData('judul', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500"
-                        />
+                        <input type="text" value={data.judul} onChange={(e) => setData('judul', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm" />
                         {errors.judul && <p className="text-xs text-red-600 mt-1">{errors.judul}</p>}
                     </div>
-                    
                     <div>
                         <label className="block text-sm font-medium mb-1">Tanggal</label>
-                        <input
-                            type="date"
-                            value={data.tanggal}
-                            onChange={(e) => setData('tanggal', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500"
-                        />
-                        {errors.tanggal && <p className="text-xs text-red-600 mt-1">{errors.tanggal}</p>}
+                        <input type="date" value={data.tanggal} onChange={(e) => setData('tanggal', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm" />
                     </div>
-                    
                     <div>
                         <label className="block text-sm font-medium mb-1">Waktu</label>
-                        <input
-                            type="text"
-                            placeholder="08:00 - 10:00"
-                            value={data.waktu}
-                            onChange={(e) => setData('waktu', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500"
-                        />
+                        <input type="text" placeholder="08:00 - 10:00" value={data.waktu} onChange={(e) => setData('waktu', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm" />
                     </div>
-                    
                     <div className="md:col-span-2">
                         <label className="block text-sm font-medium mb-1">Lokasi</label>
-                        <input
-                            type="text"
-                            value={data.lokasi}
-                            onChange={(e) => setData('lokasi', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500"
-                        />
+                        <input type="text" value={data.lokasi} onChange={(e) => setData('lokasi', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm" />
                     </div>
-                    
                     <div className="md:col-span-2">
                         <label className="block text-sm font-medium mb-1">Deskripsi</label>
-                        <textarea
-                            rows="3"
-                            value={data.deskripsi}
-                            onChange={(e) => setData('deskripsi', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary-500"
-                        ></textarea>
+                        <textarea rows="3" value={data.deskripsi} onChange={(e) => setData('deskripsi', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm"></textarea>
                     </div>
-
                     <div className="md:col-span-2 flex justify-end gap-2 mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-                        <button type="button" onClick={closeModal} className="px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700">
-                            Batal
-                        </button>
-                        <button type="submit" disabled={processing} className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg disabled:opacity-60">
-                            {processing ? 'Menyimpan...' : 'Simpan'}
-                        </button>
+                        <button type="button" onClick={closeModal} className="px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg">Batal</button>
+                        <button type="submit" disabled={processing} className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg disabled:opacity-60">{processing ? 'Menyimpan...' : 'Simpan'}</button>
                     </div>
                 </form>
             </Modal>
+
+            {/* TAMBAHKAN CONFIRM MODAL DI SINI */}
+            <ConfirmModal
+                show={confirmDelete.show}
+                onClose={() => setConfirmDelete({ show: false, id: null })}
+                onConfirm={executeDelete}
+                processing={isDeleting}
+                message="Apakah Anda yakin ingin menghapus agenda ini? Data yang dihapus tidak dapat dikembalikan."
+            />
         </section>
     );
-}   
+}

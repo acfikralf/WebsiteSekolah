@@ -64,8 +64,7 @@ Route::middleware('auth')->group(function () {
 
     //Admin Dadhboard
 
-    Route::get('/dashboard', [SettingController::class, 'index'])
-        ->name('admin.dashboard');
+    Route::get('/admin', [SettingController::class, 'index'])->name('admin.dashboard');
 
 
     //Admin

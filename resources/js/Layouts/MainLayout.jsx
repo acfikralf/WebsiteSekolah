@@ -57,8 +57,8 @@ export default function MainLayout({ children }) {
                                     <i className="ph ph-caret-down text-xs"></i>
                                 </button>
                                 <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <a href="#guru" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Guru</a>
-                                    <a href="#ekstrakurikuler" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Ekstrakurikuler</a>
+                                    <a href="/guru" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Guru</a>
+                                    <a href="/ekstrakurikuler" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Ekstrakurikuler</a>
                                 </div>
                             </div>
                             <div className="relative group">
@@ -67,15 +67,15 @@ export default function MainLayout({ children }) {
                                     <i className="ph ph-caret-down text-xs"></i>
                                 </button>
                                 <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <a href="#prestasi" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Prestasi</a>
-                                    <a href="#galeri" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Galeri</a>
+                                    <a href="/prestasi" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Prestasi</a>
+                                    <a href="/galeri" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Galeri</a>
                                 </div>
                             </div>
-                            <a href="#berita" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Berita</a>
-                            <a href="#agenda" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Agenda</a>
-                            <a href="#ppdb" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">PPDB</a>
-                            <a href="#kontak" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Kontak</a>
-                            <button onClick={toggleDarkMode} className="p-2 text-slate-500 hover:text-primary-600 dark:hover:text-accent-400 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle dark mode">
+                            <a href="/berita" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Berita</a>
+                            <a href="/agenda" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Agenda</a>
+                            <a href="/ppdb" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">PPDB</a>
+                            <a href="/kontak" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Kontak</a>
+                            <button onClick={toggleDarkMode} className="p-2 text-slate-500 hover:text-primary-600 dark:hover:text-accent-400 rounded-full hover:bg-slate-10<PASSWORD> dark:hover:bg-slate-8<PASSWORD> transition-colors" aria-label="Toggle dark mode">
                                 <i className={`ph ${darkMode ? 'ph-sun' : 'ph-moon'} text-xl`}></i>
                             </button>
                         </div>
@@ -99,15 +99,15 @@ export default function MainLayout({ children }) {
                             <a href="/" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Beranda</a>
                             <a href="profil" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Profil</a>
                             <p className="px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white">Akademik</p>
-                            <a href="#guru" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Guru</a>
-                            <a href="#ekstrakurikuler" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Ekstrakurikuler</a>
+                            <a href="/guru" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Guru</a>
+                            <a href="/ekstrakurikuler" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Ekstrakurikuler</a>
                             <p className="px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white">Kesiswaan</p>
-                            <a href="#prestasi" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Prestasi</a>
-                            <a href="#galeri" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Galeri</a>
-                            <a href="#berita" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Berita</a>
-                            <a href="#agenda" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Agenda</a>
-                            <a href="#ppdb" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">PPDB</a>
-                            <a href="#kontak" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Kontak</a>
+                            <a href="/prestasi" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Prestasi</a>
+                            <a href="/galeri" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Galeri</a>
+                            <a href="/berita" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Berita</a>
+                            <a href="/agenda" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Agenda</a>
+                            <a href="/ppdb" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">PPDB</a>
+                            <a href="/kontak" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Kontak</a>
                         </div>
                     </div>
                 )}
@@ -140,12 +140,12 @@ export default function MainLayout({ children }) {
                             <ul className="space-y-2 text-sm">
                                 <li><Link href="/" className="hover:text-accent-400 transition-colors">Beranda</Link></li>
                                 <li><Link href="profil" className="hover:text-accent-400 transition-colors">Profil</Link></li>
-                                <li><Link href="#berita" className="hover:text-accent-400 transition-colors">Berita</Link></li>
-                                <li><Link href="#agenda" className="hover:text-accent-400 transition-colors">Agenda</Link></li>
-                                <li><Link href="#prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
-                                <li><Link href="#galeri" className="hover:text-accent-400 transition-colors">Galeri</Link></li>
-                                <li><Link href="#ppdb" className="hover:text-accent-400 transition-colors">PPDB</Link></li>
-                                <li><Link href="#kontak" className="hover:text-accent-400 transition-colors">Kontak</Link></li>
+                                <li><Link href="/berita" className="hover:text-accent-400 transition-colors">Berita</Link></li>
+                                <li><Link href="/agenda" className="hover:text-accent-400 transition-colors">Agenda</Link></li>
+                                <li><Link href="/prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
+                                <li><Link href="/galeri" className="hover:text-accent-400 transition-colors">Galeri</Link></li>
+                                <li><Link href="/ppdb" className="hover:text-accent-400 transition-colors">PPDB</Link></li>
+                                <li><Link href="/kontak" className="hover:text-accent-400 transition-colors">Kontak</Link></li>
                                 <li><Link href={auth.user ? '/dashboard' : '/login'} className="hover:text-accent-400 transition-colors">Administrator</Link></li>
                             </ul>
                         </div>

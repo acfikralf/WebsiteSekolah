@@ -5,6 +5,13 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Setting;
 use App\http\Controllers\PollingVoteController;
+use App\Models\Berita;
+use App\Models\Agenda;
+use App\Models\Guru;
+use App\Models\Ekstrakurikuler;
+use App\Models\Prestasi;
+use App\Models\Galeri;
+
 
 
 Route::get('/', function () {
@@ -51,6 +58,58 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/profil', [\App\Http\Controllers\Admin\ProfilController::class, 'update'])
         ->name('admin.profil.update');
 });
+
+Route::get('/berita', function () {
+    return Inertia::render('Berita/Index', [
+        'beritas' => Berita::where('status', 'published')->latest('tanggal')->get()
+    ]);
+})->name('berita.index');
+
+// Rute Halaman Agenda  
+Route::get('/agenda', function () {
+    return Inertia::render('Agenda/Index', [
+        'agendas' => Agenda::where('tanggal', '>=', now()->startOfDay())->orderBy('tanggal')->get()
+    ]);
+})->name('agenda.index');
+
+Route::get('/guru', function () {
+    return Inertia::render('Guru/Index', [
+        'gurus' => Guru::ordered()->get()
+    ]);
+})->name('guru.index');
+
+Route::get('/ekstrakurikuler', function () {
+    return Inertia::render('Ekstrakurikuler/Index', [
+        'ekstrakurikulers' => Ekstrakurikuler::latest()->get()
+    ]);
+})->name('ekstrakurikuler.index');
+
+Route::get('/prestasi', function () {
+    return Inertia::render('Prestasi/Index', [
+        'prestasis' => Prestasi::orderBy('tanggal', 'desc')->get()
+    ]);
+})->name('prestasi.index');
+
+Route::get('/galeri', function () {
+    return Inertia::render('Galeri/Index', [
+        'galeris' => Galeri::ordered()->get()
+    ]);
+})->name('galeri.index');
+
+Route::get('/ppdb', function () {
+    return Inertia::render('Ppdb/Index');
+})->name('ppdb.index');
+
+Route::get('/kontak', function () {
+    return Inertia::render('Kontak/Index', [
+        // Kirim data setting untuk halaman kontak
+        'kontak' => [
+            'alamat'  => \App\Models\Setting::get('profil_alamat', 'Jl. Pendidikan No. 1, Watestanjung'),
+            'telepon' => \App\Models\Setting::get('profil_telepon', '+62 812-3456-7890'),
+            'email'   => \App\Models\Setting::get('profil_email', 'info@watestanjung.sch.id'),
+        ]
+    ]);
+})->name('kontak.index');
 
 
 
