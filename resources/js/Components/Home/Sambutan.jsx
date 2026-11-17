@@ -12,7 +12,7 @@ export default function Sambutan() {
                     <div className="relative" ref={leftRef}>
                         <div className="absolute -inset-4 bg-gradient-to-br from-primary-200 to-accent-200 dark:from-primary-800 dark:to-accent-800 rounded-3xl blur-2xl opacity-30"></div>
                         <img 
-                         src="/image/kepala-sekolah.jpeg" 
+                         src="/image/kepala-sekolah.png" 
                          alt="Kepala Sekolah" 
                          className="relative w-full max-w-md mx-auto rounded-3xl shadow-xl transform transition-transform duration-500 hover:scale-[1.02]" 
                         />

@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Head, Link, useForm, usePage} from '@inertiajs/react';
-
-
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function AdminLayout({ children, activeSection, onSectionChange, title }) {
     const [darkMode, setDarkMode] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const  { user }  = usePage().props.auth
-    console.log(user)
+    const { user } = usePage().props.auth;
 
     // ==== Dark mode init ====
     useEffect(() => {
@@ -30,12 +27,11 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
         });
     };
 
-    const { post } = useForm()
+    const { post } = useForm();
 
     const HandleLogout = () => {
-        post(route('logout'))
-    }
-    
+        post(route('logout'));
+    };
 
     // ==== Daftar menu sidebar ====
     const sections = {
@@ -99,10 +95,12 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
                         } lg:translate-x-0 transition-transform duration-300 flex flex-col`}
                     >
                         {/* Logo */}
-                        <Link href='/' className="h-16 flex items-center gap-2 px-6 border-b border-slate-200 dark:border-slate-800">
-                            <div className="w-9 h-9 bg-primary-600 text-white rounded-lg flex items-center justify-center shrink-0">
-                                <i className="ph ph-graduation-cap text-xl"></i>
-                            </div>
+                        <Link href="/" className="h-16 flex items-center gap-2 px-6 border-b border-slate-200 dark:border-slate-800">
+                            <img
+                                src="/image/logo-sekolah.png"
+                                alt="Logo SMP Islam Watestanjung"
+                                className="w-9 h-9 object-contain shrink-0"
+                            />
                             <span className="font-display font-bold text-slate-900 dark:text-white text-sm leading-tight">
                                 SMP Islam Watestanjung
                             </span>
@@ -136,14 +134,13 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
 
                         {/* Sidebar footer */}
                         <div className="p-4 border-t border-slate-200 dark:border-slate-800">
-                            <a
+                            <button
                                 onClick={HandleLogout}
-                                as="button"
                                 className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 w-full"
                             >
                                 <i className="ph ph-sign-out text-xl"></i>
                                 Logout
-                            </a>
+                            </button>
                         </div>
                     </aside>
 
