@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { Head, Link, useForm, usePage, router } from '@inertiajs/react'; // Tambahkan router
 import Toast from '@/Components/Toast';
+=======
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
+>>>>>>> origin/Decka
 
 export default function AdminLayout({ children, activeSection, onSectionChange, title }) {
     const [darkMode, setDarkMode] = useState(false);
@@ -28,10 +32,18 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
         });
     };
 
+<<<<<<< HEAD
     const { post } = useForm()
     const HandleLogout = () => {
         post(route('logout'))
     }
+=======
+    const { post } = useForm();
+
+    const HandleLogout = () => {
+        post(route('logout'));
+    };
+>>>>>>> origin/Decka
 
     // ==== Daftar menu sidebar ====
     const sections = {
@@ -100,10 +112,20 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
                             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                         } lg:translate-x-0 transition-transform duration-300 flex flex-col`}
                     >
+<<<<<<< HEAD
                         <Link href='/' className="h-16 flex items-center gap-2 px-6 border-b border-slate-200 dark:border-slate-800">
                             <div className="w-9 h-9 bg-primary-600 text-white rounded-lg flex items-center justify-center shrink-0">
                                 <i className="ph ph-graduation-cap text-xl"></i>
                             </div>
+=======
+                        {/* Logo */}
+                        <Link href="/" className="h-16 flex items-center gap-2 px-6 border-b border-slate-200 dark:border-slate-800">
+                            <img
+                                src="/image/logo-sekolah.png"
+                                alt="Logo SMP Islam Watestanjung"
+                                className="w-9 h-9 object-contain shrink-0"
+                            />
+>>>>>>> origin/Decka
                             <span className="font-display font-bold text-slate-900 dark:text-white text-sm leading-tight">
                                 SMP Islam Watestanjung
                             </span>
@@ -128,9 +150,16 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
                         <div className="p-4 border-t border-slate-200 dark:border-slate-800">
                             <button
                                 onClick={HandleLogout}
+<<<<<<< HEAD
                                 className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 w-full text-left"
                             >
                                 <i className="ph ph-sign-out text-xl"></i> Logout
+=======
+                                className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 w-full"
+                            >
+                                <i className="ph ph-sign-out text-xl"></i>
+                                Logout
+>>>>>>> origin/Decka
                             </button>
                         </div>
                     </aside>

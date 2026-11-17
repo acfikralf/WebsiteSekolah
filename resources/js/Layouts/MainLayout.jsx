@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 
 export default function MainLayout({ children }) {
-
-    const { auth } = usePage().props;
+    const { auth, site } = usePage().props;
     const [darkMode, setDarkMode] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -16,16 +15,14 @@ export default function MainLayout({ children }) {
     }, []);
 
     const toggleDarkMode = () => {
-        setDarkMode(prev => {
+        setDarkMode((prev) => {
             const newMode = !prev;
             document.documentElement.classList.toggle('dark', newMode);
             localStorage.setItem('theme', newMode ? 'dark' : 'light');
             return newMode;
         });
     };
-    console.log(usePage());;
 
-    const { site } = usePage().props || {};
     return (
         <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
             {/* NAVBAR */}
@@ -33,10 +30,19 @@ export default function MainLayout({ children }) {
                 <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16 md:h-20">
                         {/* Logo */}
+<<<<<<< HEAD
                         <a href="/" className="flex items-center gap-2 shrink-0 group">
                             <div className="w-10 h-10 bg-primary-600 text-white rounded-xl flex items-center justify-center transition-all group-hover:rounded-lg group-hover:bg-primary-500">
                                 <i className="ph ph-graduation-cap text-2xl"></i>
                             </div>
+=======
+                        <a href="#" className="flex items-center gap-2 shrink-0 group">
+                            <img
+                                src="/image/logo-sekolah.png"
+                                alt="Logo Sekolah"
+                                className="w-10 h-10 object-contain transition-transform group-hover:scale-105"
+                            />
+>>>>>>> origin/Decka
                             <div className="leading-tight">
                                 <span className="block font-display font-bold text-slate-900 dark:text-white text-lg group-hover:text-primary-600 dark:group-hover:text-accent-400 transition-colors">
                                     {site.title}
@@ -122,9 +128,11 @@ export default function MainLayout({ children }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         <div className="space-y-4">
                             <div className="flex items-center gap-2">
-                                <div className="w-10 h-10 bg-primary-500 text-white rounded-xl flex items-center justify-center">
-                                    <i className="ph ph-graduation-cap text-2xl"></i>
-                                </div>
+                                <img
+                                    src="/image/logo-sekolah.png"
+                                    alt="Logo SMP Islam Watestanjung"
+                                    className="w-10 h-10 object-contain"
+                                />
                                 <span className="font-display font-bold text-white text-lg">SMP Islam Watestanjung</span>
                             </div>
                             <p className="text-sm leading-relaxed">Sekolah Islam yang mengintegrasikan pendidikan umum dengan nilai-nilai keislaman untuk membentuk generasi berilmu dan berakhlak mulia.</p>
