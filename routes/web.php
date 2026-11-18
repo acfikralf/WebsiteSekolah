@@ -61,7 +61,20 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/berita', function () {
     return Inertia::render('Berita/Index', [
-        'beritas' => Berita::where('status', 'published')->latest('tanggal')->get()
+        'beritas' => Berita::where('status', 'published')
+            ->latest('tanggal')
+            ->get()
+            ->map(fn ($b) => [
+                'id'         => $b->id,
+                'judul'      => $b->judul,
+                'kategori'   => $b->kategori,
+                'status'     => $b->status,
+                'tanggal'    => $b->tanggal?->format('Y-m-d'),
+                'gambar_url' => $b->gambar_url,
+                'ringkasan'  => $b->ringkasan,
+                'konten'     => $b->konten,
+            ])
+            ->values(),
     ]);
 })->name('berita.index');
 
@@ -74,7 +87,7 @@ Route::get('/agenda', function () {
 
 Route::get('/guru', function () {
     return Inertia::render('Guru/Index', [
-        'gurus' => Guru::orderBy('urutan', 'asc')->get() 
+        'gurus' => Guru::orderBy('urutan', 'asc')->get(),
     ]);
 });
 
@@ -92,7 +105,17 @@ Route::get('/prestasi', function () {
 
 Route::get('/galeri', function () {
     return Inertia::render('Galeri/Index', [
-        'galeris' => Galeri::ordered()->get()
+        'galeris' => Galeri::ordered()
+            ->get()
+            ->map(fn ($g) => [
+                'id'         => $g->id,
+                'judul'      => $g->judul,
+                'kategori'   => $g->kategori,
+                'gambar'     => $g->gambar,
+                'gambar_url' => $g->gambar_url,
+                'urutan'     => $g->urutan,
+            ])
+            ->values(),
     ]);
 })->name('galeri.index');
 

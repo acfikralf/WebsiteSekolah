@@ -4,6 +4,7 @@ import { Image as ImageIcon } from '@phosphor-icons/react';
 
 export default function GaleriIndex({ galeris = [] }) {
     const [lightbox, setLightbox] = useState(null);
+    console.log('galeris:', galeris);
 
     return (
         <MainLayout>

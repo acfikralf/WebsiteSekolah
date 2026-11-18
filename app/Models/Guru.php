@@ -10,20 +10,22 @@ class Guru extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'jabatan', 'mapel', 'urutan', 'foto'];
+    protected $fillable = [
+        'nama',
+        'jabatan',
+        'mapel',
+        'urutan',
+        'foto',
+    ];
 
-    // TAMBAHKAN INI:
-    // Otomatis menambahkan properti 'foto_url' saat data dipanggil
     protected $appends = ['foto_url'];
 
     public function getFotoUrlAttribute()
     {
-        if ($this->foto) {
-            // Cek apakah file benar-benar ada di folder storage/app/public
-            if (Storage::disk('public')->exists($this->foto)) {
-                return Storage::disk('public')->url($this->foto);
-            }
+        if (empty($this->foto)) {
+            return null;
         }
-        return null;
+
+        return Storage::disk('public')->url($this->foto);
     }
 }
