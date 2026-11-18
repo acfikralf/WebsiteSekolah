@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { useForm, router } from '@inertiajs/react'; // Tambahkan router
-import { Plus, PencilSimple, Trash } from '@phosphor-icons/react';
-import ConfirmModal from '@/Components/ConfirmModal'; // Import ConfirmModal
+import { useForm, router } from '@inertiajs/react';
+import { Plus, PencilSimple, Trash, Tent } from '@phosphor-icons/react';
+import ConfirmModal from '@/Components/ConfirmModal';
 
 export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
     const [showModal, setShowModal] = useState(false);
     const [editing, setEditing] = useState(null);
     
-    // State Konfirmasi Hapus
     const [confirmDelete, setConfirmDelete] = useState({ show: false, id: null, nama: '' });
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -26,12 +25,10 @@ export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
         setEditing(null);
     };
 
-    // Fungsi trigger modal hapus
     const handleDeleteClick = (item) => {
         setConfirmDelete({ show: true, id: item.id, nama: item.nama });
     };
 
-    // Fungsi eksekusi hapus
     const executeDelete = () => {
         setIsDeleting(true);
         router.delete(route('admin.ekstrakurikuler.destroy', confirmDelete.id), {
@@ -62,34 +59,44 @@ export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
                 </div>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Grid diubah jadi 2 kolom untuk HP */}
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {ekstrakurikulers?.map((item) => (
                     <div
                         key={item.id}
-                        className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-4"
+                        className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-3 sm:p-4 flex flex-col justify-between"
                     >
-                        <div className="flex items-start gap-3">
-                            <div className="w-10 h-10 bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400 rounded-lg flex items-center justify-center shrink-0">
-                                <i className={`ph ${item.icon || 'ph-tent'} text-xl`}></i>
+                        <div>
+                            {/* Ikon & Teks atas */}
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-2">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400 rounded-lg flex items-center justify-center shrink-0">
+                                    <i className={`ph ${item.icon || 'ph-tent'} text-lg sm:text-xl`}></i>
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="font-medium text-xs sm:text-sm truncate">{item.nama}</p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500 truncate">Pembina: {item.pembina || '-'}</p>
+                                </div>
                             </div>
-                            <div className="flex-1">
-                                <p className="font-medium">{item.nama}</p>
-                                <p className="text-xs text-slate-500">Pembina: {item.pembina || '-'}</p>
-                            </div>
+                            
+                            {/* Deskripsi */}
+                            {item.deskripsi && (
+                                <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 line-clamp-2 sm:line-clamp-none mt-1">
+                                    {item.deskripsi}
+                                </p>
+                            )}
                         </div>
-                        {item.deskripsi && (
-                            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{item.deskripsi}</p>
-                        )}
+                        
+                        {/* Tombol Aksi */}
                         <div className="mt-3 flex gap-2">
                             <button
                                 onClick={() => openEdit(item)}
-                                className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700"
+                                className="flex-1 inline-flex items-center justify-center gap-1 px-2 py-1.5 text-[10px] sm:text-xs bg-slate-100 dark:bg-slate-800 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                             >
                                 <PencilSimple size={14} /> Edit
                             </button>
                             <button
                                 onClick={() => handleDeleteClick(item)}
-                                className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 text-xs bg-red-50 dark:bg-red-900/30 text-red-600 rounded-md hover:bg-red-100"
+                                className="flex-1 inline-flex items-center justify-center gap-1 px-2 py-1.5 text-[10px] sm:text-xs bg-red-50 dark:bg-red-900/30 text-red-600 rounded-md hover:bg-red-100 transition-colors"
                             >
                                 <Trash size={14} /> Hapus
                             </button>
@@ -105,7 +112,6 @@ export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
                 />
             )}
 
-            {/* CONFIRM MODAL */}
             <ConfirmModal
                 show={confirmDelete.show}
                 onClose={() => setConfirmDelete({ show: false, id: null, nama: '' })}
@@ -118,7 +124,6 @@ export default function SectionEkstrakurikuler({ ekstrakurikulers }) {
 }
 
 function EkstrakurikulerModal({ editing, onClose }) {
-    // ... (Isi EkstrakurikulerModal SAMA PERSIS dengan yang Anda kirim, tidak ada perubahan logic di sini)
     const isEdit = !!editing;
 
     const { data, setData, post, put, processing, errors, reset } = useForm({
@@ -144,13 +149,12 @@ function EkstrakurikulerModal({ editing, onClose }) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-md p-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 overflow-y-auto">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-md p-6 my-8">
                 <h3 className="font-display font-semibold text-lg mb-4">
                     {isEdit ? 'Edit Ekstrakurikuler' : 'Tambah Ekstrakurikuler'}
                 </h3>
                 <form onSubmit={submit} className="space-y-4">
-                    {/* Form fields ... */}
                     <div>
                         <label className="block text-sm font-medium mb-1">Nama</label>
                         <input type="text" value={data.nama} onChange={(e) => setData('nama', e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />

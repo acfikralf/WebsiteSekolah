@@ -17,7 +17,8 @@ class GuruController extends Controller
             'jabatan' => 'nullable|string|max:255',
             'mapel'   => 'nullable|string|max:255',
             'urutan'  => 'nullable|integer',
-            'foto'    => 'nullable|image|max:2048',
+            // PERUBAHAN: max diubah menjadi 8192 (8MB)
+            'foto'    => 'nullable|image|max:8192',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -37,7 +38,8 @@ class GuruController extends Controller
             'jabatan' => 'nullable|string|max:255',
             'mapel'   => 'nullable|string|max:255',
             'urutan'  => 'nullable|integer',
-            'foto'    => 'nullable|image|max:2048',
+            // PERUBAHAN: max diubah menjadi 8192 (8MB)
+            'foto'    => 'nullable|image|max:8192',
         ]);
 
         if ($request->hasFile('foto')) {

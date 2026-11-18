@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm, router } from '@inertiajs/react';
 import Modal from '@/Components/Modal';
-import ConfirmModal from '@/Components/ConfirmModal'; // Import ConfirmModal
+import ConfirmModal from '@/Components/ConfirmModal';
 
 export default function SectionPrestasi({ prestasis = [] }) {
     const [showForm, setShowForm] = useState(false);
@@ -43,12 +43,10 @@ export default function SectionPrestasi({ prestasis = [] }) {
         post(url, { forceFormData: true, preserveScroll: true, onSuccess: () => closeModal() });
     };
 
-    // Fungsi trigger modal hapus
     const handleDeleteClick = (item) => {
         setConfirmDelete({ show: true, id: item.id, judul: item.judul });
     };
 
-    // Fungsi eksekusi hapus
     const executeDelete = () => {
         setIsDeleting(true);
         router.delete(route('admin.prestasi.destroy', confirmDelete.id), {
@@ -72,32 +70,52 @@ export default function SectionPrestasi({ prestasis = [] }) {
 
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="bg-slate-50 dark:bg-slate-800/50 text-left">
-                                <th className="px-4 py-3 font-medium">#</th>
-                                <th className="px-4 py-3 font-medium">Foto</th>
-                                <th className="px-4 py-3 font-medium">Judul</th>
-                                <th className="px-4 py-3 font-medium">Siswa</th>
-                                <th className="px-4 py-3 font-medium">Kategori</th>
-                                <th className="px-4 py-3 font-medium">Aksi</th>
+                    <table className="w-full text-left whitespace-nowrap">
+                        <thead className="bg-slate-50 dark:bg-slate-800/50 text-xs sm:text-sm">
+                            <tr>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium hidden sm:table-cell">#</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium">Foto</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium">Judul</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium hidden md:table-cell">Siswa</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium hidden md:table-cell">Kategori</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-                            {prestasis.length === 0 && <tr><td colSpan="6" className="px-4 py-6 text-center text-slate-500">Belum ada data prestasi.</td></tr>}
+                        <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-xs sm:text-sm">
+                            {prestasis.length === 0 && (
+                                <tr>
+                                    <td colSpan="6" className="px-4 py-6 text-center text-slate-500">Belum ada data prestasi.</td>
+                                </tr>
+                            )}
                             {prestasis.map((item, idx) => (
                                 <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                                    <td className="px-4 py-3">{idx + 1}</td>
-                                    <td className="px-4 py-3">
-                                        {item.foto ? <img src={`/storage/${item.foto}`} alt={item.judul} className="w-12 h-12 object-cover rounded-lg" /> : <div className="w-12 h-12 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center text-slate-400"><i className="ph ph-image"></i></div>}
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 hidden sm:table-cell">{idx + 1}</td>
+                                    {/* Kolom Foto TIDAK disembunyikan (muncul di HP & Desktop) */}
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3">
+                                        {item.foto ? (
+                                            <img src={`/storage/${item.foto}`} alt={item.judul} className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-lg" />
+                                        ) : (
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center text-slate-400">
+                                                <i className="ph ph-image"></i>
+                                            </div>
+                                        )}
                                     </td>
-                                    <td className="px-4 py-3 font-medium">{item.judul}</td>
-                                    <td className="px-4 py-3">{item.siswa}</td>
-                                    <td className="px-4 py-3"><span className="text-xs bg-accent-100 dark:bg-accent-900 text-accent-700 dark:text-accent-300 px-2 py-1 rounded-full">{item.kategori}</span></td>
-                                    <td className="px-4 py-3">
-                                        <div className="flex gap-2">
-                                            <button onClick={() => openEdit(item)} className="p-1.5 text-slate-500 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-slate-800 rounded-md" title="Edit"><i className="ph ph-pencil-simple text-lg"></i></button>
-                                            <button onClick={() => handleDeleteClick(item)} className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-slate-800 rounded-md" title="Hapus"><i className="ph ph-trash text-lg"></i></button>
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 font-medium max-w-[120px] sm:max-w-xs truncate whitespace-normal">
+                                        {item.judul}
+                                        {/* Info Siswa & Kategori untuk Mobile */}
+                                        <div className="md:hidden mt-1 flex flex-col gap-1">
+                                            <span className="text-[10px] text-slate-500 truncate">{item.siswa}</span>
+                                            <span className="text-[10px] bg-accent-100 dark:bg-accent-900 text-accent-700 dark:text-accent-300 px-1.5 py-0.5 rounded-full w-max">{item.kategori}</span>
+                                        </div>
+                                    </td>
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 hidden md:table-cell">{item.siswa}</td>
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 hidden md:table-cell">
+                                        <span className="text-xs bg-accent-100 dark:bg-accent-900 text-accent-700 dark:text-accent-300 px-2 py-1 rounded-full">{item.kategori}</span>
+                                    </td>
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-center">
+                                        <div className="flex justify-center gap-1 sm:gap-2">
+                                            <button onClick={() => openEdit(item)} className="p-1 text-slate-500 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-slate-800 rounded-md" title="Edit"><i className="ph ph-pencil-simple text-base sm:text-lg"></i></button>
+                                            <button onClick={() => handleDeleteClick(item)} className="p-1 text-slate-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-slate-800 rounded-md" title="Hapus"><i className="ph ph-trash text-base sm:text-lg"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -108,7 +126,6 @@ export default function SectionPrestasi({ prestasis = [] }) {
             </div>
 
             <Modal show={showForm} onClose={closeModal} title={editing ? 'Edit Prestasi' : 'Tambah Prestasi'}>
-                {/* ... Isi form Prestasi SAMA PERSIS ... */}
                 <form onSubmit={submit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2 flex flex-col sm:flex-row items-center sm:items-start gap-4">
                         <div className="w-32 h-24 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700">

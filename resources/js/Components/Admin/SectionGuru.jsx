@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm, router } from '@inertiajs/react';
 import Modal from '@/Components/Modal';
-import ConfirmModal from '@/Components/ConfirmModal'; // Import ConfirmModal
+import ConfirmModal from '@/Components/ConfirmModal';
 
 export default function SectionGuru({ gurus = [] }) {
     const [showForm, setShowForm] = useState(false);
@@ -33,6 +33,16 @@ export default function SectionGuru({ gurus = [] }) {
 
     const handleFotoChange = (e) => {
         const file = e.target.files[0];
+        
+        // Validasi ukuran di frontend: 8MB = 8 * 1024 * 1024 bytes
+        if (file && file.size > 8 * 1024 * 1024) {
+            alert("Ukuran file terlalu besar! Maksimal 8MB.");
+            e.target.value = null; // Reset input
+            setData('foto', null);
+            setPreviewFoto(null);
+            return;
+        }
+
         setData('foto', file);
         if (file) setPreviewFoto(URL.createObjectURL(file));
     };
@@ -60,6 +70,7 @@ export default function SectionGuru({ gurus = [] }) {
             onError: () => setIsDeleting(false)
         });
     };
+    console.log('SectionGuru data:', gurus);
 
     return (
         <section id="section-guru">
@@ -70,20 +81,21 @@ export default function SectionGuru({ gurus = [] }) {
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
                 {gurus.length === 0 && <p className="col-span-full text-center text-slate-500 py-8">Belum ada data guru.</p>}
                 {gurus.map((item) => (
                     <div key={item.id} className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
                         <div className="aspect-[3/4] bg-slate-100 dark:bg-slate-800 overflow-hidden">
                             {item.foto_url ? <img src={item.foto_url} alt={item.nama} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-slate-400"><i className="ph ph-user text-5xl"></i></div>}
                         </div>
-                        <div className="p-4">
-                            <p className="font-medium text-sm truncate">{item.nama}</p>
-                            <p className="text-xs text-primary-600 dark:text-accent-400 truncate">{item.jabatan}</p>
-                            <p className="text-xs text-slate-500 truncate mt-0.5">{item.mapel}</p>
+                        <div className="p-3 sm:p-4">
+                            <p className="font-medium text-xs sm:text-sm truncate">{item.nama}</p>
+                            <p className="text-[10px] sm:text-xs text-primary-600 dark:text-accent-400 truncate">{item.jabatan}</p>
+                            <p className="text-[10px] sm:text-xs text-slate-500 truncate mt-0.5">{item.mapel}</p>
+                            
                             <div className="mt-3 flex gap-2">
-                                <button onClick={() => openEdit(item)} className="flex-1 px-3 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700">Edit</button>
-                                <button onClick={() => handleDeleteClick(item)} className="flex-1 px-3 py-1.5 text-xs bg-red-50 dark:bg-red-900/30 text-red-600 rounded-md hover:bg-red-100">Hapus</button>
+                                <button onClick={() => openEdit(item)} className="flex-1 px-2 py-1.5 text-[10px] sm:text-xs bg-slate-100 dark:bg-slate-800 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700">Edit</button>
+                                <button onClick={() => handleDeleteClick(item)} className="flex-1 px-2 py-1.5 text-[10px] sm:text-xs bg-red-50 dark:bg-red-900/30 text-red-600 rounded-md hover:bg-red-100">Hapus</button>
                             </div>
                         </div>
                     </div>
@@ -91,7 +103,6 @@ export default function SectionGuru({ gurus = [] }) {
             </div>
 
             <Modal show={showForm} onClose={closeModal} title={editing ? 'Edit Guru' : 'Tambah Guru'}>
-                {/* ... Isi form Guru SAMA PERSIS ... */}
                 <form onSubmit={submit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2 flex flex-col sm:flex-row items-center sm:items-start gap-4">
                         <div className="w-24 h-32 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700">
@@ -100,7 +111,10 @@ export default function SectionGuru({ gurus = [] }) {
                         <div className="flex-1 w-full">
                             <label className="block text-sm font-medium mb-1">Foto Profil</label>
                             <input type="file" accept="image/*" onChange={handleFotoChange} className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-slate-800 dark:file:text-slate-300" />
-                            <p className="text-xs text-slate-500 mt-1">Format: JPG, PNG. Maks 2MB. Rasio 3:4.</p>
+                            
+                            {/* PERUBAHAN TEKS: Maks 8MB */}
+                            <p className="text-xs text-slate-500 mt-1">Format: JPG, PNG. Maks 8MB. Rasio 3:4.</p>
+                            
                             {errors.foto && <p className="text-xs text-red-600 mt-1">{errors.foto}</p>}
                         </div>
                     </div>
@@ -128,7 +142,6 @@ export default function SectionGuru({ gurus = [] }) {
                 </form>
             </Modal>
 
-            {/* CONFIRM MODAL */}
             <ConfirmModal
                 show={confirmDelete.show}
                 onClose={() => setConfirmDelete({ show: false, id: null, nama: '' })}

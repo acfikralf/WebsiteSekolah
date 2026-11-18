@@ -2,25 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Guru extends Model
 {
-    protected $fillable = ['nama', 'jabatan', 'mapel', 'foto', 'urutan'];
+    use HasFactory;
 
-    /**
-     * Accessor: URL lengkap foto.
-     */
-    public function getFotoUrlAttribute(): ?string
-    {
-        return $this->foto ? asset('storage/' . $this->foto) : null;
-    }
+    protected $fillable = ['nama', 'jabatan', 'mapel', 'urutan', 'foto'];
 
-    /**
-     * Scope: urutkan berdasarkan kolom urutan.
-     */
-    public function scopeOrdered($query)
+    // TAMBAHKAN INI:
+    // Otomatis menambahkan properti 'foto_url' saat data dipanggil
+    protected $appends = ['foto_url'];
+
+    public function getFotoUrlAttribute()
     {
-        return $query->orderBy('urutan')->orderBy('id');
+        if ($this->foto) {
+            // Cek apakah file benar-benar ada di folder storage/app/public
+            if (Storage::disk('public')->exists($this->foto)) {
+                return Storage::disk('public')->url($this->foto);
+            }
+        }
+        return null;
     }
 }

@@ -74,9 +74,9 @@ Route::get('/agenda', function () {
 
 Route::get('/guru', function () {
     return Inertia::render('Guru/Index', [
-        'gurus' => Guru::ordered()->get()
+        'gurus' => Guru::orderBy('urutan', 'asc')->get() 
     ]);
-})->name('guru.index');
+});
 
 Route::get('/ekstrakurikuler', function () {
     return Inertia::render('Ekstrakurikuler/Index', [

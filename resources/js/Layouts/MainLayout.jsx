@@ -3,175 +3,217 @@ import { Link, usePage } from '@inertiajs/react';
 
 export default function MainLayout({ children }) {
     const { auth, site } = usePage().props;
+
     const [darkMode, setDarkMode] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    // ==== Dark Mode Init ====
     useEffect(() => {
         const saved = localStorage.getItem('theme');
-        if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+
+        if (
+            saved === 'dark' ||
+            (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
             setDarkMode(true);
             document.documentElement.classList.add('dark');
+        } else {
+            setDarkMode(false);
+            document.documentElement.classList.remove('dark');
         }
     }, []);
 
+    // ==== Toggle Dark Mode ====
     const toggleDarkMode = () => {
         setDarkMode((prev) => {
             const newMode = !prev;
+
             document.documentElement.classList.toggle('dark', newMode);
             localStorage.setItem('theme', newMode ? 'dark' : 'light');
+
             return newMode;
         });
     };
 
     return (
-        <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
-            {/* NAVBAR */}
+        <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col min-h-screen">
+
+            {/* ===== NAVBAR ===== */}
             <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
-                <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16 md:h-20">
                         {/* Logo */}
-<<<<<<< HEAD
                         <a href="/" className="flex items-center gap-2 shrink-0 group">
-                            <div className="w-10 h-10 bg-primary-600 text-white rounded-xl flex items-center justify-center transition-all group-hover:rounded-lg group-hover:bg-primary-500">
-                                <i className="ph ph-graduation-cap text-2xl"></i>
-                            </div>
-=======
-                        <a href="#" className="flex items-center gap-2 shrink-0 group">
                             <img
                                 src="/image/logo-sekolah.png"
-                                alt="Logo Sekolah"
-                                className="w-10 h-10 object-contain transition-transform group-hover:scale-105"
+                                alt="Logo SMP Islam Watestanjung"
+                                className="w-8 h-8 sm:w-10 sm:h-10 object-contain transition-transform group-hover:scale-105"
                             />
->>>>>>> origin/Decka
-                            <div className="leading-tight">
-                                <span className="block font-display font-bold text-slate-900 dark:text-white text-lg group-hover:text-primary-600 dark:group-hover:text-accent-400 transition-colors">
+                            <div className="leading-tight max-w-[170px] sm:max-w-none">
+                                <span className="block font-display font-bold text-slate-900 dark:text-white text-[13px] sm:text-lg group-hover:text-primary-600 dark:group-hover:text-accent-400 transition-colors truncate">
                                     {site.title}
                                 </span>
-                                <span className="block text-xs text-slate-500 dark:text-slate-400">
+                                <span className="hidden xs:block text-[9px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">
                                     {site.tagline}
                                 </span>
                             </div>
                         </a>
 
-                        {/* Desktop nav */}
+                        {/* ===== DESKTOP NAVIGATION ===== */}
                         <div className="hidden lg:flex items-center gap-6">
                             <a href="/" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Beranda</a>
-                            <a href="profil" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Profil</a>
+                            <a href="/profil" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Profil</a>
+
                             <div className="relative group">
                                 <button className="flex items-center gap-1 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400">
-                                    Akademik
-                                    <i className="ph ph-caret-down text-xs"></i>
+                                    Akademik <i className="ph ph-caret-down text-xs"></i>
                                 </button>
                                 <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                     <a href="/guru" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Guru</a>
                                     <a href="/ekstrakurikuler" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Ekstrakurikuler</a>
                                 </div>
                             </div>
+
                             <div className="relative group">
                                 <button className="flex items-center gap-1 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400">
-                                    Kesiswaan
-                                    <i className="ph ph-caret-down text-xs"></i>
+                                    Kesiswaan <i className="ph ph-caret-down text-xs"></i>
                                 </button>
                                 <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                     <a href="/prestasi" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Prestasi</a>
                                     <a href="/galeri" className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600">Galeri</a>
                                 </div>
                             </div>
+
                             <a href="/berita" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Berita</a>
                             <a href="/agenda" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Agenda</a>
                             <a href="/ppdb" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">PPDB</a>
                             <a href="/kontak" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Kontak</a>
-                            <button onClick={toggleDarkMode} className="p-2 text-slate-500 hover:text-primary-600 dark:hover:text-accent-400 rounded-full hover:bg-slate-10<PASSWORD> dark:hover:bg-slate-8<PASSWORD> transition-colors" aria-label="Toggle dark mode">
+
+                            <button onClick={toggleDarkMode} className="p-2 text-slate-500 hover:text-primary-600 dark:hover:text-accent-400 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle dark mode">
                                 <i className={`ph ${darkMode ? 'ph-sun' : 'ph-moon'} text-xl`}></i>
                             </button>
                         </div>
 
-                        {/* Mobile menu button */}
-                        <div className="flex items-center gap-4 lg:hidden">
-                            <button onClick={toggleDarkMode} className="p-2 text-slate-500 hover:text-primary-600 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle dark mode">
-                                <i className={`ph ${darkMode ? 'ph-sun' : 'ph-moon'} text-xl`}></i>
+                        {/* ===== MOBILE MENU BUTTON ===== */}
+                        <div className="flex items-center gap-1.5 sm:gap-4 lg:hidden">
+                            <button onClick={toggleDarkMode} className="p-1.5 sm:p-2 text-slate-500 hover:text-primary-600 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle dark mode">
+                                <i className={`ph ${darkMode ? 'ph-sun' : 'ph-moon'} text-lg sm:text-xl`}></i>
                             </button>
-                            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-slate-500 hover:text-primary-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle menu">
-                                <i className="ph ph-list text-2xl"></i>
+                            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-1.5 sm:p-2 text-slate-500 hover:text-primary-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle menu">
+                                <i className="ph ph-list text-xl sm:text-2xl"></i>
                             </button>
                         </div>
                     </div>
                 </nav>
 
-                {/* Mobile menu */}
+                {/* ===== MOBILE NAVIGATION ===== */}
                 {mobileMenuOpen && (
-                    <div className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-lg">
-                        <div className="px-4 pt-2 pb-4 space-y-1">
-                            <a href="/" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Beranda</a>
-                            <a href="profil" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Profil</a>
-                            <p className="px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white">Akademik</p>
-                            <a href="/guru" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Guru</a>
-                            <a href="/ekstrakurikuler" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Ekstrakurikuler</a>
-                            <p className="px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white">Kesiswaan</p>
-                            <a href="/prestasi" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Prestasi</a>
-                            <a href="/galeri" className="block pl-6 pr-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Galeri</a>
-                            <a href="/berita" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Berita</a>
-                            <a href="/agenda" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Agenda</a>
-                            <a href="/ppdb" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">PPDB</a>
-                            <a href="/kontak" className="block px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors">Kontak</a>
+                    <div className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-lg max-h-[80vh] overflow-y-auto">
+                        <div className="px-2 pt-2 pb-4 space-y-0.5">
+                            <a href="/" className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Beranda</a>
+                            <a href="/profil" className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Profil</a>
+
+                            <p className="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Akademik</p>
+                            <a href="/guru" className="block pl-5 pr-3 py-1.5 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Guru</a>
+                            <a href="/ekstrakurikuler" className="block pl-5 pr-3 py-1.5 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Ekstrakurikuler</a>
+
+                            <p className="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Kesiswaan</p>
+                            <a href="/prestasi" className="block pl-5 pr-3 py-1.5 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Prestasi</a>
+                            <a href="/galeri" className="block pl-5 pr-3 py-1.5 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Galeri</a>
+
+                            <a href="/berita" className="block px-3 py-2 mt-1 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors border-t border-slate-100 dark:border-slate-800/50">Berita</a>
+                            <a href="/agenda" className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Agenda</a>
+                            <a href="/ppdb" className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">PPDB</a>
+                            <a href="/kontak" className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Kontak</a>
                         </div>
                     </div>
                 )}
+
             </header>
 
-            {/* Konten utama */}
-            <main>{children}</main>
+            {/* ===== KONTEN UTAMA ===== */}
+            <main className="flex-grow">
+                {children}
+            </main>
 
-            {/* FOOTER */}
+            {/* ===== FOOTER ===== */}
             <footer className="bg-slate-900 dark:bg-slate-950 text-slate-300">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div className="space-y-4">
+                {/* PERBAIKAN: Menggunakan grid-cols-12 untuk kontrol lebar presisi */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+                    <div className="grid grid-cols-2 md:grid-cols-12 gap-x-4 gap-y-8 md:gap-x-8 md:gap-y-0">
+                        
+                        {/* 1. Informasi Sekolah - Desktop: 4 kolom */}
+                        <div className="md:col-span-4 space-y-3 sm:space-y-4">
                             <div className="flex items-center gap-2">
-                                <img
-                                    src="/image/logo-sekolah.png"
-                                    alt="Logo SMP Islam Watestanjung"
-                                    className="w-10 h-10 object-contain"
-                                />
-                                <span className="font-display font-bold text-white text-lg">SMP Islam Watestanjung</span>
+                                <img src="/image/logo-sekolah.png" alt="Logo" className="w-7 h-7 sm:w-10 sm:h-10 object-contain shrink-0" />
+                                <span className="font-display font-bold text-white text-[11px] sm:text-lg leading-tight">SMP Islam Watestanjung</span>
                             </div>
-                            <p className="text-sm leading-relaxed">Sekolah Islam yang mengintegrasikan pendidikan umum dengan nilai-nilai keislaman untuk membentuk generasi berilmu dan berakhlak mulia.</p>
-                            <div className="flex space-x-4">
-                                <a href="#" aria-label="Instagram" className="text-slate-400 hover:text-white transition-colors"><i className="ph ph-instagram-logo text-xl"></i></a>
-                                <a href="#" aria-label="Facebook" className="text-slate-400 hover:text-white transition-colors"><i className="ph ph-facebook-logo text-xl"></i></a>
-                                <a href="#" aria-label="YouTube" className="text-slate-400 hover:text-white transition-colors"><i className="ph ph-youtube-logo text-xl"></i></a>
-                                <a href="#" aria-label="WhatsApp" className="text-slate-400 hover:text-white transition-colors"><i className="ph ph-whatsapp-logo text-xl"></i></a>
+                            <p className="text-[10px] sm:text-sm leading-relaxed text-slate-400">
+                                Sekolah Islam yang mengintegrasikan pendidikan umum dengan nilai-nilai keislaman untuk membentuk generasi berilmu dan berakhlak mulia.
+                            </p>
+                            <div className="flex space-x-3 sm:space-x-4">
+                                <a href="#" className="text-slate-400 hover:text-white transition-colors"><i className="ph ph-instagram-logo text-base sm:text-xl"></i></a>
+                                <a href="#" className="text-slate-400 hover:text-white transition-colors"><i className="ph ph-facebook-logo text-base sm:text-xl"></i></a>
+                                <a href="#" className="text-slate-400 hover:text-white transition-colors"><i className="ph ph-youtube-logo text-base sm:text-xl"></i></a>
+                                <a href="#" className="text-slate-400 hover:text-white transition-colors"><i className="ph ph-whatsapp-logo text-base sm:text-xl"></i></a>
                             </div>
                         </div>
-                        <div>
-                            <h3 className="text-white font-semibold mb-4">Tautan</h3>
-                            <ul className="space-y-2 text-sm">
-                                <li><Link href="/" className="hover:text-accent-400 transition-colors">Beranda</Link></li>
-                                <li><Link href="profil" className="hover:text-accent-400 transition-colors">Profil</Link></li>
-                                <li><Link href="/berita" className="hover:text-accent-400 transition-colors">Berita</Link></li>
-                                <li><Link href="/agenda" className="hover:text-accent-400 transition-colors">Agenda</Link></li>
-                                <li><Link href="/prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
-                                <li><Link href="/galeri" className="hover:text-accent-400 transition-colors">Galeri</Link></li>
-                                <li><Link href="/ppdb" className="hover:text-accent-400 transition-colors">PPDB</Link></li>
-                                <li><Link href="/kontak" className="hover:text-accent-400 transition-colors">Kontak</Link></li>
-                                <li><Link href={auth.user ? '/dashboard' : '/login'} className="hover:text-accent-400 transition-colors">Administrator</Link></li>
+
+                        {/* 2. Tautan - Desktop: 2 kolom */}
+                        <div className="md:col-span-2">
+                            <h3 className="text-white font-semibold mb-2 sm:mb-4 text-xs sm:text-base">Tautan</h3>
+                            
+                            <div className="grid grid-cols-2 md:grid-cols-1 gap-x-2 md:gap-x-0">
+                                <ul className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-sm text-slate-400">
+                                    <li><Link href="/" className="hover:text-accent-400 transition-colors">Beranda</Link></li>
+                                    <li><Link href="/profil" className="hover:text-accent-400 transition-colors">Profil</Link></li>
+                                    <li><Link href="/berita" className="hover:text-accent-400 transition-colors">Berita</Link></li>
+                                    <li><Link href="/agenda" className="hover:text-accent-400 transition-colors">Agenda</Link></li>
+                                    <li><Link href="/prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
+                                </ul>
+                                <ul className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-sm text-slate-400">
+                                    <li><Link href="/galeri" className="hover:text-accent-400 transition-colors">Galeri</Link></li>
+                                    <li><Link href="/ppdb" className="hover:text-accent-400 transition-colors">PPDB</Link></li>
+                                    <li><Link href="/kontak" className="hover:text-accent-400 transition-colors">Kontak</Link></li>
+                                    <li><Link href={auth.user ? '/admin' : '/login'} className="hover:text-accent-400 transition-colors">Administrator</Link></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* 3. Kontak - Desktop: 3 kolom */}
+                        <div className="md:col-span-3">
+                            <h3 className="text-white font-semibold mb-2 sm:mb-4 text-xs sm:text-base">Kontak</h3>
+                            <ul className="space-y-2 sm:space-y-3 text-[10px] sm:text-sm text-slate-400">
+                                <li className="flex items-start gap-1.5 sm:gap-2">
+                                    <i className="ph ph-map-pin text-accent-400 mt-0.5"></i>
+                                    <span className="leading-snug">Jl. Pendidikan No. 1, Watestanjung</span>
+                                </li>
+                                <li className="flex items-start gap-1.5 sm:gap-2">
+                                    <i className="ph ph-phone text-accent-400 mt-0.5"></i>
+                                    <span>+62 812-3456-7890</span>
+                                </li>
+                                <li className="flex items-start gap-1.5 sm:gap-2">
+                                    <i className="ph ph-envelope text-accent-400 mt-0.5"></i>
+                                    <span className="break-all">info@watestanjung.sch.id</span>
+                                </li>
                             </ul>
                         </div>
-                        <div>
-                            <h3 className="text-white font-semibold mb-4">Kontak</h3>
-                            <ul className="space-y-3 text-sm">
-                                <li className="flex items-start gap-2"><i className="ph ph-map-pin text-accent-400 mt-1"></i> Jl. Pendidikan No. 1, Watestanjung</li>
-                                <li className="flex items-center gap-2"><i className="ph ph-phone text-accent-400"></i> +62 812-3456-7890</li>
-                                <li className="flex items-center gap-2"><i className="ph ph-envelope text-accent-400"></i> info@watestanjung.sch.id</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-white font-semibold mb-4">Lokasi</h3>
-                            <div className="bg-slate-800 rounded-xl h-32 flex items-center justify-center text-slate-500">Google Maps embed</div>
+
+                        {/* 4. Lokasi - Desktop: 3 kolom */}
+                        <div className="md:col-span-3">
+                            <h3 className="text-white font-semibold mb-2 sm:mb-4 text-xs sm:text-base">Lokasi</h3>
+                            <div className="bg-slate-800 rounded-lg sm:rounded-xl h-20 sm:h-32 flex items-center justify-center text-slate-500 text-[10px] sm:text-sm text-center p-2">
+                                Google Maps embed
+                            </div>
                         </div>
                     </div>
-                    <div className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-400">
-                        © {new Date().getFullYear()} SMP Islam Watestanjung. All Rights Reserved.
+
+                    {/* Copyright (Tengah Bawah) */}
+                    <div className="mt-8 sm:mt-12 pt-5 sm:pt-8 border-t border-slate-800 text-center text-[10px] sm:text-sm text-slate-400">
+                        <p>© {new Date().getFullYear()} SMP Islam Watestanjung. All Rights Reserved.</p>
+                        <p className="mt-1.5 sm:mt-2 text-[9px] sm:text-xs text-slate-500">
+                            Supported by <span className="font-semibold text-slate-300">RPL SMK Krian 1 Sidoarjo</span>
+                        </p>
                     </div>
                 </div>
             </footer>

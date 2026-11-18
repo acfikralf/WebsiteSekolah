@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useForm, router } from "@inertiajs/react";
 import { Plus, PencilSimple, Trash } from "@phosphor-icons/react";
-import ConfirmModal from '@/Components/ConfirmModal'; // <-- Tambahkan ini
+import ConfirmModal from '@/Components/ConfirmModal';
 
 const KATEGORI_OPTIONS = ["Kegiatan", "Prestasi", "Ekstrakurikuler", "Pengumuman"];
 
@@ -11,7 +11,6 @@ export default function SectionBerita({ beritas }) {
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     
-    // State untuk Konfirmasi Hapus (tambahkan judul agar pesannya dinamis)
     const [confirmDelete, setConfirmDelete] = useState({ show: false, id: null, judul: "" });
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -44,12 +43,10 @@ export default function SectionBerita({ beritas }) {
         setEditing(null);
     };
 
-    // 1. Ganti fungsi handleDelete
     const handleDeleteClick = (item) => {
         setConfirmDelete({ show: true, id: item.id, judul: item.judul });
     };
 
-    // 2. Fungsi eksekusi hapus
     const executeDelete = () => {
         setIsDeleting(true);
         router.delete(route("admin.berita.destroy", confirmDelete.id), {
@@ -87,19 +84,21 @@ export default function SectionBerita({ beritas }) {
                         className="w-full sm:w-64 px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                 </div>
+                
+                {/* Tabel dengan padding yang lebih kecil di HP (px-2 py-2) dan normal di Desktop (sm:px-4 sm:py-3) */}
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="bg-slate-50 dark:bg-slate-800/50 text-left">
-                                <th className="px-4 py-3 font-medium w-12">#</th>
-                                <th className="px-4 py-3 font-medium w-20">Gambar</th>
-                                <th className="px-4 py-3 font-medium">Judul</th>
-                                <th className="px-4 py-3 font-medium">Status</th>
-                                <th className="px-4 py-3 font-medium">Tanggal</th>
-                                <th className="px-4 py-3 font-medium w-28">Aksi</th>
+                    <table className="w-full text-left whitespace-nowrap">
+                        <thead className="bg-slate-50 dark:bg-slate-800/50 text-xs sm:text-sm">
+                            <tr>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium hidden sm:table-cell">#</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium hidden sm:table-cell">Gambar</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium">Judul</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium">Status</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium hidden md:table-cell">Tanggal</th>
+                                <th className="px-2 sm:px-4 py-2 sm:py-3 font-medium text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                        <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-xs sm:text-sm">
                             {paginated.length === 0 && (
                                 <tr>
                                     <td colSpan="6" className="px-4 py-8 text-center text-slate-500">Tidak ada data.</td>
@@ -107,33 +106,36 @@ export default function SectionBerita({ beritas }) {
                             )}
                             {paginated.map((item, idx) => (
                                 <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                                    <td className="px-4 py-3">{(currentPage - 1) * perPage + idx + 1}</td>
-                                    <td className="px-4 py-3">
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 hidden sm:table-cell">{(currentPage - 1) * perPage + idx + 1}</td>
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 hidden sm:table-cell">
                                         {item.gambar_url ? (
-                                            <img src={item.gambar_url} alt={item.judul} className="w-12 h-12 rounded-lg object-cover" />
+                                            <img src={item.gambar_url} alt={item.judul} className="w-10 h-10 rounded-lg object-cover" />
                                         ) : (
-                                            <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-400">
+                                            <div className="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-400">
                                                 <i className="ph ph-image"></i>
                                             </div>
                                         )}
                                     </td>
-                                    <td className="px-4 py-3 font-medium">{item.judul}</td>
-                                    <td className="px-4 py-3">
-                                        <span className={`text-xs px-2 py-1 rounded-full ${
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 font-medium max-w-[120px] sm:max-w-xs truncate whitespace-normal">
+                                        {item.judul}
+                                    </td>
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3">
+                                        <span className={`text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full whitespace-nowrap ${
                                             item.status === "published"
                                                 ? "bg-primary-100 dark:bg-slate-800 text-primary-700 dark:text-accent-400"
                                                 : "bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300"
                                         }`}>
-                                            {item.status === "published" ? "Published" : "Draft"}
+                                            {item.status === "published" ? "Publish" : "Draft"}
                                         </span>
                                     </td>
-                                    <td className="px-4 py-3">{new Date(item.tanggal).toLocaleDateString("id-ID")}</td>
-                                    <td className="px-4 py-3">
-                                        <div className="flex gap-2">
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 hidden md:table-cell">
+                                        {new Date(item.tanggal).toLocaleDateString("id-ID")}
+                                    </td>
+                                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-center">
+                                        <div className="flex justify-center gap-1 sm:gap-2">
                                             <button onClick={() => openEdit(item)} className="p-1 text-slate-500 hover:text-primary-600">
                                                 <PencilSimple size={16} />
                                             </button>
-                                            {/* PANGGIL handleDeleteClick DI SINI */}
                                             <button onClick={() => handleDeleteClick(item)} className="p-1 text-slate-500 hover:text-red-600">
                                                 <Trash size={16} />
                                             </button>
@@ -146,18 +148,17 @@ export default function SectionBerita({ beritas }) {
                 </div>
                 
                 {/* Pagination */}
-                <div className="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                    <span className="text-xs text-slate-500">Menampilkan {paginated.length} dari {filtered.length} data</span>
+                <div className="p-3 sm:p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <span className="text-[10px] sm:text-xs text-slate-500">Menampilkan {paginated.length} dari {filtered.length} data</span>
                     <div className="flex gap-2">
-                        <button disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)} className="px-3 py-1 border border-slate-300 dark:border-slate-700 rounded-lg text-xs disabled:opacity-40">Previous</button>
-                        <button disabled={currentPage === totalPages} onClick={() => setPage(currentPage + 1)} className="px-3 py-1 border border-slate-300 dark:border-slate-700 rounded-lg text-xs disabled:opacity-40">Next</button>
+                        <button disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)} className="px-2 sm:px-3 py-1 border border-slate-300 dark:border-slate-700 rounded-lg text-[10px] sm:text-xs disabled:opacity-40">Previous</button>
+                        <button disabled={currentPage === totalPages} onClick={() => setPage(currentPage + 1)} className="px-2 sm:px-3 py-1 border border-slate-300 dark:border-slate-700 rounded-lg text-[10px] sm:text-xs disabled:opacity-40">Next</button>
                     </div>
                 </div>
             </div>
 
             {showModal && <BeritaModal editing={editing} onClose={closeModal} />}
 
-            {/* TAMBAHKAN CONFIRM MODAL DI SINI */}
             <ConfirmModal
                 show={confirmDelete.show}
                 onClose={() => setConfirmDelete({ show: false, id: null, judul: "" })}
@@ -170,7 +171,6 @@ export default function SectionBerita({ beritas }) {
 }
 
 function BeritaModal({ editing, onClose }) {
-    // ... (Kode BeritaModal tetap sama persis, tidak perlu diubah)
     const isEdit = !!editing;
     const { data, setData, post, processing, errors, reset, progress } = useForm({
         judul: editing?.judul || "",
@@ -197,7 +197,6 @@ function BeritaModal({ editing, onClose }) {
             <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-2xl p-6 my-8">
                 <h3 className="font-display font-semibold text-lg mb-4">{isEdit ? "Edit Berita" : "Tambah Berita"}</h3>
                 <form onSubmit={submit} className="space-y-4">
-                    {/* ... ISI FORM SAMA PERSIS ... */}
                     <div>
                         <label className="block text-sm font-medium mb-1">Judul</label>
                         <input type="text" value={data.judul} onChange={(e) => setData("judul", e.target.value)} className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm" />

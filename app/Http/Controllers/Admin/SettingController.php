@@ -42,7 +42,9 @@ class SettingController extends Controller
                 'foto' => $prestasi->foto,
                 'deskripsi' => $prestasi->deskripsi,
             ]),
-            'gurus'     => \App\Models\Guru::ordered()->get()->map(fn($g) => [
+            
+            // PERBAIKAN 1: Mengganti ordered() menjadi orderBy('urutan', 'asc')
+            'gurus'     => \App\Models\Guru::orderBy('urutan', 'asc')->get()->map(fn($g) => [
                 'id'       => $g->id,
                 'nama'     => $g->nama,
                 'jabatan'  => $g->jabatan,
@@ -50,7 +52,9 @@ class SettingController extends Controller
                 'foto_url' => $g->foto_url,
                 'urutan'   => $g->urutan,
             ]),
-            'galeris' => \App\Models\Galeri::ordered()->get()->map(fn($g) => [
+            
+            // PERBAIKAN 2: Mengganti ordered() menjadi orderBy('urutan', 'asc')
+            'galeris' => \App\Models\Galeri::orderBy('urutan', 'asc')->get()->map(fn($g) => [
                 'id'         => $g->id,
                 'judul'      => $g->judul,
                 'kategori'   => $g->kategori,
@@ -58,6 +62,7 @@ class SettingController extends Controller
                 'gambar_url' => $g->gambar_url,
                 'urutan'     => $g->urutan,
             ]),
+            
             'polling' => (function () {
                 $p = \App\Models\Polling::with('options')->latest()->first();
                 return $p ? [

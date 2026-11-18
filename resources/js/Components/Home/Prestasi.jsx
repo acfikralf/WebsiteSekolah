@@ -1,7 +1,6 @@
 import useReveal from '@/hooks/useReveal';
 import { Medal, MusicNotes, SoccerBall, Trophy, ArrowRight } from '@phosphor-icons/react';
-import {usePage} from '@inertiajs/react'
-
+import { usePage } from '@inertiajs/react';
 
 const iconMap = {
     Akademik: Medal,
@@ -13,22 +12,26 @@ const iconMap = {
 export default function Prestasi({ prestasiList = [] }) {
     const titleRef = useReveal();
     const { prestasis } = usePage().props;
+
     return (
-        <section id="prestasi" className="py-16 md:py-20 bg-white dark:bg-slate-900">
+        <section id="prestasi" className="py-12 sm:py-16 md:py-20 bg-white dark:bg-slate-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12" ref={titleRef}>
-                    <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 dark:text-white">
+                
+                {/* Header Section */}
+                <div className="text-center mb-8 sm:mb-12" ref={titleRef}>
+                    <h2 className="text-xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900 dark:text-white">
                         Prestasi Terbaru
                     </h2>
-                    <div className="w-24 h-1 bg-accent-500 mx-auto mt-4 rounded-full"></div>
-                    <p className="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                    <div className="w-12 sm:w-24 h-1 bg-accent-500 mx-auto mt-2 sm:mt-4 rounded-full"></div>
+                    <p className="mt-2 sm:mt-4 text-[9px] sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
                         Raihan gemilang siswa kami
                     </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Grid 3 Kolom (Mobile), 2 (Tablet), 3 (Desktop) */}
+                <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
                     {prestasis.length === 0 && (
-                        <p className="col-span-full text-center text-slate-500">Belum ada prestasi.</p>
+                        <p className="col-span-full text-center text-xs sm:text-base text-slate-500">Belum ada prestasi.</p>
                     )}
 
                     {prestasis.map((item) => {
@@ -36,10 +39,10 @@ export default function Prestasi({ prestasiList = [] }) {
                         return (
                             <div
                                 key={item.id}
-                                className="group bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col reveal"
+                                className="group bg-slate-50 dark:bg-slate-800 rounded-lg sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col reveal"
                             >
                                 {/* Foto */}
-                                <div className="relative aspect-[4/3] overflow-hidden bg-slate-200 dark:bg-slate-700">
+                                <div className="relative aspect-[4/3] sm:aspect-auto sm:h-48 overflow-hidden bg-slate-200 dark:bg-slate-700">
                                     {item.foto ? (
                                         <img
                                             src={`/storage/${item.foto}`}
@@ -49,39 +52,48 @@ export default function Prestasi({ prestasiList = [] }) {
                                         />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-slate-400">
-                                            <i className="ph ph-image text-4xl"></i>
+                                            <i className="ph ph-image text-xl sm:text-4xl"></i>
                                         </div>
                                     )}
-                                    {/* Badge kategori */}
-                                    <span className="absolute top-3 left-3 bg-accent-500 text-white text-xs font-medium px-3 py-1 rounded-full shadow">
+                                    
+                                    {/* Badge kategori - Diperkecil drastis di HP */}
+                                    <span className="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 bg-accent-500 text-white text-[7px] sm:text-xs font-medium px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-full shadow">
                                         {item.kategori}
                                     </span>
-                                    {/* Badge tingkat */}
+                                    
+                                    {/* Badge tingkat - Diperkecil drastis di HP */}
                                     {item.tingkat && (
-                                        <span className="absolute bottom-3 right-3 bg-primary-600/90 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full shadow">
+                                        <span className="absolute bottom-1.5 right-1.5 sm:bottom-3 sm:right-3 bg-primary-600/90 backdrop-blur-sm text-white text-[7px] sm:text-xs font-medium px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-full shadow">
                                             {item.tingkat}
                                         </span>
                                     )}
                                 </div>
 
                                 {/* Body */}
-                                <div className="p-5 flex flex-col flex-grow">
-                                    <div className="flex items-center gap-2 mb-2 text-primary-600 dark:text-accent-400">
+                                <div className="p-2 sm:p-5 flex flex-col flex-grow">
+                                    {/* Ikon Kategori - Disembunyikan di HP agar hemat tempat, atau dikecilkan */}
+                                    <div className="hidden sm:flex items-center gap-2 mb-2 text-primary-600 dark:text-accent-400">
                                         <Icon size={20} />
                                         <span className="text-xs uppercase tracking-wider font-semibold">
                                             {item.kategori}
                                         </span>
                                     </div>
-                                    <h3 className="font-display font-semibold text-lg text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-accent-400 transition-colors">
+
+                                    {/* Judul - Dibesarkan sedikit di HP (text-[11px]) */}
+                                    <h3 className="text-[11px] sm:text-xl font-display font-bold sm:font-semibold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-accent-400 transition-colors leading-snug line-clamp-2 mb-1 sm:mb-2">
                                         {item.judul}
                                     </h3>
+
+                                    {/* Nama Siswa - Dikecilkan (text-[8px]) */}
                                     {item.siswa && (
-                                        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                                        <p className="text-[8px] sm:text-sm text-slate-500 dark:text-slate-400 mb-1 sm:mb-0">
                                             oleh <span className="font-medium text-slate-700 dark:text-slate-300">{item.siswa}</span>
                                         </p>
                                     )}
+
+                                    {/* Deskripsi - Dikecilkan (text-[8px]) dan dibatasi 2 baris */}
                                     {item.deskripsi && (
-                                        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 line-clamp-2">
+                                        <p className="text-[8px] sm:text-base text-slate-500 dark:text-slate-400 line-clamp-2 sm:line-clamp-none flex-grow leading-tight">
                                             {item.deskripsi}
                                         </p>
                                     )}

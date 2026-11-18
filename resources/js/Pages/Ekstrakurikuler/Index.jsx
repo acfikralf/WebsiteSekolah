@@ -4,27 +4,61 @@ import { Tent } from '@phosphor-icons/react';
 export default function EkstrakurikulerIndex({ ekstrakurikulers = [] }) {
     return (
         <MainLayout>
-            <div className="bg-primary-700 dark:bg-primary-900 text-white py-16 relative overflow-hidden islamic-pattern">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <h1 className="text-3xl md:text-5xl font-display font-bold mb-4">Ekstrakurikuler</h1>
-                    <p className="text-lg text-primary-100 max-w-2xl">Wadah pengembangan bakat, minat, dan karakter siswa.</p>
+            {/* ===== HERO — gradient hijau ke kuning (disamakan dengan Profil) ===== */}
+            <section className="relative bg-gradient-to-r from-emerald-900 via-emerald-700 to-yellow-500 text-white overflow-hidden">
+                {/* Hiasan lingkaran tipis, bukan blur */}
+                <div className="absolute -top-20 -right-20 w-72 h-72 border-[30px] border-white/10 rounded-full"></div>
+                <div className="absolute -bottom-20 -left-20 w-72 h-72 border-[30px] border-white/10 rounded-full"></div>
+                
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+                    <div className="max-w-2xl">
+                        <p className="inline-flex items-center gap-2 text-yellow-300 font-medium uppercase tracking-wider mb-4 bg-white/20 border border-white/30 rounded-full px-4 py-1.5 text-xs sm:text-sm backdrop-blur-sm">
+                            <Tent size={16} /> Ekstrakurikuler
+                        </p>
+                        <h1 className="text-3xl md:text-5xl font-display font-bold leading-tight mb-4 text-white">
+                            Wadah Pengembangan<br />
+                            <span className="text-yellow-300">
+                                Bakat & Minat
+                            </span>
+                        </h1>
+                        <p className="text-lg text-white/90 max-w-2xl">
+                            Wadah pengembangan bakat, minat, dan karakter siswa.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div className="py-16 md:py-20 bg-white dark:bg-slate-900 min-h-[50vh]">
+            {/* ===== BODY WRAPPER ===== */}
+            <div className="py-12 sm:py-16 md:py-20 bg-slate-50 dark:bg-slate-950 min-h-[50vh]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Grid 3 kolom di HP, 3 kolom di Desktop */}
+                    <div className="grid grid-cols-3 lg:grid-cols-3 gap-2.5 sm:gap-6">
                         {ekstrakurikulers.map((item) => (
-                            <div key={item.id} className="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-                                <div className="w-12 h-12 bg-primary-100 dark:bg-slate-700 text-primary-600 dark:text-accent-400 rounded-xl flex items-center justify-center mb-4">
-                                    <i className={`ph ${item.icon || 'ph-tent'} text-2xl`}></i>
+                            <div key={item.id} className="bg-white dark:bg-slate-900 p-3 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all flex flex-col h-full">
+                                {/* Ikon */}
+                                <div className="w-8 h-8 sm:w-12 sm:h-12 bg-primary-100 dark:bg-slate-700 text-primary-600 dark:text-accent-400 rounded-lg sm:rounded-xl flex items-center justify-center mb-2 sm:mb-4 shrink-0">
+                                    <i className={`ph ${item.icon || 'ph-tent'} text-base sm:text-2xl`}></i>
                                 </div>
-                                <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-2">{item.nama}</h3>
-                                <p className="text-sm font-medium text-primary-600 dark:text-accent-400 mb-3">Pembina: {item.pembina || '-'}</p>
-                                <p className="text-slate-600 dark:text-slate-300 text-sm">{item.deskripsi}</p>
+                                
+                                {/* Judul */}
+                                <h3 className="font-display font-bold text-[11px] sm:text-xl text-slate-900 dark:text-white mb-1 sm:mb-2 leading-snug line-clamp-2">
+                                    {item.nama}
+                                </h3>
+                                
+                                {/* Pembina */}
+                                <p className="text-[9px] sm:text-sm font-medium text-primary-600 dark:text-accent-400 mb-1 sm:mb-3 truncate">
+                                    Pembina: {item.pembina || '-'}
+                                </p>
+                                
+                                {/* Deskripsi */}
+                                <p className="text-[9px] sm:text-sm text-slate-600 dark:text-slate-300 leading-snug line-clamp-3 sm:line-clamp-none mt-auto">
+                                    {item.deskripsi}
+                                </p>
                             </div>
                         ))}
-                        {ekstrakurikulers.length === 0 && <p className="col-span-full text-center text-slate-500">Belum ada data ekstrakurikuler.</p>}
+                        {ekstrakurikulers.length === 0 && (
+                            <p className="col-span-full text-center text-xs sm:text-base text-slate-500">Belum ada data ekstrakurikuler.</p>
+                        )}
                     </div>
                 </div>
             </div>
