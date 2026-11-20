@@ -1,10 +1,13 @@
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class=scroll-smooth>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title inertia>{{ config('app.name', 'SMP Islam Watestanjung') }}</title>
+
         <meta name="description" content="Website resmi SMP Islam Watestanjung. Sekolah Islam yang mengintegrasikan pendidikan umum dengan nilai-nilai keislaman.">
 
         <!-- Fonts -->
@@ -15,16 +18,17 @@
         <!-- Phosphor Icons CDN -->
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+        <!-- Favicon -->
         <link rel="icon" type="image/png" href="/image/logo-sekolah.png">
         <link rel="shortcut icon" href="/image/logo-sekolah.png">
-        
 
         <!-- Scripts -->
         @routes
         @viteReactRefresh
-        @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
+        @vite('resources/js/app.jsx')
         @inertiaHead
     </head>
+
     <body class="font-sans antialiased">
         @inertia
     </body>
