@@ -21,6 +21,10 @@ Route::get('/', function () {
             'foto'     => \App\Models\Setting::get('profil_kepala_foto'),
             'sambutan' => \App\Models\Setting::get('profil_sambutan', 'Teks sambutan belum diisi.'),
         ],
+        'profil' => [
+    'visi' => Setting::get('profil_visi', ''),
+    'misi' => Setting::get('profil_misi', ''),
+],
     ]);
 })->name('home');
 
@@ -77,6 +81,45 @@ Route::get('/berita', function () {
             ->values(),
     ]);
 })->name('berita.index');
+
+Route::get('/berita/{berita}', function (\App\Models\Berita $berita) {
+    // Pastikan hanya berita published yang bisa dilihat publik
+    if ($berita->status !== 'published') {
+        abort(404);
+    }
+
+    // Ambil 3 berita lain untuk rekomendasi
+    $beritaLainnya = \App\Models\Berita::where('status', 'published')
+        ->where('id', '!=', $berita->id)
+        ->latest('tanggal')
+        ->take(3)
+        ->get()
+        ->map(fn ($b) => [
+            'id'         => $b->id,
+            'judul'      => $b->judul,
+            'kategori'   => $b->kategori,
+            'status'     => $b->status,
+            'tanggal'    => $b->tanggal?->format('Y-m-d'),
+            'gambar_url' => $b->gambar_url,
+            'ringkasan'  => $b->ringkasan,
+            'konten'     => $b->konten,
+        ])
+        ->values();
+
+    return Inertia::render('Berita/Show', [
+        'berita' => [
+            'id'         => $berita->id,
+            'judul'      => $berita->judul,
+            'kategori'   => $berita->kategori,
+            'status'     => $berita->status,
+            'tanggal'    => $berita->tanggal?->format('Y-m-d'),
+            'gambar_url' => $berita->gambar_url,
+            'ringkasan'  => $berita->ringkasan,
+            'konten'     => $berita->konten,
+        ],
+        'beritaLainnya' => $beritaLainnya,
+    ]);
+})->name('berita.show');
 
 // Rute Halaman Agenda  
 Route::get('/agenda', function () {

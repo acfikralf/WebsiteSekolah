@@ -33,7 +33,7 @@ export default function SectionGaleri({ galeris = [] }) {
             kategori: item.kategori || '',
             urutan: item.urutan || 0,
             gambar: null,
-            _method: 'put',
+            _method: 'post',
         });
         setEditing(item);
         setPreviews([]);

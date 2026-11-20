@@ -40,7 +40,7 @@ export default function Kontak() {
                     {/* PETA (Di Kanan) */}
                     <div className="rounded-lg sm:rounded-2xl overflow-hidden shadow-md min-h-[150px] sm:min-h-[250px]" ref={rightRef}>
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.9!2d112.7!3d-7.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMDAnMDAuMCJTIDExMsKwNDInMDAuMCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.8112683557665!2d112.55714847500008!3d-7.375038592634247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e780892873f76a9%3A0x5b8edea7ca068924!2sSMP%20Islam%20Watestanjung!5e0!3m2!1sid!2sid!4v1795146762939!5m2!1sid!2sid"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}

@@ -132,23 +132,27 @@ class SettingController extends Controller
                 'created_at' => $u->created_at->format('Y-m-d'),
             ]),
 
-             'profil' => [
-            'sejarah'       => Setting::get('profil_sejarah', ''),
-            'sambutan'      => Setting::get('profil_sambutan', ''),
-            'kepala_nama'   => Setting::get('profil_kepala_nama', ''),
-            'kepala_foto'   => Setting::get('profil_kepala_foto', null),
-            'timeline'      => Setting::get('profil_timeline', ''),
-            'visi'          => Setting::get('profil_visi', ''),
-            'misi'          => Setting::get('profil_misi', ''),
-            'tujuan'        => Setting::get('profil_tujuan', ''),
-            'program'       => Setting::get('profil_program', ''),
-            'npsn'          => Setting::get('profil_npsn', ''),
-            'status'        => Setting::get('profil_status', ''),
-            'alamat'        => Setting::get('profil_alamat', ''),
-            'telepon'       => Setting::get('profil_telepon', ''),
-            'email'         => Setting::get('profil_email', ''),
-            'tahun_berdiri' => Setting::get('profil_tahun_berdiri', ''),
-        ],
+             
+'profil' => [
+    'sejarah'       => Setting::get('profil_sejarah', ''),
+    'sambutan'      => Setting::get('profil_sambutan', ''),
+    'kepala_nama'   => Setting::get('profil_kepala_nama', ''),
+    'kepala_foto'   => Setting::get('profil_kepala_foto', null),
+
+    'timeline'      => Setting::get('profil_timeline', ''),
+    'visi'          => Setting::get('profil_visi', ''),
+    'misi'          => Setting::get('profil_misi', ''),
+    'tujuan'        => Setting::get('profil_tujuan', ''),
+    'program'       => Setting::get('profil_program', ''),
+
+    'npsn'          => Setting::get('profil_npsn', ''),
+    'status'        => Setting::get('profil_status', ''),
+    'alamat'        => Setting::get('profil_alamat', ''),
+    'telepon'       => Setting::get('profil_telepon', ''),
+    'email'         => Setting::get('profil_email', ''),
+    'tahun_berdiri' => Setting::get('profil_tahun_berdiri', ''),
+],
+
         ]);
     }
 

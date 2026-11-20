@@ -14,6 +14,9 @@
 
         <!-- Phosphor Icons CDN -->
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+        <link rel="icon" type="image/png" href="/image/logo-sekolah.png">
+        <link rel="shortcut icon" href="/image/logo-sekolah.png">
         
 
         <!-- Scripts -->

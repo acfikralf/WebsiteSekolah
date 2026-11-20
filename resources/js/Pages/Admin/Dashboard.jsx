@@ -30,7 +30,7 @@ const sectionTitles = {
 };
 
 export default function Dashboard({
-    settings, ekstrakurikulers, beritas, agendas, prestasis, gurus, galeris, polling, stats, recentAgenda, recentBerita, recentPrestasi, invitations, users,
+    settings, ekstrakurikulers, beritas, agendas, prestasis, gurus, galeris, polling, stats, recentAgenda, recentBerita, recentPrestasi, invitations, users, profil
 }) {
     const { url } = usePage();
     
@@ -73,7 +73,7 @@ export default function Dashboard({
             {activeSection === "galeri" && <SectionGaleri galeris={galeris} />}
             {activeSection === "polling" && <SectionPolling polling={polling} />}
             {activeSection === 'akun' && <SectionAkun invitations={invitations} users={users} />}
-            {activeSection === 'profil' && <SectionProfil profil={settings} />}
+            {activeSection === 'profil' && <SectionProfil profil={profil} />}
         </AdminLayout>
     );
 }

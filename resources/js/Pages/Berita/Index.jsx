@@ -82,7 +82,7 @@ export default function BeritaIndex({ beritas = [] }) {
                                         </p>
 
                                         {/* Tombol Baca - Disembunyikan di HP agar hemat tempat */}
-                                        <Link href="#" className="hidden sm:inline-flex items-center text-primary-600 dark:text-accent-400 font-medium hover:text-primary-700 group/link mt-auto">
+                                        <Link href={`/berita/${item.id}`} className="hidden sm:inline-flex items-center text-primary-600 dark:text-accent-400 font-medium hover:text-primary-700 group/link mt-auto">
                                             Baca Selengkapnya
                                             <ArrowRight size={16} className="ml-1 transition-transform group-hover/link:translate-x-1" />
                                         </Link>

@@ -70,7 +70,7 @@ export default function Berita() {
                                     </p>
 
                                     {/* Tombol Baca disembunyikan di HP */}
-                                    <a href="#" className="hidden sm:inline-flex mt-4 items-center text-primary-600 dark:text-accent-400 font-medium hover:text-primary-700 group/link">
+                                    <a href={`/berita/${item.id}`} className="hidden sm:inline-flex mt-4 items-center text-primary-600 dark:text-accent-400 font-medium hover:text-primary-700 group/link">
                                         Baca Selengkapnya
                                         <ArrowRight size={16} className="ml-1 transition-transform group-hover/link:translate-x-1" />
                                     </a>

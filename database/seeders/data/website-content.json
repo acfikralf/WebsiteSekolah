@@ -1,0 +1,560 @@
+{
+    "settings": [
+        {
+            "id": 1,
+            "key": "site_title",
+            "value": "SMP Islam Watestanjung",
+            "created_at": "2026-11-11 05:07:51",
+            "updated_at": "2026-11-11 05:07:51"
+        },
+        {
+            "id": 2,
+            "key": "site_tagline",
+            "value": "Unggul dalam Prestasi, Berakhlak Mulia",
+            "created_at": "2026-11-11 05:07:51",
+            "updated_at": "2026-11-11 05:07:51"
+        },
+        {
+            "id": 3,
+            "key": "site_description",
+            "value": "Website resmi SMP Islam Watestanjung. Sekolah Islam yang mengintegrasikan pendidikan umum dengan nilai-nilai keislaman.",
+            "created_at": "2026-11-11 05:07:51",
+            "updated_at": "2026-11-11 05:07:51"
+        },
+        {
+            "id": 4,
+            "key": "stat_siswa",
+            "value": "450",
+            "created_at": "2026-11-11 05:07:51",
+            "updated_at": "2026-11-11 05:07:51"
+        },
+        {
+            "id": 5,
+            "key": "stat_guru",
+            "value": "32",
+            "created_at": "2026-11-11 05:07:51",
+            "updated_at": "2026-11-11 05:07:51"
+        },
+        {
+            "id": 6,
+            "key": "stat_prestasi",
+            "value": "57",
+            "created_at": "2026-11-11 05:07:51",
+            "updated_at": "2026-11-11 05:07:51"
+        },
+        {
+            "id": 7,
+            "key": "stat_ekstrakurikuler",
+            "value": "12",
+            "created_at": "2026-11-11 05:07:51",
+            "updated_at": "2026-11-11 05:07:51"
+        },
+        {
+            "id": 8,
+            "key": "profil_sejarah",
+            "value": "SMP Islam Watestanjung merupakan lembaga pendidikan swasta yang berada di bawah naungan Yayasan Pendidikan Islam (YPI) Watestanjung, berlokasi di Desa Watestanjung, Kecamatan Wringinanom, Kabupaten Gresik, Jawa Timur.\r\n\r\nSekolah ini resmi didirikan pada tahun 1993 sebagai bentuk kepedulian terhadap kebutuhan masyarakat akan pendidikan formal tingkat menengah pertama yang mengintegrasikan ilmu pengetahuan umum dengan nilai-nilai keislaman.\r\n\r\nSejak awal berdirinya, SMP Islam Watestanjung berkomitmen menyelenggarakan pendidikan berdasarkan nilai-nilai Ahlussunnah wal Jama'ah (Aswaja). Komitmen tersebut diwujudkan melalui pembiasaan kegiatan keagamaan, seperti salat Dhuha dan Dhuhur berjamaah, Baca Tulis Al-Qur'an (BTQ), serta pembentukan karakter Islami.\r\n\r\nDalam perkembangannya, sekolah terus meningkatkan mutu pendidikan, mengembangkan sarana dan prasarana, serta menyesuaikan kurikulum dengan perkembangan zaman.\r\n\r\nMemasuki era digital, SMP Islam Watestanjung mengembangkan pembelajaran berbasis teknologi melalui pendekatan Deep Learning serta integrasi Koding dan Kecerdasan Artifisial (AI).\r\n\r\nDengan dukungan seluruh warga sekolah dan masyarakat, SMP Islam Watestanjung terus berupaya menjadi lembaga pendidikan yang bermutu, berkepribadian Pancasila, berwawasan lingkungan, serta berakhlakul karimah.",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 9,
+            "key": "profil_visi",
+            "value": "Terwujudnya Sekolah yang Bermutu, Berkepribadian Pancasila, Berwawasan Lingkungan serta Berakhlakul Karimah.",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:18:25"
+        },
+        {
+            "id": 10,
+            "key": "profil_misi",
+            "value": "1. Melaksanakan pengembangan Kurikulum Operasional Satuan Pendidikan.\r\n2. Mengembangkan sumber daya manusia meliputi kepala sekolah, tenaga pendidik, dan tenaga kependidikan.\r\n3. Mengembangkan pembelajaran yang kreatif, inovatif, kritis, kolaboratif, dan berwawasan lingkungan.\r\n4. Meningkatkan prestasi akademik dan nonakademik.\r\n5. Mewujudkan dan mengembangkan 8 Dimensi Profil Lulusan.\r\n6. Mewujudkan budaya sekolah yang aman, nyaman, sejuk, dan asri.\r\n7. Melestarikan lingkungan, mencegah pencemaran, dan mencegah kerusakan lingkungan.\r\n8. Melaksanakan kegiatan peningkatan iman dan takwa kepada Tuhan Yang Maha Esa.",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:40:58"
+        },
+        {
+            "id": 11,
+            "key": "profil_sambutan",
+            "value": "Assalamu’alaikum Warahmatullahi Wabarakatuh.\r\n\r\nPuji syukur ke hadirat Allah SWT atas segala rahmat dan karunia-Nya sehingga website resmi SMP Islam Watestanjung dapat hadir sebagai sarana informasi, komunikasi, dan publikasi sekolah.\r\n\r\nDi era perkembangan teknologi informasi, website sekolah memiliki peran penting dalam menyampaikan berbagai informasi mengenai kegiatan, program, prestasi, serta perkembangan sekolah kepada masyarakat luas.\r\n\r\nKami berharap website ini dapat menjadi media yang bermanfaat bagi peserta didik, orang tua, alumni, tenaga pendidik, dan seluruh masyarakat. Kami berkomitmen untuk terus meningkatkan mutu pendidikan serta menciptakan lingkungan belajar yang aman, nyaman, religius, dan berwawasan lingkungan.\r\n\r\nSemoga SMP Islam Watestanjung senantiasa berkembang dan mampu mencetak generasi yang cerdas, berkarakter Pancasila, berwawasan lingkungan, serta berakhlakul karimah.\r\n\r\nWassalamu’alaikum Warahmatullahi Wabarakatuh.",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 12,
+            "key": "profil_kepala_nama",
+            "value": "H. Fahru Rozi, M.Pd.",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 13,
+            "key": "profil_kepala_foto",
+            "value": "profil/VHxXpHQK72cNgmnC13G18TuObTWuqWzhOlVkYNCU.jpg",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:37:27"
+        },
+        {
+            "id": 14,
+            "key": "profil_npsn",
+            "value": "50800438",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 15,
+            "key": "profil_status",
+            "value": "Swasta",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 16,
+            "key": "profil_alamat",
+            "value": "Jl. Raya Watestanjung, Desa Watestanjung, Kecamatan Wringinanom, Kabupaten Gresik, Jawa Timur 61176",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 17,
+            "key": "profil_telepon",
+            "value": "089503305937",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 18,
+            "key": "profil_email",
+            "value": "smpislamwatestanjung92@gmail.com",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 19,
+            "key": "profil_tahun_berdiri",
+            "value": "1993",
+            "created_at": "2026-11-11 05:19:34",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 20,
+            "key": "profil_tujuan",
+            "value": "1. Mampu melaksanakan pengembangan Kurikulum Operasional Satuan Pendidikan.\r\n2. Mampu mengembangkan sumber daya manusia yang profesional.\r\n3. Mampu mengembangkan pembelajaran yang kreatif, inovatif, kritis, kolaboratif, dan berwawasan lingkungan.\r\n4. Mampu meningkatkan prestasi akademik dan nonakademik.\r\n5. Mampu mewujudkan dan mengembangkan 8 Dimensi Profil Lulusan.\r\n6. Mampu menciptakan budaya sekolah yang aman, nyaman, sejuk, dan asri.\r\n7. Mampu melestarikan lingkungan, mencegah pencemaran, dan mencegah kerusakan lingkungan.\r\n8. Mampu meningkatkan iman dan takwa kepada Tuhan Yang Maha Esa.",
+            "created_at": "2026-11-20 03:37:27",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 21,
+            "key": "profil_program",
+            "value": "Eco-School Watestanjung | Program pelestarian lingkungan sekolah melalui pengelolaan limbah, pembuatan kompos, pemanfaatan lahan ketahanan pangan, dan pembiasaan peduli lingkungan.\r\n\r\nIntegrasi Koding & AI | Pengembangan kecakapan digital melalui pemrograman Scratch, App Inventor, logika komputasi, dan integrasi kecerdasan artifisial dalam pembelajaran.\r\n\r\nRabaca & Literasi Karya | Gerakan Rabu Membaca untuk meningkatkan budaya literasi, kemampuan menulis karya kreatif, serta publikasi karya peserta didik.\r\n\r\n5 Pembiasaan Karakter | Pembentukan karakter Islami melalui program Sambut Murid, Baberlim, salat Dhuha dan Dhuhur berjamaah, serta disiplin positif.\r\n\r\nAswaja & Seni Budaya | Penguatan nilai keagamaan Ahlussunnah wal Jama'ah dan pelestarian budaya lokal melalui BTQ, Bahasa Jawa, MTQ, Banjari, Drum Band, dan Tari.\r\n\r\nSociopreneur Muda Muslim | Pengembangan jiwa kewirausahaan berbasis nilai syariah melalui kemitraan UMKM, pembelajaran transaksi yang jujur, dan pembuatan produk kreatif.",
+            "created_at": "2026-11-20 03:37:27",
+            "updated_at": "2026-11-20 03:39:47"
+        },
+        {
+            "id": 22,
+            "key": "profil_timeline",
+            "value": "1993 | Resmi didirikan di bawah naungan Yayasan Pendidikan Islam (YPI) Watestanjung untuk menyediakan akses pendidikan formal tingkat SMP berbasis nilai-nilai keislaman.\r\n\r\n2000-an – 2010-an | Penguatan kelembagaan, pembentukan karakter Islami, peningkatan kedisiplinan, pengembangan ekstrakurikuler, serta budaya literasi.\r\n\r\n2020 – 2024 | Transformasi pembelajaran melalui implementasi Kurikulum Merdeka, penguatan Projek Profil Pelajar Pancasila (P5), serta pengembangan literasi dan numerasi.\r\n\r\n2025 – Sekarang | Penerapan pendekatan Deep Learning, integrasi Koding dan Kecerdasan Artifisial (AI), serta pengembangan 8 Dimensi Profil Lulusan.",
+            "created_at": "2026-11-20 03:37:27",
+            "updated_at": "2026-11-20 03:39:47"
+        }
+    ],
+    "beritas": [
+        {
+            "id": 1,
+            "judul": "Peringatan Maulid Nabi Muhammad SAW 1447 H",
+            "slug": "peringatan-maulid-nabi-muhammad-saw-1447-h-179437367256",
+            "ringkasan": "SMP Islam Watestanjung menggelar peringatan Maulid Nabi dengan berbagai kegiatan islami.",
+            "konten": "Kegiatan peringatan Maulid Nabi diisi dengan lomba tahfidz, hadrah, dan ceramah agama oleh ustadz tamu.",
+            "gambar": "berita/XFUCfPmupvqq5oJVHTmO2ENJMoZFjJzddjsVhdRp.jpg",
+            "kategori": "Kegiatan",
+            "status": "published",
+            "tanggal": "2025-09-12",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 02:57:00"
+        },
+        {
+            "id": 2,
+            "judul": "Siswa Raih Juara 1 Olimpiade Sains Kabupaten",
+            "slug": "siswa-raih-juara-1-olimpiade-sains-kabupaten-179437367228",
+            "ringkasan": "Prestasi membanggakan kembali diraih oleh siswa SMP Islam Watestanjung dalam ajang OSN.",
+            "konten": "Ahmad Rizki, siswa kelas 9A, berhasil meraih juara 1 Olimpiade Sains bidang Matematika tingkat kabupaten.",
+            "gambar": "berita/02xzR21rXiTAegaJ5czJFIpFc3iK1Iy26xveEMNH.jpg",
+            "kategori": "Prestasi",
+            "status": "published",
+            "tanggal": "2025-08-28",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 02:57:28"
+        },
+        {
+            "id": 3,
+            "judul": "Perkemahan Pramuka Penggalang 2025",
+            "slug": "perkemahan-pramuka-penggalang-2025-179437367262",
+            "ringkasan": "Kegiatan perkemahan untuk melatih kemandirian dan kerjasama antar siswa.",
+            "konten": "Perkemahan berlangsung selama 3 hari di bumi perkemahan dengan berbagai kegiatan kepramukaan.",
+            "gambar": "berita/xRByxvCIzLLJRSqrjYuuUUpzh5IqNtwsE4FtMZrU.jpg",
+            "kategori": "Ekstrakurikuler",
+            "status": "published",
+            "tanggal": "2025-08-15",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 02:57:57"
+        }
+    ],
+    "agendas": [
+        {
+            "id": 1,
+            "judul": "Rapat Orang Tua Siswa",
+            "tanggal": "2026-11-16",
+            "waktu": "08:00 - 10:00",
+            "lokasi": "Aula Sekolah",
+            "deskripsi": "Rapat koordinasi antara pihak sekolah dengan orang tua/wali siswa.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:07:52"
+        },
+        {
+            "id": 2,
+            "judul": "Lomba Tahfidz Internal",
+            "tanggal": "2026-11-21",
+            "waktu": "09:00 - 12:00",
+            "lokasi": "Masjid Sekolah",
+            "deskripsi": "Kompetisi hafalan Al-Qur'an antar kelas.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:07:52"
+        },
+        {
+            "id": 3,
+            "judul": "Upacara Hari Kesaktian Pancasila",
+            "tanggal": "2026-11-26",
+            "waktu": "07:00 - 08:00",
+            "lokasi": "Lapangan Upacara",
+            "deskripsi": "Upacara peringatan Hari Kesaktian Pancasila.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:07:52"
+        },
+        {
+            "id": 4,
+            "judul": "Peringatan Maulid Nabi",
+            "tanggal": "2026-12-01",
+            "waktu": "08:00 - 11:00",
+            "lokasi": "Aula Sekolah",
+            "deskripsi": "Kegiatan peringatan Maulid Nabi Muhammad SAW.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:07:52"
+        },
+        {
+            "id": 5,
+            "judul": "Study Tour ke Museumm",
+            "tanggal": "2026-12-11",
+            "waktu": "07:00 - 15:00",
+            "lokasi": "Museum Nasional",
+            "deskripsi": "Kunjungan edukatif ke museum nasional.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:57:42"
+        }
+    ],
+    "prestasis": [
+        {
+            "id": 1,
+            "judul": "Juara 1 Olimpiade Matematika",
+            "siswa": "Ahmad Rizki",
+            "kategori": "Akademik",
+            "tingkat": "Kabupaten",
+            "tanggal": "2026-10-12",
+            "foto": "prestasi/OiowxtHh5OO2AAdVqTnmV6KDTlBNPEJwEogxG9uN.jpg",
+            "deskripsi": "Meraih juara 1 dalam Olimpiade Matematika tingkat Kabupaten.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 03:08:49"
+        },
+        {
+            "id": 2,
+            "judul": "Juara 2 Lomba Hadrah",
+            "siswa": "Tim Hadrah Al-Falah",
+            "kategori": "Seni",
+            "tingkat": "Provinsi",
+            "tanggal": "2026-09-27",
+            "foto": "prestasi/Jjp43XjjJ7cOeuLnVJrfdgPobPWxpIsXJnKFII1X.jpg",
+            "deskripsi": "Tim hadrah meraih juara 2 di tingkat Provinsi.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 03:09:15"
+        },
+        {
+            "id": 3,
+            "judul": "Juara 3 Futsal",
+            "siswa": "Tim Futsal SMP Islam",
+            "kategori": "Olahraga",
+            "tingkat": "Kabupaten",
+            "tanggal": "2026-09-12",
+            "foto": "prestasi/xDvsBaFYROZxcBJMvbiHiEFpCa6CXVYTMVrMVYwM.jpg",
+            "deskripsi": "Tim futsal meraih juara 3 tingkat Kabupaten.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 03:09:41"
+        },
+        {
+            "id": 4,
+            "judul": "Juara 1 Olimpiade Sains (IPA)",
+            "siswa": "Siti Nurhaliza",
+            "kategori": "Akademik",
+            "tingkat": "Kabupaten",
+            "tanggal": "2026-10-22",
+            "foto": "prestasi/RmGrCz48wcEIBC3Cwut3Y0RGxXUv3onTIEgGQYoA.jpg",
+            "deskripsi": "Meraih juara 1 Olimpiade Sains bidang IPA.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 03:08:16"
+        },
+        {
+            "id": 5,
+            "judul": "Juara 2 Lomba Pidato Bahasa Arab",
+            "siswa": "Muhammad Farhan",
+            "kategori": "Akademik",
+            "tingkat": "Provinsi",
+            "tanggal": "2026-10-27",
+            "foto": "prestasi/71s3sXVRguXhKm7xMNyhgVBUvNgN8rcdgYJNK1ZG.jpg",
+            "deskripsi": "Meraih juara 2 lomba pidato Bahasa Arab tingkat Provinsi.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 03:07:45"
+        },
+        {
+            "id": 6,
+            "judul": "Juara 1 Musabaqah Tilawatil Qur'an",
+            "siswa": "Aisyah Zahra",
+            "kategori": "Keagamaan",
+            "tingkat": "Kabupaten",
+            "tanggal": "2026-11-01",
+            "foto": "prestasi/bBV5HtrtX1GDI3VEkUk3MfG3nlcCNUPDomMbgQuL.jpg",
+            "deskripsi": "Meraih juara 1 MTQ tingkat Kabupaten.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-20 03:07:13"
+        }
+    ],
+    "gurus": [
+        {
+            "id": 2,
+            "nama": "AHMAD IHKSAN BASARUDDIN ZAINAL, S.Pd",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/nEjTNClWT49peYUTKdOnlBPK53DAnQ8JV7Mtfelk.jpg",
+            "urutan": 6,
+            "created_at": "2026-11-11 05:07:56",
+            "updated_at": "2026-11-20 04:03:34"
+        },
+        {
+            "id": 3,
+            "nama": "Akhmad Fattah Attabiyan",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/ashuFh5WMT9jvOaT6YAs40IM2VdjcREAxRtfqsv3.jpg",
+            "urutan": 3,
+            "created_at": "2026-11-11 05:07:57",
+            "updated_at": "2026-11-20 04:04:08"
+        },
+        {
+            "id": 4,
+            "nama": "LAILATUL FITROTIN, S.Pd",
+            "jabatan": "Wakil Kepala Sekolah",
+            "mapel": null,
+            "foto": "guru/Nh4kHGMnRmOI4bZFzqhVbVh8vYE8HZ53r1wHVq9Y.jpg",
+            "urutan": 2,
+            "created_at": "2026-11-11 05:07:59",
+            "updated_at": "2026-11-20 04:04:55"
+        },
+        {
+            "id": 5,
+            "nama": "H. FAHRU ROZI, M.Pd",
+            "jabatan": "Kepala Sekolah",
+            "mapel": null,
+            "foto": "guru/JVLKSzP6VYxs3hbX6mRZT7HbLGFjqcR1uCo8rmYA.jpg",
+            "urutan": 1,
+            "created_at": "2026-11-11 05:08:00",
+            "updated_at": "2026-11-20 04:05:25"
+        },
+        {
+            "id": 6,
+            "nama": "LINA ARIFIN, S.Pd",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/u2QEp2T5DPUbexJf12RRq2l9FCjt6joFhSzAX7Zv.jpg",
+            "urutan": 4,
+            "created_at": "2026-11-11 05:08:01",
+            "updated_at": "2026-11-20 04:06:12"
+        },
+        {
+            "id": 7,
+            "nama": "KURNIA RATNA SARI., S.Pd",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/LIwni3KNjz7oIGUXrUBReE3iqTZmTYZnf92dbkxl.jpg",
+            "urutan": 5,
+            "created_at": "2026-11-11 05:08:02",
+            "updated_at": "2026-11-20 04:06:51"
+        },
+        {
+            "id": 8,
+            "nama": "ABDUL MUBIN, S.Kom",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/9clgOcnrjANvUQrTuKNN7JkQ275SENIBtVXITNKT.jpg",
+            "urutan": 7,
+            "created_at": "2026-11-11 05:08:03",
+            "updated_at": "2026-11-20 04:07:24"
+        },
+        {
+            "id": 9,
+            "nama": "LINDA NUR AISYAH, S.Pd",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/VeIAqa1mb52OZYpsseHGgJqUNzxnnA4c5CKRgT3X.jpg",
+            "urutan": 8,
+            "created_at": "2026-11-11 05:08:04",
+            "updated_at": "2026-11-20 04:08:27"
+        },
+        {
+            "id": 10,
+            "nama": "DEVI MEGA LESTARI",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/pCPN6cvUrcMQsN2IcENTy6SMWpAm9yocj5hILuzH.jpg",
+            "urutan": 9,
+            "created_at": "2026-11-11 05:08:05",
+            "updated_at": "2026-11-20 04:08:58"
+        },
+        {
+            "id": 12,
+            "nama": "NUR AFIYATUR RAHMAH, S,Pd",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/Sqo6pw8D9vFU8wIz02QcZNBLvWu2Atz1JZ59UwIZ.jpg",
+            "urutan": 10,
+            "created_at": "2026-11-20 04:09:24",
+            "updated_at": "2026-11-20 04:09:24"
+        },
+        {
+            "id": 13,
+            "nama": "DEWI SETYO RAHMAWATI, S.Pd",
+            "jabatan": "Guru",
+            "mapel": null,
+            "foto": "guru/XhOto3F3kXex42FkXLbFNjz2QUIjzN87U8DALqN7.jpg",
+            "urutan": 11,
+            "created_at": "2026-11-20 04:09:49",
+            "updated_at": "2026-11-20 04:09:49"
+        }
+    ],
+    "galeris": [
+        {
+            "id": 9,
+            "judul": "Lomba Kaligrafi",
+            "kategori": "Seni",
+            "gambar": "galeri/bKe5BhIWaMNs04cnGv42EM7LSr1zmBxwEVEeYitF.jpg",
+            "urutan": 9,
+            "created_at": "2026-11-11 05:08:17",
+            "updated_at": "2026-11-20 04:00:49"
+        },
+        {
+            "id": 10,
+            "judul": "Class Meeting",
+            "kategori": "Olahraga",
+            "gambar": "galeri/zXYCgfDYtcvsKBohOj0bOle4Fk4xDwns2nzPWAZk.jpg",
+            "urutan": 10,
+            "created_at": "2026-11-11 05:08:20",
+            "updated_at": "2026-11-20 04:01:14"
+        },
+        {
+            "id": 11,
+            "judul": "Wisuda Siswa",
+            "kategori": "Kegiatan",
+            "gambar": "galeri/wjsGqty4Yvqpiry8ypnWoKaQ9N3Q4gXX2cpTjfHF.jpg",
+            "urutan": 11,
+            "created_at": "2026-11-11 05:08:22",
+            "updated_at": "2026-11-20 04:01:36"
+        },
+        {
+            "id": 12,
+            "judul": "Mabit (Malam Bina Iman)",
+            "kategori": "Keagamaan",
+            "gambar": "galeri/WyqgmkiiPUmtLl933tOG8FTuCWiQ57ancCwZHfIi.jpg",
+            "urutan": 12,
+            "created_at": "2026-11-11 05:08:23",
+            "updated_at": "2026-11-20 04:02:03"
+        }
+    ],
+    "ekstrakurikulers": [
+        {
+            "id": 1,
+            "nama": "Tahfidz Al-Qur'an",
+            "pembina": "Ust. Abdullah",
+            "icon": "ph-book-open-text",
+            "deskripsi": "Program hafalan Al-Qur'an dengan metode yang menyenangkan.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:07:52"
+        },
+        {
+            "id": 2,
+            "nama": "Pramuka",
+            "pembina": "Kak Budi",
+            "icon": "ph-tent",
+            "deskripsi": "Melatih kepemimpinan, kedisiplinan, dan kemandirian.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:07:52"
+        },
+        {
+            "id": 3,
+            "nama": "Hadrah",
+            "pembina": "Ust. Rahman",
+            "icon": "ph-music-notes",
+            "deskripsi": "Seni musik islami untuk mengembangkan kreativitas.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:07:52"
+        },
+        {
+            "id": 4,
+            "nama": "Futsal",
+            "pembina": "Pak Andi",
+            "icon": "ph-soccer-ball",
+            "deskripsi": "Olahraga untuk kesehatan dan sportivitas.",
+            "created_at": "2026-11-11 05:07:52",
+            "updated_at": "2026-11-11 05:07:52"
+        }
+    ],
+    "pollings": [
+        {
+            "id": 1,
+            "pertanyaan": "Menurut Anda, informasi apa yang paling bermanfaat?",
+            "aktif": 1,
+            "created_at": "2026-11-11 05:08:24",
+            "updated_at": "2026-11-11 05:08:24"
+        }
+    ],
+    "polling_options": [
+        {
+            "id": 1,
+            "polling_id": 1,
+            "opsi": "Berita",
+            "votes": 45,
+            "urutan": 1,
+            "created_at": "2026-11-11 05:08:24",
+            "updated_at": "2026-11-11 05:08:24"
+        },
+        {
+            "id": 2,
+            "polling_id": 1,
+            "opsi": "Prestasi",
+            "votes": 30,
+            "urutan": 2,
+            "created_at": "2026-11-11 05:08:24",
+            "updated_at": "2026-11-11 05:08:24"
+        },
+        {
+            "id": 3,
+            "polling_id": 1,
+            "opsi": "Agenda",
+            "votes": 25,
+            "urutan": 3,
+            "created_at": "2026-11-11 05:08:24",
+            "updated_at": "2026-11-11 05:08:24"
+        },
+        {
+            "id": 4,
+            "polling_id": 1,
+            "opsi": "PPDB",
+            "votes": 16,
+            "urutan": 4,
+            "created_at": "2026-11-11 05:08:24",
+            "updated_at": "2026-11-11 06:06:36"
+        }
+    ]
+}
