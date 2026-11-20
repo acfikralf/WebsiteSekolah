@@ -10,7 +10,6 @@ import Prestasi from '@/Components/Home/Prestasi';
 import Guru from '@/Components/Home/Guru';
 import Galeri from '@/Components/Home/Galeri';
 import Polling from '@/Components/Home/Polling';
-import PpdbCta from '@/Components/Home/PpdbCta';
 import Kontak from '@/Components/Home/Kontak';
 import { Head } from '@inertiajs/react';
 
