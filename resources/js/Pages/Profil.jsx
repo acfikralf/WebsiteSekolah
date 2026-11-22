@@ -1,4 +1,3 @@
-
 import MainLayout from '@/Layouts/MainLayout';
 import {
     Eye,
@@ -25,7 +24,6 @@ export default function Profil({ profil = {} }) {
     };
 
     // Memproses Timeline dan Program
-    // Baris kosong dan baris yang hanya berisi | tidak akan ditampilkan
     const parseItems = (value) => {
         return (value || '')
             .split(/\r?\n/)
@@ -63,8 +61,11 @@ export default function Profil({ profil = {} }) {
 
     return (
         <MainLayout>
-            {/* HERO */}
-            <section className="relative bg-gradient-to-r from-emerald-900 via-emerald-700 to-yellow-500 text-white overflow-hidden">
+            {/* HERO - WARNA HIJAU LEBIH CERAH */}
+            <section 
+                className="relative text-white overflow-hidden" 
+                style={{ background: 'linear-gradient(to bottom right, #059669, #047857)' }}
+            >
                 <div className="absolute -top-20 -right-20 w-72 h-72 border-[30px] border-white/10 rounded-full"></div>
                 <div className="absolute -bottom-20 -left-20 w-72 h-72 border-[30px] border-white/10 rounded-full"></div>
 
