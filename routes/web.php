@@ -4,7 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Setting;
-use App\http\Controllers\PollingVoteController;
+use App\Http\Controllers\PollingVoteController;
 use App\Models\Berita;
 use App\Models\Agenda;
 use App\Models\Guru;
