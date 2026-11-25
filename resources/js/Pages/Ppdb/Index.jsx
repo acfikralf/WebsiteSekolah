@@ -1,7 +1,12 @@
 import MainLayout from '@/Layouts/MainLayout';
-import { ArrowRight, CheckCircle, Student } from '@phosphor-icons/react';
+import { ArrowRight, CheckCircle, Student, DownloadSimple, WhatsappLogo } from '@phosphor-icons/react';
 
 export default function PpdbIndex() {
+    // Nomor WA Dummy (Ganti dengan nomor asli nanti)
+    const waNumber = "6281234567890"; 
+    const waLink = `https://wa.me/${waNumber}?text=Halo%20Bu%20Nia,%20saya%20ingin%20bertanya%20mengenai%20pendaftaran%20PPDB%20SMP%20Islam%20Watestanjung.`;
+    const googleFormLink = "https://forms.gle/GxvmTx9bMsMXwqix7";
+
     return (
         <MainLayout>
             {/* ===== HERO — WARNA HIJAU CERAH ===== */}
@@ -27,7 +32,13 @@ export default function PpdbIndex() {
                         <p className="text-xl text-white/90 mb-8">
                             Bergabunglah bersama kami untuk masa depan yang lebih cerah.
                         </p>
-                        <a href="#" className="inline-flex items-center px-8 py-4 bg-white text-emerald-800 hover:bg-yellow-50 font-bold text-lg rounded-xl shadow-lg transition-all hover:-translate-y-1">
+                        {/* Tombol Daftar Sekarang diarahkan ke Google Form */}
+                        <a 
+                            href={googleFormLink} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center px-8 py-4 bg-white text-emerald-800 hover:bg-yellow-50 font-bold text-lg rounded-xl shadow-lg transition-all hover:-translate-y-1"
+                        >
                             DAFTAR SEKARANG <ArrowRight size={24} className="ml-2" />
                         </a>
                     </div>
@@ -37,9 +48,11 @@ export default function PpdbIndex() {
             {/* ===== BODY WRAPPER ===== */}
             <div className="py-16 md:py-20 bg-slate-50 dark:bg-slate-950">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
                     <h2 className="text-2xl md:text-3xl font-display font-bold text-center text-slate-900 dark:text-white mb-8">
                         Syarat Pendaftaran
                     </h2>
+                    
                     <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
                         {['Fotokopi Ijazah / SKL SD/MI', 'Fotokopi Akta Kelahiran', 'Fotokopi Kartu Keluarga (KK)', 'Pas Foto 3x4 sebanyak 3 lembar', 'Mengisi formulir pendaftaran'].map((syarat, i) => (
                             <div key={i} className="flex items-center gap-3">
@@ -48,6 +61,26 @@ export default function PpdbIndex() {
                             </div>
                         ))}
                     </div>
+
+                    {/* Aksi Tambahan: Unduh Formulir & Tanya Admin WA */}
+                    <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                        <a 
+                            href="#" // Ganti dengan link file PDF formulir jika ada
+                            className="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        >
+                            <DownloadSimple size={20} className="mr-2" /> Unduh Formulir
+                        </a>
+                        
+                        <a 
+                            href={waLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center px-6 py-3 bg-[#25D366] text-white font-medium rounded-xl shadow-lg shadow-green-500/20 hover:bg-[#128C7E] transition-colors"
+                        >
+                            <WhatsappLogo size={20} className="mr-2" /> Tanya Admin (Bu Nia)
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </MainLayout>

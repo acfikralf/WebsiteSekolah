@@ -51,7 +51,7 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
             { key: 'agenda', label: 'Agenda', icon: 'ph-calendar' },
             { key: 'prestasi', label: 'Prestasi', icon: 'ph-trophy' },
             { key: 'ekstrakurikuler', label: 'Ekstrakurikuler', icon: 'ph-tent' },
-            { key: 'galeri', label: 'Galeri', icon: 'ph-images' },
+            { key: 'mading', label: 'Moderasi Mading', icon: 'ph-pencil-line' },
             { key: 'polling', label: 'Polling', icon: 'ph-chart-bar' },
         ],
 

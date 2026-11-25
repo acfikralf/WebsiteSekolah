@@ -27,7 +27,7 @@ export default function Sambutan({ kepalaSekolah }) {
                         <img
                             src={fotoUrl}
                             alt={kepalaSekolah?.nama || 'Kepala Sekolah'}
-                            className="relative w-full rounded-xl sm:rounded-3xl shadow-lg sm:shadow-xl object-cover aspect-[3/4]"
+                            className="relative w-[75%] rounded-xl sm:rounded-3xl shadow-lg sm:shadow-xl object-cover aspect-[3/4]"
                         />
                     </div>
 

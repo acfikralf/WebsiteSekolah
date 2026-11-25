@@ -102,6 +102,12 @@ export default function Prestasi({ prestasiList = [] }) {
                         );
                     })}
                 </div>
+                <div className="text-center mt-6 sm:mt-10 reveal">
+                    <a href="/prestasi" className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-primary-600 hover:bg-primary-700 text-white text-[10px] sm:text-base font-medium rounded-md sm:rounded-xl shadow-lg shadow-primary-600/20 transition-all active:scale-95 sm:hover:-translate-y-0.5">
+                        Lihat Semua Prestasi
+                        <ArrowRight className="ml-1.5 sm:ml-2 w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                    </a>
+                </div>
             </div>
         </section>
     );

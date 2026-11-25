@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Mading;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -42,7 +44,7 @@ class SettingController extends Controller
                 'foto' => $prestasi->foto,
                 'deskripsi' => $prestasi->deskripsi,
             ]),
-            
+
             // PERBAIKAN 1: Mengganti ordered() menjadi orderBy('urutan', 'asc')
             'gurus'     => \App\Models\Guru::orderBy('urutan', 'asc')->get()->map(fn($g) => [
                 'id'       => $g->id,
@@ -52,7 +54,7 @@ class SettingController extends Controller
                 'foto_url' => $g->foto_url,
                 'urutan'   => $g->urutan,
             ]),
-            
+
             // PERBAIKAN 2: Mengganti ordered() menjadi orderBy('urutan', 'asc')
             'galeris' => \App\Models\Galeri::orderBy('urutan', 'asc')->get()->map(fn($g) => [
                 'id'         => $g->id,
@@ -62,7 +64,7 @@ class SettingController extends Controller
                 'gambar_url' => $g->gambar_url,
                 'urutan'     => $g->urutan,
             ]),
-            
+
             'polling' => (function () {
                 $p = \App\Models\Polling::with('options')->latest()->first();
                 return $p ? [
@@ -131,27 +133,40 @@ class SettingController extends Controller
                 'email'      => $u->email,
                 'created_at' => $u->created_at->format('Y-m-d'),
             ]),
+            'madings' => Mading::latest()->get()->map(fn($mading) => [
+                'id' => $mading->id,
+                'nama_murid' => $mading->nama_murid,
+                'kelas' => $mading->kelas,
+                'judul' => $mading->judul,
+                'kategori' => $mading->kategori,
+                'konten' => $mading->konten,
+                'gambar' => $mading->gambar,
+                'gambar_url' => $mading->gambar
+                    ? Storage::disk('public')->url($mading->gambar)
+                    : null,
+                'status' => $mading->status,
+                'created_at' => $mading->created_at,
+            ]),
 
-             
-'profil' => [
-    'sejarah'       => Setting::get('profil_sejarah', ''),
-    'sambutan'      => Setting::get('profil_sambutan', ''),
-    'kepala_nama'   => Setting::get('profil_kepala_nama', ''),
-    'kepala_foto'   => Setting::get('profil_kepala_foto', null),
+            'profil' => [
+                'sejarah'       => Setting::get('profil_sejarah', ''),
+                'sambutan'      => Setting::get('profil_sambutan', ''),
+                'kepala_nama'   => Setting::get('profil_kepala_nama', ''),
+                'kepala_foto'   => Setting::get('profil_kepala_foto', null),
 
-    'timeline'      => Setting::get('profil_timeline', ''),
-    'visi'          => Setting::get('profil_visi', ''),
-    'misi'          => Setting::get('profil_misi', ''),
-    'tujuan'        => Setting::get('profil_tujuan', ''),
-    'program'       => Setting::get('profil_program', ''),
+                'timeline'      => Setting::get('profil_timeline', ''),
+                'visi'          => Setting::get('profil_visi', ''),
+                'misi'          => Setting::get('profil_misi', ''),
+                'tujuan'        => Setting::get('profil_tujuan', ''),
+                'program'       => Setting::get('profil_program', ''),
 
-    'npsn'          => Setting::get('profil_npsn', ''),
-    'status'        => Setting::get('profil_status', ''),
-    'alamat'        => Setting::get('profil_alamat', ''),
-    'telepon'       => Setting::get('profil_telepon', ''),
-    'email'         => Setting::get('profil_email', ''),
-    'tahun_berdiri' => Setting::get('profil_tahun_berdiri', ''),
-],
+                'npsn'          => Setting::get('profil_npsn', ''),
+                'status'        => Setting::get('profil_status', ''),
+                'alamat'        => Setting::get('profil_alamat', ''),
+                'telepon'       => Setting::get('profil_telepon', ''),
+                'email'         => Setting::get('profil_email', ''),
+                'tahun_berdiri' => Setting::get('profil_tahun_berdiri', ''),
+            ],
 
         ]);
     }

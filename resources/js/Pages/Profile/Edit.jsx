@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { FloppyDisk, User, LockKey, CheckCircle } from '@phosphor-icons/react';
+import Modal from '@/Components/Modal';
+import { 
+    FloppyDisk, User, LockKey, CheckCircle, 
+    Warning, Trash, X 
+} from '@phosphor-icons/react';
 
 export default function Edit({ mustVerifyEmail, status }) {
     const { auth } = usePage().props;
@@ -41,13 +46,32 @@ export default function Edit({ mustVerifyEmail, status }) {
         });
     };
 
+    // ==== State & Form Hapus Akun ====
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const deleteForm = useForm({
+        password: '',
+    });
+
+    const deleteUser = (e) => {
+        e.preventDefault();
+        deleteForm.delete(route('profile.destroy'), {
+            preserveScroll: true,
+            onSuccess: () => setShowDeleteModal(false),
+            onError: () => {
+                // Jika password salah, biarkan modal terbuka
+            },
+        });
+    };
+
     return (
         <AdminLayout 
             title="Pengaturan Akun" 
             activeSection="akun" 
-            onSectionChange={() => {}} // Biarkan kosong, navigasi akan diurus oleh AdminLayout
+            onSectionChange={() => {}} 
         >
             <div className="max-w-3xl space-y-6">
+                
+                {/* Header Info */}
                 <div>
                     <h2 className="text-xl font-display font-semibold text-slate-900 dark:text-white">Akun Admin</h2>
                     <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
@@ -169,7 +193,70 @@ export default function Edit({ mustVerifyEmail, status }) {
                         </div>
                     </form>
                 </div>
+
+                {/* Card 3: Hapus Akun */}
+                <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-red-200 dark:border-red-900/30 p-6">
+                    <div className="flex items-center gap-2 mb-4 border-b border-red-100 dark:border-red-900/30 pb-3">
+                        <Warning size={20} className="text-red-600 dark:text-red-400" />
+                        <h3 className="font-display font-semibold text-red-600 dark:text-red-400">Hapus Akun</h3>
+                    </div>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+                        Setelah akun Anda dihapus, semua sumber daya dan datanya akan dihapus secara permanen. Sebelum menghapus akun, harap unduh data atau informasi apa pun yang ingin Anda simpan.
+                    </p>
+                    <button
+                        onClick={() => setShowDeleteModal(true)}
+                        className="inline-flex items-center gap-2 px-5 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
+                    >
+                        <Trash size={18} /> Hapus Akun Saya
+                    </button>
+                </div>
+
             </div>
+
+            {/* Modal Konfirmasi Hapus Akun */}
+            <Modal 
+                show={showDeleteModal} 
+                onClose={() => setShowDeleteModal(false)} 
+                title="Apakah Anda yakin ingin menghapus akun?"
+                maxWidth="max-w-md"
+            >
+                <form onSubmit={deleteUser} className="space-y-4">
+                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                        Tindakan ini tidak dapat dibatalkan. Masukkan password Anda untuk mengonfirmasi bahwa Anda ingin menghapus akun ini secara permanen.
+                    </p>
+                    
+                    <div>
+                        <label className="block text-sm font-medium mb-1">Password</label>
+                        <input
+                            type="password"
+                            value={deleteForm.data.password}
+                            onChange={(e) => deleteForm.setData('password', e.target.value)}
+                            className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-red-500"
+                            placeholder="Masukkan password Anda"
+                            autoFocus
+                            required
+                        />
+                        {deleteForm.errors.password && <p className="text-xs text-red-600 mt-1">{deleteForm.errors.password}</p>}
+                    </div>
+
+                    <div className="flex justify-end gap-2 pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <button
+                            type="button"
+                            onClick={() => setShowDeleteModal(false)}
+                            className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700"
+                        >
+                            Batal
+                        </button>
+                        <button
+                            type="submit"
+                            disabled={deleteForm.processing}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg disabled:opacity-60"
+                        >
+                            {deleteForm.processing ? 'Menghapus...' : 'Hapus Akun'}
+                        </button>
+                    </div>
+                </form>
+            </Modal>
         </AdminLayout>
     );
 }

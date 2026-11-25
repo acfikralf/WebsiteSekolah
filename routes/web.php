@@ -11,6 +11,7 @@ use App\Models\Guru;
 use App\Models\Ekstrakurikuler;
 use App\Models\Prestasi;
 use App\Models\Galeri;
+use App\Http\Controllers\MadingController;
 
 
 
@@ -22,9 +23,11 @@ Route::get('/', function () {
             'sambutan' => \App\Models\Setting::get('profil_sambutan', 'Teks sambutan belum diisi.'),
         ],
         'profil' => [
-    'visi' => Setting::get('profil_visi', ''),
-    'misi' => Setting::get('profil_misi', ''),
-],
+            'visi' => Setting::get('profil_visi', ''),
+            'misi' => Setting::get('profil_misi', ''),
+
+        ],
+        'madings' => \App\Models\Mading::where('status', 'published')->latest()->take(4)->get(),
     ]);
 })->name('home');
 
@@ -68,7 +71,7 @@ Route::get('/berita', function () {
         'beritas' => Berita::where('status', 'published')
             ->latest('tanggal')
             ->get()
-            ->map(fn ($b) => [
+            ->map(fn($b) => [
                 'id'         => $b->id,
                 'judul'      => $b->judul,
                 'kategori'   => $b->kategori,
@@ -94,7 +97,7 @@ Route::get('/berita/{berita}', function (\App\Models\Berita $berita) {
         ->latest('tanggal')
         ->take(3)
         ->get()
-        ->map(fn ($b) => [
+        ->map(fn($b) => [
             'id'         => $b->id,
             'judul'      => $b->judul,
             'kategori'   => $b->kategori,
@@ -150,7 +153,7 @@ Route::get('/galeri', function () {
     return Inertia::render('Galeri/Index', [
         'galeris' => Galeri::ordered()
             ->get()
-            ->map(fn ($g) => [
+            ->map(fn($g) => [
                 'id'         => $g->id,
                 'judul'      => $g->judul,
                 'kategori'   => $g->kategori,
@@ -177,6 +180,10 @@ Route::get('/kontak', function () {
     ]);
 })->name('kontak.index');
 
+Route::get('/galeri-murid', [MadingController::class, 'index'])->name('mading.index');
+Route::post('/galeri-murid', [MadingController::class, 'store'])->name('mading.store');
 
 
-require __DIR__.'/auth.php';
+
+
+require __DIR__ . '/auth.php';

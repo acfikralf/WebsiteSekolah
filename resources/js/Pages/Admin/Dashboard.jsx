@@ -9,10 +9,10 @@ import SectionBerita from "@/Components/Admin/SectionBerita";
 import SectionAgenda from "@/Components/Admin/SectionAgenda";
 import SectionPrestasi from "@/Components/Admin/SectionPrestasi";
 import SectionGuru from "@/Components/Admin/SectionGuru";
-import SectionGaleri from "@/Components/Admin/SectionGaleri";
 import SectionPolling from "@/Components/Admin/SectionPolling";
 import SectionDashboard from "@/Components/Admin/SectionDashboard";
 import SectionProfil from "@/Components/Admin/SectionProfil";
+import SectionMading from "@/Components/Admin/SectionMading";
 
 const sectionTitles = {
     dashboard: "Dashboard",
@@ -20,17 +20,17 @@ const sectionTitles = {
     agenda: "Data Agenda",
     prestasi: "Data Prestasi",
     ekstrakurikuler: "Ekstrakurikuler",
-    galeri: "Galeri",
     polling: "Polling",
     guru: "Data Guru",
     statistik: "Statistik Sekolah",
     profil: "Profil Sekolah",
     pengaturan: "Pengaturan Website",
     akun: "Akun Admin",
+    mading: "Moderasi Mading",
 };
 
 export default function Dashboard({
-    settings, ekstrakurikulers, beritas, agendas, prestasis, gurus, galeris, polling, stats, recentAgenda, recentBerita, recentPrestasi, invitations, users, profil
+    settings, ekstrakurikulers, beritas, agendas, prestasis, gurus, polling, stats, recentAgenda, recentBerita, recentPrestasi, invitations, users, profil, madings
 }) {
     const { url } = usePage();
     
@@ -70,7 +70,7 @@ export default function Dashboard({
             {activeSection === "agenda" && <SectionAgenda agendas={agendas} />}
             {activeSection === "prestasi" && <SectionPrestasi prestasis={prestasis} />}
             {activeSection === "guru" && <SectionGuru gurus={gurus} />}
-            {activeSection === "galeri" && <SectionGaleri galeris={galeris} />}
+            {activeSection === "mading" && <SectionMading madings={madings} />}
             {activeSection === "polling" && <SectionPolling polling={polling} />}
             {activeSection === 'akun' && <SectionAkun invitations={invitations} users={users} />}
             {activeSection === 'profil' && <SectionProfil profil={profil} />}

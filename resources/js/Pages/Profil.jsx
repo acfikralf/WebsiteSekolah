@@ -120,7 +120,7 @@ export default function Profil({ profil = {} }) {
                                         <img
                                             src={kepalaFotoUrl}
                                             alt={profil.kepala_nama || 'Kepala Sekolah'}
-                                            className="relative w-full rounded-xl sm:rounded-3xl shadow-lg sm:shadow-xl object-cover aspect-[3/4]"
+                                            className="relative w-[75%] rounded-xl sm:rounded-3xl shadow-lg sm:shadow-xl object-cover aspect-[3/4]"
                                         />
                                     ) : (
                                         <div className="relative w-full aspect-[3/4] bg-slate-200 dark:bg-slate-800 rounded-xl sm:rounded-3xl flex items-center justify-center text-slate-400">

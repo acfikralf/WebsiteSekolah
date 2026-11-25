@@ -3,18 +3,23 @@ import { Link, usePage } from "@inertiajs/react";
 
 export default function MainLayout({ children }) {
     const { auth, site } = usePage().props;
+    const { url } = usePage(); // <-- Ambil URL saat ini
 
     const [darkMode, setDarkMode] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    // ==== Helper untuk mengecek apakah link sedang aktif ====
+    const isActive = (path) => {
+        if (path === '/') return url === '/';
+        return url.startsWith(path);
+    };
+
     // ==== Dark Mode Init ====
     useEffect(() => {
         const saved = localStorage.getItem("theme");
-
         if (
             saved === "dark" ||
-            (!saved &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches)
+            (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)
         ) {
             setDarkMode(true);
             document.documentElement.classList.add("dark");
@@ -28,10 +33,8 @@ export default function MainLayout({ children }) {
     const toggleDarkMode = () => {
         setDarkMode((prev) => {
             const newMode = !prev;
-
             document.documentElement.classList.toggle("dark", newMode);
             localStorage.setItem("theme", newMode ? "dark" : "light");
-
             return newMode;
         });
     };
@@ -43,10 +46,7 @@ export default function MainLayout({ children }) {
                 <nav className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16 md:h-20">
                         {/* Logo */}
-                        <a
-                            href="/"
-                            className="flex items-center gap-2 shrink-0 group"
-                        >
+                        <Link href="/" className="flex items-center gap-2 shrink-0 group">
                             <img
                                 src="/image/logo-sekolah.png"
                                 alt="Logo SMP Islam Watestanjung"
@@ -60,98 +60,138 @@ export default function MainLayout({ children }) {
                                     {site.tagline}
                                 </span>
                             </div>
-                        </a>
+                        </Link>
 
                         {/* ===== DESKTOP NAVIGATION ===== */}
                         <div className="hidden lg:flex items-center gap-6">
-                            <a
+                            <Link
                                 href="/"
-                                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                                className={`text-sm font-medium relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:transition-transform after:origin-left ${
+                                    isActive('/')
+                                        ? "text-primary-600 dark:text-accent-400 after:scale-x-100"
+                                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 after:scale-x-0 hover:after:scale-x-100"
+                                }`}
                             >
                                 Beranda
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/profil"
-                                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                                className={`text-sm font-medium relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:transition-transform after:origin-left ${
+                                    isActive('/profil')
+                                        ? "text-primary-600 dark:text-accent-400 after:scale-x-100"
+                                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 after:scale-x-0 hover:after:scale-x-100"
+                                }`}
                             >
                                 Profil
-                            </a>
+                            </Link>
 
+                            {/* Dropdown Akademik */}
                             <div className="relative group">
-                                <button className="flex items-center gap-1 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400">
+                                <button className={`flex items-center gap-1 py-2 text-sm font-medium ${
+                                    isActive('/guru') || isActive('/ekstrakurikuler')
+                                        ? "text-primary-600 dark:text-accent-400"
+                                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400"
+                                }`}>
                                     Akademik{" "}
                                     <i className="ph ph-caret-down text-xs"></i>
                                 </button>
-                                <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <a
+                                <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                    <Link
                                         href="/guru"
-                                        className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600"
+                                        className={`block px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600 ${
+                                            isActive('/guru') ? "text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300"
+                                        }`}
                                     >
                                         Guru
-                                    </a>
-                                    <a
+                                    </Link>
+                                    <Link
                                         href="/ekstrakurikuler"
-                                        className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600"
+                                        className={`block px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600 ${
+                                            isActive('/ekstrakurikuler') ? "text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300"
+                                        }`}
                                     >
                                         Ekstrakurikuler
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
 
+                            {/* Dropdown Kesiswaan */}
                             <div className="relative group">
-                                <button className="flex items-center gap-1 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400">
+                                <button className={`flex items-center gap-1 py-2 text-sm font-medium ${
+                                    isActive('/prestasi') || isActive('/galeri')
+                                        ? "text-primary-600 dark:text-accent-400"
+                                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400"
+                                }`}>
                                     Kesiswaan{" "}
                                     <i className="ph ph-caret-down text-xs"></i>
                                 </button>
-                                <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <a
+                                <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                    <Link
                                         href="/prestasi"
-                                        className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600"
+                                        className={`block px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600 ${
+                                            isActive('/prestasi') ? "text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300"
+                                        }`}
                                     >
                                         Prestasi
-                                    </a>
-                                    <a
-                                        href="/galeri"
-                                        className="block px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600"
+                                    </Link>
+                                    <Link
+                                        href="/galeri-murid"
+                                        className={`block px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600 ${
+                                            isActive('/galeri') ? "text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300"
+                                        }`}
                                     >
-                                        Galeri
-                                    </a>
+                                        Galeri Murid
+                                    </Link>
                                 </div>
                             </div>
 
-                            <a
+                            <Link
                                 href="/berita"
-                                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                                className={`text-sm font-medium relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:transition-transform after:origin-left ${
+                                    isActive('/berita')
+                                        ? "text-primary-600 dark:text-accent-400 after:scale-x-100"
+                                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 after:scale-x-0 hover:after:scale-x-100"
+                                }`}
                             >
                                 Berita
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/agenda"
-                                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                                className={`text-sm font-medium relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:transition-transform after:origin-left ${
+                                    isActive('/agenda')
+                                        ? "text-primary-600 dark:text-accent-400 after:scale-x-100"
+                                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 after:scale-x-0 hover:after:scale-x-100"
+                                }`}
                             >
                                 Agenda
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/ppdb"
-                                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                                className={`text-sm font-medium relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:transition-transform after:origin-left ${
+                                    isActive('/ppdb')
+                                        ? "text-primary-600 dark:text-accent-400 after:scale-x-100"
+                                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 after:scale-x-0 hover:after:scale-x-100"
+                                }`}
                             >
                                 PPDB
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/kontak"
-                                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                                className={`text-sm font-medium relative py-2 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-accent-400 after:transition-transform after:origin-left ${
+                                    isActive('/kontak')
+                                        ? "text-primary-600 dark:text-accent-400 after:scale-x-100"
+                                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400 after:scale-x-0 hover:after:scale-x-100"
+                                }`}
                             >
                                 Kontak
-                            </a>
+                            </Link>
 
                             <button
                                 onClick={toggleDarkMode}
                                 className="p-2 text-slate-500 hover:text-primary-600 dark:hover:text-accent-400 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                 aria-label="Toggle dark mode"
                             >
-                                <i
-                                    className={`ph ${darkMode ? "ph-sun" : "ph-moon"} text-xl`}
-                                ></i>
+                                <i className={`ph ${darkMode ? "ph-sun" : "ph-moon"} text-xl`}></i>
                             </button>
                         </div>
 
@@ -162,14 +202,10 @@ export default function MainLayout({ children }) {
                                 className="p-1.5 sm:p-2 text-slate-500 hover:text-primary-600 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                 aria-label="Toggle dark mode"
                             >
-                                <i
-                                    className={`ph ${darkMode ? "ph-sun" : "ph-moon"} text-lg sm:text-xl`}
-                                ></i>
+                                <i className={`ph ${darkMode ? "ph-sun" : "ph-moon"} text-lg sm:text-xl`}></i>
                             </button>
                             <button
-                                onClick={() =>
-                                    setMobileMenuOpen(!mobileMenuOpen)
-                                }
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                                 className="p-1.5 sm:p-2 text-slate-500 hover:text-primary-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                 aria-label="Toggle menu"
                             >
@@ -183,75 +219,95 @@ export default function MainLayout({ children }) {
                 {mobileMenuOpen && (
                     <div className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-lg max-h-[80vh] overflow-y-auto">
                         <div className="px-2 pt-2 pb-4 space-y-0.5">
-                            <a
+                            <Link
                                 href="/"
-                                className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${
+                                    isActive('/') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 Beranda
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/profil"
-                                className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${
+                                    isActive('/profil') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 Profil
-                            </a>
+                            </Link>
 
                             <p className="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                                 Akademik
                             </p>
-                            <a
+                            <Link
                                 href="/guru"
-                                className="block pl-5 pr-3 py-1.5 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block pl-5 pr-3 py-1.5 text-[13px] rounded-lg transition-colors ${
+                                    isActive('/guru') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 Guru
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/ekstrakurikuler"
-                                className="block pl-5 pr-3 py-1.5 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block pl-5 pr-3 py-1.5 text-[13px] rounded-lg transition-colors ${
+                                    isActive('/ekstrakurikuler') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 Ekstrakurikuler
-                            </a>
+                            </Link>
 
                             <p className="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                                 Kesiswaan
                             </p>
-                            <a
+                            <Link
                                 href="/prestasi"
-                                className="block pl-5 pr-3 py-1.5 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block pl-5 pr-3 py-1.5 text-[13px] rounded-lg transition-colors ${
+                                    isActive('/prestasi') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 Prestasi
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/galeri"
-                                className="block pl-5 pr-3 py-1.5 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block pl-5 pr-3 py-1.5 text-[13px] rounded-lg transition-colors ${
+                                    isActive('/galeri') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
-                                Galeri
-                            </a>
+                                Galeri Murid
+                            </Link>
 
-                            <a
+                            <Link
                                 href="/berita"
-                                className="block px-3 py-2 mt-1 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors border-t border-slate-100 dark:border-slate-800/50"
+                                className={`block px-3 py-2 mt-1 text-[13px] font-medium rounded-lg transition-colors border-t border-slate-100 dark:border-slate-800/50 ${
+                                    isActive('/berita') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 Berita
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/agenda"
-                                className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${
+                                    isActive('/agenda') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 Agenda
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/ppdb"
-                                className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${
+                                    isActive('/ppdb') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 PPDB
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/kontak"
-                                className="block px-3 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className={`block px-3 py-2 text-[13px] font-medium rounded-lg transition-colors ${
+                                    isActive('/kontak') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                }`}
                             >
                                 Kontak
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 )}
@@ -261,11 +317,10 @@ export default function MainLayout({ children }) {
             <main className="flex-grow">{children}</main>
 
             {/* ===== FOOTER ===== */}
+            {/* (Footer Anda tetap sama, tidak perlu diubah) */}
             <footer className="bg-slate-900 dark:bg-slate-950 text-slate-300">
-                {/* PERBAIKAN: Menggunakan grid-cols-12 untuk kontrol lebar presisi */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
                     <div className="grid grid-cols-2 md:grid-cols-12 gap-x-4 gap-y-8 md:gap-x-8 md:gap-y-0">
-                        {/* 1. Informasi Sekolah - Desktop: 4 kolom */}
                         <div className="md:col-span-4 space-y-3 sm:space-y-4">
                             <div className="flex items-center gap-2">
                                 <img
@@ -283,116 +338,39 @@ export default function MainLayout({ children }) {
                                 membentuk generasi berilmu dan berakhlak mulia.
                             </p>
                             <div className="flex space-x-3 sm:space-x-4">
-                                <a
-                                    href="https://www.instagram.com/smp_islam_watestanjung/"
-                                    className="text-slate-400 hover:text-white transition-colors"
-                                >
+                                <a href="https://www.instagram.com/smp_islam_watestanjung/" className="text-slate-400 hover:text-white transition-colors">
                                     <i className="ph ph-instagram-logo text-base sm:text-xl"></i>
                                 </a>
-                                <a
-                                    href="https://www.facebook.com/pages/Smp-Islam-Wates-Tanjung/841595049322724?locale=en_GB"
-                                    className="text-slate-400 hover:text-white transition-colors"
-                                >
+                                <a href="https://www.facebook.com/pages/Smp-Islam-Wates-Tanjung/841595049322724?locale=en_GB" className="text-slate-400 hover:text-white transition-colors">
                                     <i className="ph ph-facebook-logo text-base sm:text-xl"></i>
                                 </a>
-                                <a
-                                    href="https://www.youtube.com/channel/UC5M2PJGf2XKLZcIresf_MYw"
-                                    className="text-slate-400 hover:text-white transition-colors"
-                                >
+                                <a href="https://www.youtube.com/channel/UC5M2PJGf2XKLZcIresf_MYw" className="text-slate-400 hover:text-white transition-colors">
                                     <i className="ph ph-youtube-logo text-base sm:text-xl"></i>
                                 </a>
                             </div>
                         </div>
 
-                        {/* 2. Tautan - Desktop: 2 kolom */}
                         <div className="md:col-span-2">
                             <h3 className="text-white font-semibold mb-2 sm:mb-4 text-xs sm:text-base">
                                 Tautan
                             </h3>
-
                             <div className="grid grid-cols-2 md:grid-cols-1 gap-x-2 md:gap-x-0">
                                 <ul className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-sm text-slate-400">
-                                    <li>
-                                        <Link
-                                            href="/"
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            Beranda
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            href="/profil"
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            Profil
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            href="/berita"
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            Berita
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            href="/agenda"
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            Agenda
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            href="/prestasi"
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            Prestasi
-                                        </Link>
-                                    </li>
+                                    <li><Link href="/" className="hover:text-accent-400 transition-colors">Beranda</Link></li>
+                                    <li><Link href="/profil" className="hover:text-accent-400 transition-colors">Profil</Link></li>
+                                    <li><Link href="/berita" className="hover:text-accent-400 transition-colors">Berita</Link></li>
+                                    <li><Link href="/agenda" className="hover:text-accent-400 transition-colors">Agenda</Link></li>
+                                    <li><Link href="/prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
                                 </ul>
                                 <ul className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-sm text-slate-400">
-                                    <li>
-                                        <Link
-                                            href="/galeri"
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            Galeri
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            href="/ppdb"
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            PPDB
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            href="/kontak"
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            Kontak
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            href={
-                                                auth.user ? "/admin" : "/login"
-                                            }
-                                            className="hover:text-accent-400 transition-colors"
-                                        >
-                                            Administrator
-                                        </Link>
-                                    </li>
+                                    <li><Link href="/galeri" className="hover:text-accent-400 transition-colors">Galeri Murid</Link></li>
+                                    <li><Link href="/ppdb" className="hover:text-accent-400 transition-colors">PPDB</Link></li>
+                                    <li><Link href="/kontak" className="hover:text-accent-400 transition-colors">Kontak</Link></li>
+                                    <li><Link href={auth.user ? "/admin" : "/login"} className="hover:text-accent-400 transition-colors">Administrator</Link></li>
                                 </ul>
                             </div>
                         </div>
 
-                        {/* 3. Kontak - Desktop: 3 kolom */}
                         <div className="md:col-span-3">
                             <h3 className="text-white font-semibold mb-2 sm:mb-4 text-xs sm:text-base">
                                 Kontak
@@ -400,9 +378,7 @@ export default function MainLayout({ children }) {
                             <ul className="space-y-2 sm:space-y-3 text-[10px] sm:text-sm text-slate-400">
                                 <li className="flex items-start gap-1.5 sm:gap-2">
                                     <i className="ph ph-map-pin text-accent-400 mt-0.5"></i>
-                                    <span className="leading-snug">
-                                        Jl. Raya Watestanjung, Desa Watestanjung
-                                    </span>
+                                    <span className="leading-snug">Jl. Raya Watestanjung, Desa Watestanjung</span>
                                 </li>
                                 <li className="flex items-start gap-1.5 sm:gap-2">
                                     <i className="ph ph-phone text-accent-400 mt-0.5"></i>
@@ -410,14 +386,11 @@ export default function MainLayout({ children }) {
                                 </li>
                                 <li className="flex items-start gap-1.5 sm:gap-2">
                                     <i className="ph ph-envelope text-accent-400 mt-0.5"></i>
-                                    <span className="break-all">
-                                        smpislamwatestanjung92@gmail.com
-                                    </span>
+                                    <span className="break-all">smpislamwatestanjung92@gmail.com</span>
                                 </li>
                             </ul>
                         </div>
 
-                        {/* 4. Lokasi - Desktop: 3 kolom */}
                         <div className="md:col-span-3">
                             <h3 className="text-white font-semibold mb-2 sm:mb-4 text-xs sm:text-base">
                                 Lokasi
@@ -435,7 +408,6 @@ export default function MainLayout({ children }) {
                         </div>
                     </div>
 
-                    {/* Copyright (Tengah Bawah) */}
                     <div className="mt-8 sm:mt-12 pt-5 sm:pt-8 border-t border-slate-800 text-center text-[10px] sm:text-sm text-slate-400">
                         <p>
                             © {new Date().getFullYear()} SMP Islam Watestanjung.

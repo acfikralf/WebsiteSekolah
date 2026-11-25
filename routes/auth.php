@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\PrestasiController;
 use App\Http\Controllers\Admin\PollingController;
 use App\Http\Controllers\Admin\InvitationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\MadingController as AdminMadingController;
 
 
 Route::middleware('guest')->group(function () {
@@ -199,4 +200,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
         ->middleware('throttle:6,1')
         ->name('verification.send');
+
+    Route::middleware('auth')->group(function () {
+    Route::get('/admin/mading', [AdminMadingController::class, 'index'])->name('admin.mading.index');
+    Route::post('/admin/mading/{mading}/approve', [AdminMadingController::class, 'approve'])->name('admin.mading.approve');
+    Route::delete('/admin/mading/{mading}', [AdminMadingController::class, 'destroy'])->name('admin.mading.destroy');
+});
 });

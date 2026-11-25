@@ -8,12 +8,12 @@ import Berita from '@/Components/Home/Berita';
 import Agenda from '@/Components/Home/Agenda';
 import Prestasi from '@/Components/Home/Prestasi';
 import Guru from '@/Components/Home/Guru';
-import Galeri from '@/Components/Home/Galeri';
 import Polling from '@/Components/Home/Polling';
 import Kontak from '@/Components/Home/Kontak';
 import { Head } from '@inertiajs/react';
+import Mading from '@/Components/Home/Mading';
 
-export default function Home({kepalaSekolah, profil}) {
+export default function Home({kepalaSekolah, profil, madings}) {
     return (
         <MainLayout>
             <Head title="Home" />
@@ -26,7 +26,7 @@ export default function Home({kepalaSekolah, profil}) {
             <Agenda />
             <Prestasi />
             <Guru />
-            <Galeri />
+            <Mading madings={madings} />
             <Polling />
             <Kontak />
         </MainLayout>
