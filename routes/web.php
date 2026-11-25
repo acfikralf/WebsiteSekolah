@@ -12,7 +12,7 @@ use App\Models\Ekstrakurikuler;
 use App\Models\Prestasi;
 use App\Models\Galeri;
 use App\Http\Controllers\MadingController;
-
+use App\Http\Controllers\Admin\InvitationController;
 
 
 Route::get('/', function () {
@@ -182,6 +182,13 @@ Route::get('/kontak', function () {
 
 Route::get('/galeri-murid', [MadingController::class, 'index'])->name('mading.index');
 Route::post('/galeri-murid', [MadingController::class, 'store'])->name('mading.store');
+
+  Route::get('/invitation/{token}', [InvitationController::class, 'show'])
+        ->name('invitation.accept');
+
+    Route::post('/invitation/{token}', [InvitationController::class, 'accept'])
+        ->name('invitation.accept.submit');
+    //Password Confirm
 
 
 

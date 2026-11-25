@@ -164,17 +164,7 @@ Route::middleware('auth')->group(function () {
 
     //Public Invitation
     // Klik link dari email
-    Route::get(
-        '/invitation/{token}',
-        [InvitationController::class, 'show']
-    )->name('invitation.accept');
-
-    // Submit form aktivasi
-    Route::post(
-        '/invitation/{token}',
-        [InvitationController::class, 'accept']
-    )->name('invitation.accept.submit');
-    //Password Confirm
+  
 
     Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->name('password.confirm');
@@ -202,8 +192,8 @@ Route::middleware('auth')->group(function () {
         ->name('verification.send');
 
     Route::middleware('auth')->group(function () {
-    Route::get('/admin/mading', [AdminMadingController::class, 'index'])->name('admin.mading.index');
-    Route::post('/admin/mading/{mading}/approve', [AdminMadingController::class, 'approve'])->name('admin.mading.approve');
-    Route::delete('/admin/mading/{mading}', [AdminMadingController::class, 'destroy'])->name('admin.mading.destroy');
-});
+        Route::get('/admin/mading', [AdminMadingController::class, 'index'])->name('admin.mading.index');
+        Route::post('/admin/mading/{mading}/approve', [AdminMadingController::class, 'approve'])->name('admin.mading.approve');
+        Route::delete('/admin/mading/{mading}', [AdminMadingController::class, 'destroy'])->name('admin.mading.destroy');
+    });
 });
