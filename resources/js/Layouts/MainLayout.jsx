@@ -118,7 +118,7 @@ export default function MainLayout({ children }) {
                             {/* Dropdown Kesiswaan */}
                             <div className="relative group">
                                 <button className={`flex items-center gap-1 py-2 text-sm font-medium ${
-                                    isActive('/prestasi') || isActive('/galeri')
+                                    isActive('/prestasi') || isActive('/galeri-murid')
                                         ? "text-primary-600 dark:text-accent-400"
                                         : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-accent-400"
                                 }`}>
@@ -137,7 +137,7 @@ export default function MainLayout({ children }) {
                                     <Link
                                         href="/galeri-murid"
                                         className={`block px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary-600 ${
-                                            isActive('/galeri') ? "text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300"
+                                            isActive('/galeri-murid') ? "text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300"
                                         }`}
                                     >
                                         Galeri Murid
@@ -268,9 +268,9 @@ export default function MainLayout({ children }) {
                                 Prestasi
                             </Link>
                             <Link
-                                href="/galeri"
+                                href="/galeri-murid"
                                 className={`block pl-5 pr-3 py-1.5 text-[13px] rounded-lg transition-colors ${
-                                    isActive('/galeri') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                    isActive('/galeri-murid') ? "bg-primary-50 dark:bg-slate-800 text-primary-600 dark:text-accent-400 font-semibold" : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
                                 }`}
                             >
                                 Galeri Murid
@@ -363,7 +363,7 @@ export default function MainLayout({ children }) {
                                     <li><Link href="/prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
                                 </ul>
                                 <ul className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-sm text-slate-400">
-                                    <li><Link href="/galeri" className="hover:text-accent-400 transition-colors">Galeri Murid</Link></li>
+                                    <li><Link href="/galeri-murid" className="hover:text-accent-400 transition-colors">Galeri Murid</Link></li>
                                     <li><Link href="/ppdb" className="hover:text-accent-400 transition-colors">PPDB</Link></li>
                                     <li><Link href="/kontak" className="hover:text-accent-400 transition-colors">Kontak</Link></li>
                                     <li><Link href={auth.user ? "/admin" : "/login"} className="hover:text-accent-400 transition-colors">Administrator</Link></li>
