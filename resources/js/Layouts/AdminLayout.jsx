@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Head, Link, useForm, usePage, router } from '@inertiajs/react';
 import Toast from '@/Components/Toast';
@@ -249,9 +248,12 @@ export default function AdminLayout({ children, activeSection, onSectionChange, 
                             {children}
                         </main>
 
-                        {/* Footer */}
+                        {/* Footer (DENGAN SUPPORTED BY) */}
                         <footer className="py-4 px-6 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
-                            © {new Date().getFullYear()} Admin SMP Islam Watestanjung
+                            <p>© {new Date().getFullYear()} Admin SMP Islam Watestanjung. All Rights Reserved.</p>
+                            <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
+                                Supported by <span className="font-semibold text-slate-500 dark:text-slate-400">RPL SMK Krian 1 Sidoarjo</span>
+                            </p>
                         </footer>
 
                     </div>

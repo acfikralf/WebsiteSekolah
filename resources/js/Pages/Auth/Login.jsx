@@ -107,10 +107,13 @@ export default function Login({ status, canResetPassword }) {
                         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
 
                         <div className="relative z-10 flex flex-col justify-between p-12 xl:p-16 w-full">
-                            <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl flex items-center justify-center">
-                                    <i className="ph ph-graduation-cap text-2xl text-accent-400"></i>
-                                </div>
+                            {/* LOGO */}
+                            <div className="flex items-center gap-2">
+                                <img
+                                    src="/image/logo-sekolah.png"
+                                    alt="Logo SMP Islam Watestanjung"
+                                    className="w-12 h-12 object-contain shrink-0"
+                                />
                                 <div>
                                     <p className="font-display font-bold text-lg">SMP Islam Watestanjung</p>
                                     <p className="text-xs text-white/70">Unggul dalam Prestasi, Berakhlak Mulia</p>
@@ -148,9 +151,12 @@ export default function Login({ status, canResetPassword }) {
                                 </ul>
                             </div>
 
-                            <p className="text-xs text-white/50">
-                                © {new Date().getFullYear()} SMP Islam Watestanjung. All Rights Reserved.
-                            </p>
+                            <div className="text-xs text-white/50">
+                                <p>© {new Date().getFullYear()} SMP Islam Watestanjung. All Rights Reserved.</p>
+                                <p className="mt-1 text-white/40">
+                                    Supported by <span className="font-semibold text-white/60">RPL SMK Krian 1 Sidoarjo</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -158,10 +164,12 @@ export default function Login({ status, canResetPassword }) {
                     <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-8 lg:p-12 bg-white dark:bg-slate-950 transition-colors duration-300">
                         <div className="w-full max-w-md fade-in">
                             {/* Mobile logo */}
-                            <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
-                                <div className="w-11 h-11 bg-primary-600 text-white rounded-xl flex items-center justify-center">
-                                    <i className="ph ph-graduation-cap text-2xl"></i>
-                                </div>
+                            <div className="lg:hidden flex items-center gap-2 mb-8 justify-center">
+                                <img
+                                    src="/image/logo-sekolah.png"
+                                    alt="Logo SMP Islam Watestanjung"
+                                    className="w-11 h-11 object-contain shrink-0"
+                                />
                                 <div>
                                     <p className="font-display font-bold text-slate-900 dark:text-white">SMP Islam Watestanjung</p>
                                     <p className="text-xs text-slate-500 dark:text-slate-400">Panel Admin</p>
@@ -303,10 +311,13 @@ export default function Login({ status, canResetPassword }) {
                         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
 
                         <div className="relative z-10 flex flex-col justify-between p-12 xl:p-16 w-full">
-                            <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl flex items-center justify-center">
-                                    <i className="ph ph-graduation-cap text-2xl text-accent-400"></i>
-                                </div>
+                            {/* LOGO */}
+                            <div className="flex items-center gap-2">
+                                <img
+                                    src="/image/logo-sekolah.png"
+                                    alt="Logo SMP Islam Watestanjung"
+                                    className="w-12 h-12 object-contain shrink-0"
+                                />
                                 <div>
                                     <p className="font-display font-bold text-lg">SMP Islam Watestanjung</p>
                                     <p className="text-xs text-white/70">Unggul dalam Prestasi, Berakhlak Mulia</p>
@@ -326,9 +337,12 @@ export default function Login({ status, canResetPassword }) {
                                 </p>
                             </div>
 
-                            <p className="text-xs text-white/50">
-                                © {new Date().getFullYear()} SMP Islam Watestanjung. All Rights Reserved.
-                            </p>
+                            <div className="text-xs text-white/50">
+                                <p>© {new Date().getFullYear()} SMP Islam Watestanjung. All Rights Reserved.</p>
+                                <p className="mt-1 text-white/40">
+                                    Supported by <span className="font-semibold text-white/60">RPL SMK Krian 1 Sidoarjo</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -336,10 +350,12 @@ export default function Login({ status, canResetPassword }) {
                     <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-8 lg:p-12 bg-white dark:bg-slate-950 transition-colors duration-300">
                         <div className="w-full max-w-md fade-in">
                             {/* Mobile logo */}
-                            <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
-                                <div className="w-11 h-11 bg-primary-600 text-white rounded-xl flex items-center justify-center">
-                                    <i className="ph ph-graduation-cap text-2xl"></i>
-                                </div>
+                            <div className="lg:hidden flex items-center gap-2 mb-8 justify-center">
+                                <img
+                                    src="/image/logo-sekolah.png"
+                                    alt="Logo SMP Islam Watestanjung"
+                                    className="w-11 h-11 object-contain shrink-0"
+                                />
                                 <div>
                                     <p className="font-display font-bold text-slate-900 dark:text-white">SMP Islam Watestanjung</p>
                                     <p className="text-xs text-slate-500 dark:text-slate-400">Panel Admin</p>

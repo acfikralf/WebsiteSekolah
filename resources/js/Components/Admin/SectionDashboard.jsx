@@ -2,6 +2,7 @@ import { Link } from '@inertiajs/react';
 import {
     Newspaper, UsersThree, Trophy, Calendar, Images, ChartBar,
     ArrowRight, TrendUp, Clock, MapPin, CheckCircle,
+    SquaresFour, PencilLine, ChartLine, GraduationCap, Gear, UserCircle, Tent
 } from '@phosphor-icons/react';
 
 export default function SectionDashboard({
@@ -11,62 +12,29 @@ export default function SectionDashboard({
     recentPrestasi = [],
     polling = null,
 }) {
-    // Stat cards konfigurasi
+    // Stat cards untuk ringkasan di bawah
     const statCards = [
-        {
-            key: 'berita',
-            label: 'Berita',
-            icon: Newspaper,
-            section: 'berita',
-            accent: 'from-blue-500/10 to-blue-500/5',
-            iconBg: 'bg-blue-100 dark:bg-blue-900/30',
-            iconColor: 'text-blue-600 dark:text-blue-400',
-        },
-        {
-            key: 'guru',
-            label: 'Guru',
-            icon: UsersThree,
-            section: 'guru',
-            accent: 'from-emerald-500/10 to-emerald-500/5',
-            iconBg: 'bg-emerald-100 dark:bg-emerald-900/30',
-            iconColor: 'text-emerald-600 dark:text-emerald-400',
-        },
-        {
-            key: 'prestasi',
-            label: 'Prestasi',
-            icon: Trophy,
-            section: 'prestasi',
-            accent: 'from-amber-500/10 to-amber-500/5',
-            iconBg: 'bg-amber-100 dark:bg-amber-900/30',
-            iconColor: 'text-amber-600 dark:text-amber-400',
-        },
-        {
-            key: 'agenda',
-            label: 'Agenda',
-            icon: Calendar,
-            section: 'agenda',
-            accent: 'from-purple-500/10 to-purple-500/5',
-            iconBg: 'bg-purple-100 dark:bg-purple-900/30',
-            iconColor: 'text-purple-600 dark:text-purple-400',
-        },
-        {
-            key: 'galeri',
-            label: 'Galeri',
-            icon: Images,
-            section: 'galeri',
-            accent: 'from-pink-500/10 to-pink-500/5',
-            iconBg: 'bg-pink-100 dark:bg-pink-900/30',
-            iconColor: 'text-pink-600 dark:text-pink-400',
-        },
-        {
-            key: 'polling',
-            label: 'Polling',
-            icon: ChartBar,
-            section: 'polling',
-            accent: 'from-cyan-500/10 to-cyan-500/5',
-            iconBg: 'bg-cyan-100 dark:bg-cyan-900/30',
-            iconColor: 'text-cyan-600 dark:text-cyan-400',
-        },
+        { key: 'berita', label: 'Berita', icon: Newspaper, accent: 'from-blue-500/10 to-blue-500/5', iconBg: 'bg-blue-100 dark:bg-blue-900/30', iconColor: 'text-blue-600 dark:text-blue-400' },
+        { key: 'guru', label: 'Guru', icon: UsersThree, accent: 'from-emerald-500/10 to-emerald-500/5', iconBg: 'bg-emerald-100 dark:bg-emerald-900/30', iconColor: 'text-emerald-600 dark:text-emerald-400' },
+        { key: 'prestasi', label: 'Prestasi', icon: Trophy, accent: 'from-amber-500/10 to-amber-500/5', iconBg: 'bg-amber-100 dark:bg-amber-900/30', iconColor: 'text-amber-600 dark:text-amber-400' },
+        { key: 'agenda', label: 'Agenda', icon: Calendar, accent: 'from-purple-500/10 to-purple-500/5', iconBg: 'bg-purple-100 dark:bg-purple-900/30', iconColor: 'text-purple-600 dark:text-purple-400' },
+        { key: 'galeri', label: 'Galeri', icon: Images, accent: 'from-pink-500/10 to-pink-500/5', iconBg: 'bg-pink-100 dark:bg-pink-900/30', iconColor: 'text-pink-600 dark:text-pink-400' },
+        { key: 'polling', label: 'Polling', icon: ChartBar, accent: 'from-cyan-500/10 to-cyan-500/5', iconBg: 'bg-cyan-100 dark:bg-cyan-900/30', iconColor: 'text-cyan-600 dark:text-cyan-400' },
+    ];
+
+    // DAFTAR MENU AKSI CEPAT (Dengan Warna)
+    const quickActions = [
+        { key: 'berita', label: 'Berita', icon: Newspaper, bg: 'bg-blue-100 dark:bg-blue-900/30', color: 'text-blue-600 dark:text-blue-400' },
+        { key: 'agenda', label: 'Agenda', icon: Calendar, bg: 'bg-purple-100 dark:bg-purple-900/30', color: 'text-purple-600 dark:text-purple-400' },
+        { key: 'prestasi', label: 'Prestasi', icon: Trophy, bg: 'bg-amber-100 dark:bg-amber-900/30', color: 'text-amber-600 dark:text-amber-400' },
+        { key: 'ekstrakurikuler', label: 'Ekstrakurikuler', icon: Tent, bg: 'bg-teal-100 dark:bg-teal-900/30', color: 'text-teal-600 dark:text-teal-400' },
+        { key: 'mading', label: 'Moderasi Mading', icon: PencilLine, bg: 'bg-pink-100 dark:bg-pink-900/30', color: 'text-pink-600 dark:text-pink-400' },
+        { key: 'polling', label: 'Polling', icon: ChartBar, bg: 'bg-cyan-100 dark:bg-cyan-900/30', color: 'text-cyan-600 dark:text-cyan-400' },
+        { key: 'guru', label: 'Guru', icon: UsersThree, bg: 'bg-emerald-100 dark:bg-emerald-900/30', color: 'text-emerald-600 dark:text-emerald-400' },
+        { key: 'statistik', label: 'Statistik', icon: ChartLine, bg: 'bg-indigo-100 dark:bg-indigo-900/30', color: 'text-indigo-600 dark:text-indigo-400' },
+        { key: 'profil', label: 'Profil Sekolah', icon: GraduationCap, bg: 'bg-orange-100 dark:bg-orange-900/30', color: 'text-orange-600 dark:text-orange-400' },
+        { key: 'pengaturan', label: 'Pengaturan Website', icon: Gear, bg: 'bg-slate-200 dark:bg-slate-700', color: 'text-slate-700 dark:text-slate-300' },
+        { key: 'akun', label: 'Akun Admin', icon: UserCircle, bg: 'bg-rose-100 dark:bg-rose-900/30', color: 'text-rose-600 dark:text-rose-400' },
     ];
 
     // Format tanggal Indonesia
@@ -109,6 +77,32 @@ export default function SectionDashboard({
                             <i className="ph ph-globe mr-2"></i> Lihat Website
                         </Link>
                     </div>
+                </div>
+            </div>
+
+            {/* ===== AKSI CEPAT (BERWARNA) ===== */}
+            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-5">
+                <h3 className="font-display font-semibold text-lg text-slate-900 dark:text-white mb-4">
+                    Aksi Cepat
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
+                    {quickActions.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                            <button
+                                key={item.key}
+                                onClick={() => window.dispatchEvent(new CustomEvent('navigate-section', { detail: item.key }))}
+                                className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-0.5 transition-all text-left group"
+                            >
+                                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${item.bg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
+                                    <Icon size={18} className={item.color} weight="duotone" />
+                                </div>
+                                <span className="text-[11px] sm:text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary-600 dark:group-hover:text-accent-400 transition-colors leading-tight break-words whitespace-normal">
+                                    {item.label}
+                                </span>
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
 
@@ -365,32 +359,6 @@ export default function SectionDashboard({
                             </p>
                         </>
                     )}
-                </div>
-            </div>
-
-            {/* ===== QUICK ACTIONS ===== */}
-            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-5">
-                <h3 className="font-display font-semibold text-lg text-slate-900 dark:text-white mb-4">
-                    Aksi Cepat
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-                    {statCards.map((card) => {
-                        const Icon = card.icon;
-                        return (
-                            <button
-                                key={card.key}
-                                onClick={() => window.dispatchEvent(new CustomEvent('navigate-section', { detail: card.section }))}
-                                className="flex flex-col items-center gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors group"
-                            >
-                                <div className={`w-10 h-10 rounded-lg ${card.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                                    <Icon size={20} className={card.iconColor} weight="duotone" />
-                                </div>
-                                <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
-                                    Kelola {card.label}
-                                </span>
-                            </button>
-                        );
-                    })}
                 </div>
             </div>
         </section>

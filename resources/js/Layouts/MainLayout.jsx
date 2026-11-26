@@ -317,7 +317,6 @@ export default function MainLayout({ children }) {
             <main className="flex-grow">{children}</main>
 
             {/* ===== FOOTER ===== */}
-            {/* (Footer Anda tetap sama, tidak perlu diubah) */}
             <footer className="bg-slate-900 dark:bg-slate-950 text-slate-300">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
                     <div className="grid grid-cols-2 md:grid-cols-12 gap-x-4 gap-y-8 md:gap-x-8 md:gap-y-0">
@@ -350,24 +349,21 @@ export default function MainLayout({ children }) {
                             </div>
                         </div>
 
+                        {/* TAUTAN JARAK DIRAPATKAN */}
                         <div className="md:col-span-2">
                             <h3 className="text-white font-semibold mb-2 sm:mb-4 text-xs sm:text-base">
                                 Tautan
                             </h3>
-                            <div className="grid grid-cols-2 md:grid-cols-1 gap-x-2 md:gap-x-0">
-                                <ul className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-sm text-slate-400">
-                                    <li><Link href="/" className="hover:text-accent-400 transition-colors">Beranda</Link></li>
-                                    <li><Link href="/profil" className="hover:text-accent-400 transition-colors">Profil</Link></li>
-                                    <li><Link href="/berita" className="hover:text-accent-400 transition-colors">Berita</Link></li>
-                                    <li><Link href="/agenda" className="hover:text-accent-400 transition-colors">Agenda</Link></li>
-                                    <li><Link href="/prestasi" className="hover:text-accent-400 transition-colors">Prestasi</Link></li>
-                                </ul>
-                                <ul className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-sm text-slate-400">
-                                    <li><Link href="/galeri-murid" className="hover:text-accent-400 transition-colors">Galeri Murid</Link></li>
-                                    <li><Link href="/ppdb" className="hover:text-accent-400 transition-colors">PPDB</Link></li>
-                                    <li><Link href="/kontak" className="hover:text-accent-400 transition-colors">Kontak</Link></li>
-                                    <li><Link href={auth.user ? "/admin" : "/login"} className="hover:text-accent-400 transition-colors">Administrator</Link></li>
-                                </ul>
+                            <div className="grid grid-cols-1 gap-y-1.5 sm:gap-y-2">
+                                <Link href="/" className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">Beranda</Link>
+                                <Link href="/profil" className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">Profil</Link>
+                                <Link href="/berita" className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">Berita</Link>
+                                <Link href="/agenda" className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">Agenda</Link>
+                                <Link href="/prestasi" className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">Prestasi</Link>
+                                <Link href="/galeri-murid" className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">Galeri Murid</Link>
+                                <Link href="/ppdb" className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">PPDB</Link>
+                                <Link href="/kontak" className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">Kontak</Link>
+                                <Link href={auth.user ? "/admin" : "/login"} className="block text-[10px] sm:text-sm text-slate-400 hover:text-accent-400 transition-colors">Administrator</Link>
                             </div>
                         </div>
 
