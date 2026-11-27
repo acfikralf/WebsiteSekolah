@@ -13,7 +13,7 @@ import Kontak from '@/Components/Home/Kontak';
 import { Head } from '@inertiajs/react';
 import Mading from '@/Components/Home/Mading';
 
-export default function Home({kepalaSekolah, profil, madings}) {
+export default function Home({kepalaSekolah, profil, madings, prestasis}) {
     return (
         <MainLayout>
             <Head title="Home" />
@@ -24,7 +24,7 @@ export default function Home({kepalaSekolah, profil, madings}) {
             <Program />
             <Berita />
             <Agenda />
-            <Prestasi />
+            <Prestasi prestasis={prestasis}/>
             <Guru />
             <Mading madings={madings} />
             <Polling />

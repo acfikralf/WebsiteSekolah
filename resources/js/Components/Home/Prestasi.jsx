@@ -9,10 +9,8 @@ const iconMap = {
     Keagamaan: Trophy,
 };
 
-export default function Prestasi({ prestasiList = [] }) {
+export default function Prestasi({prestasis = [] }) {
     const titleRef = useReveal();
-    const { prestasis } = usePage().props;
-
     return (
         <section id="prestasi" className="py-12 sm:py-16 md:py-20 bg-white dark:bg-slate-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -28,6 +28,19 @@ Route::get('/', function () {
 
         ],
         'madings' => \App\Models\Mading::where('status', 'published')->latest()->take(4)->get(),
+        'prestasis' => \App\Models\Prestasi::latest('tanggal')
+            ->take(3)
+            ->get()
+            ->map(fn($prestasi) => [
+                'id' => $prestasi->id,
+                'judul' => $prestasi->judul,
+                'siswa' => $prestasi->siswa,
+                'kategori' => $prestasi->kategori,
+                'tingkat' => $prestasi->tingkat,
+                'tanggal' => $prestasi->tanggal->format('Y-m-d'),
+                'foto' => $prestasi->foto,
+                'deskripsi' => $prestasi->deskripsi,
+            ]),
     ]);
 })->name('home');
 
@@ -127,7 +140,7 @@ Route::get('/berita/{berita}', function (\App\Models\Berita $berita) {
 // Rute Halaman Agenda  
 Route::get('/agenda', function () {
     return Inertia::render('Agenda/Index', [
-        'agendas' => Agenda::where('tanggal', '>=', now()->startOfDay())->orderBy('tanggal')->get()
+        'agendas' => Agenda::orderBy('tanggal', 'asc')->get()
     ]);
 })->name('agenda.index');
 
@@ -149,22 +162,6 @@ Route::get('/prestasi', function () {
     ]);
 })->name('prestasi.index');
 
-Route::get('/galeri', function () {
-    return Inertia::render('Galeri/Index', [
-        'galeris' => Galeri::ordered()
-            ->get()
-            ->map(fn($g) => [
-                'id'         => $g->id,
-                'judul'      => $g->judul,
-                'kategori'   => $g->kategori,
-                'gambar'     => $g->gambar,
-                'gambar_url' => $g->gambar_url,
-                'urutan'     => $g->urutan,
-            ])
-            ->values(),
-    ]);
-})->name('galeri.index');
-
 Route::get('/ppdb', function () {
     return Inertia::render('Ppdb/Index');
 })->name('ppdb.index');
@@ -173,9 +170,9 @@ Route::get('/kontak', function () {
     return Inertia::render('Kontak/Index', [
         // Kirim data setting untuk halaman kontak
         'kontak' => [
-            'alamat'  => \App\Models\Setting::get('profil_alamat', 'Jl. Pendidikan No. 1, Watestanjung'),
-            'telepon' => \App\Models\Setting::get('profil_telepon', '+62 812-3456-7890'),
-            'email'   => \App\Models\Setting::get('profil_email', 'info@watestanjung.sch.id'),
+            'alamat'  => \App\Models\Setting::get('profil_alamat', 'Jl. Raya Watestanjung, Desa Watestanjung'),
+            'telepon' => \App\Models\Setting::get('profil_telepon', '+62 857-3152-4096'),
+            'email'   => \App\Models\Setting::get('profil_email', 'smpislamwatestanjung92@gmail.com'),
         ]
     ]);
 })->name('kontak.index');
@@ -183,12 +180,12 @@ Route::get('/kontak', function () {
 Route::get('/galeri-murid', [MadingController::class, 'index'])->name('mading.index');
 Route::post('/galeri-murid', [MadingController::class, 'store'])->name('mading.store');
 
-  Route::get('/invitation/{token}', [InvitationController::class, 'show'])
-        ->name('invitation.accept');
+Route::get('/invitation/{token}', [InvitationController::class, 'show'])
+    ->name('invitation.accept');
 
-    Route::post('/invitation/{token}', [InvitationController::class, 'accept'])
-        ->name('invitation.accept.submit');
-    //Password Confirm
+Route::post('/invitation/{token}', [InvitationController::class, 'accept'])
+    ->name('invitation.accept.submit');
+//Password Confirm
 
 
 

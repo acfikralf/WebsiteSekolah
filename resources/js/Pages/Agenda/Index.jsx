@@ -2,6 +2,7 @@ import MainLayout from '@/Layouts/MainLayout';
 import { Calendar, Clock, MapPin, ListChecks } from '@phosphor-icons/react';
 
 export default function AgendaIndex({ agendas = [] }) {
+    console.log('Agendas:', agendas);
     return (
         <MainLayout>
             {/* ===== HERO — WARNA HIJAU CERAH ===== */}

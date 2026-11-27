@@ -106,7 +106,7 @@ class SettingController extends Controller
                     'lokasi'  => $a->lokasi,
                 ]),
 
-            'recentPrestasi' => \App\Models\Prestasi::orderBy('tanggal', 'desc')->take(4)->get()->map(fn($p) => [
+            'recentPrestasi' => \App\Models\Prestasi::orderBy('tanggal', 'desc')->take(3)->get()->map(fn($p) => [
                 'id'       => $p->id,
                 'judul'    => $p->judul,
                 'siswa'    => $p->siswa,

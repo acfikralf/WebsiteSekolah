@@ -21,7 +21,7 @@ export default function Program() {
 
                 {ekstrakurikulers?.length > 0 ? (
                     /* Grid 3 kolom di HP, 4 kolom di Desktop */
-                    <div className="grid grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-6">
+                    <div className="grid grid-cols-4 lg:grid-cols-4 gap-2.5 sm:gap-6">
                         {ekstrakurikulers.map((item) => (
                             <div
                                 key={item.id}

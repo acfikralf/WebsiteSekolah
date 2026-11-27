@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle, Student, DownloadSimple, WhatsappLogo } from '
 
 export default function PpdbIndex() {
     // Nomor WA Dummy (Ganti dengan nomor asli nanti)
-    const waNumber = "6281234567890"; 
+    const waNumber = "+6285731524096"; 
     const waLink = `https://wa.me/${waNumber}?text=Halo%20Bu%20Nia,%20saya%20ingin%20bertanya%20mengenai%20pendaftaran%20PPDB%20SMP%20Islam%20Watestanjung.`;
     const googleFormLink = "https://forms.gle/GxvmTx9bMsMXwqix7";
 
@@ -63,14 +63,7 @@ export default function PpdbIndex() {
                     </div>
 
                     {/* Aksi Tambahan: Unduh Formulir & Tanya Admin WA */}
-                    <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-                        <a 
-                            href="#" // Ganti dengan link file PDF formulir jika ada
-                            className="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        >
-                            <DownloadSimple size={20} className="mr-2" /> Unduh Formulir
-                        </a>
-                        
+                    <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">                
                         <a 
                             href={waLink}
                             target="_blank"

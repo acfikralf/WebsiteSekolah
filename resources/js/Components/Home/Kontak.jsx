@@ -25,15 +25,15 @@ export default function Kontak() {
                     <div className="space-y-2 sm:space-y-6 flex flex-col justify-center" ref={leftRef}>
                         <div className="flex items-start gap-2 sm:gap-3 p-2 sm:p-4 bg-slate-50 dark:bg-slate-800 rounded-md sm:rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
                             <MapPin className="w-4 h-4 sm:w-6 sm:h-6 text-primary-600 dark:text-accent-400 mt-0.5 shrink-0" />
-                            <p className="text-[10px] sm:text-base text-slate-700 dark:text-slate-300 leading-snug">Jl. Pendidikan No. 1, Watestanjung, Jawa Timur</p>
+                            <p className="text-[10px] sm:text-base text-slate-700 dark:text-slate-300 leading-snug">Jl. Raya Watestanjung, Desa Watestanjung</p>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-4 bg-slate-50 dark:bg-slate-800 rounded-md sm:rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
                             <Phone className="w-4 h-4 sm:w-6 sm:h-6 text-primary-600 dark:text-accent-400 shrink-0" />
-                            <p className="text-[10px] sm:text-base text-slate-700 dark:text-slate-300 leading-snug">+62 812-3456-7890</p>
+                            <p className="text-[10px] sm:text-base text-slate-700 dark:text-slate-300 leading-snug">+62 857-3152-4096</p>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-4 bg-slate-50 dark:bg-slate-800 rounded-md sm:rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
                             <Envelope className="w-4 h-4 sm:w-6 sm:h-6 text-primary-600 dark:text-accent-400 shrink-0" />
-                            <p className="text-[10px] sm:text-base text-slate-700 dark:text-slate-300 leading-snug break-all">info@watestanjung.sch.id</p>
+                            <p className="text-[10px] sm:text-base text-slate-700 dark:text-slate-300 leading-snug break-all">smpislamwatestanjung92@gmail.com</p>
                         </div>
                     </div>
 
